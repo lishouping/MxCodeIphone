@@ -1,0 +1,100 @@
+//
+//  Mxpch.pch
+//  MXrestaurant
+//
+//  Created by lishouping on 2017/11/5.
+//  Copyright © 2017年 lishouping. All rights reserved.
+//
+
+#ifndef Mxpch_pch
+#define Mxpch_pch
+
+
+#import "UIView+SDAutoLayout.h"
+#define kHeight [[UIScreen mainScreen] bounds].size.height
+#define kWidth  [[UIScreen mainScreen] bounds].size.width
+#define KNOTIFICATION_LOGINCHANGE @"loginStateChange"
+#import "MBProgressHUD.h"
+#import "AppDelegate.h"
+#import "AFHTTPRequestOperationManager.h"
+#import "SDWebImageManager.h"
+#import "UIImageView+WebCache.h"
+#import "MJRefresh.h"
+#import "UIImageView+WebCache.h"
+#import "ZXPAutoLayout.h"
+#import "LMJTab.h"
+
+
+#define API_URL @"http://47.92.66.33:8080/heygay"
+#define RESOURCE_URL @"http://www.heyguy.cn/images"
+
+// 接口详细地址的调用
+// 用户登录
+#define USERLOGIN_URL @"/userservice/login"
+// 查询菜品分类(包含菜品)
+#define SELECTCATEGORY_URL @"/goods/selectCategory"
+// 查询分区(包含桌台)
+#define GETTABLEINFO_URL @"/tableservice/getTableInfo"
+// 查询购物车
+#define GETSHOPPINGCAR_URL @"/cart/getCart"
+// 添加购物车
+#define ADDSHOPPINGCAR_URL @"/cart/addCart"
+// 清空购物车
+#define DELETECAR_URL @"/cart/deleteCart"
+// 移除购物车
+#define REMOVECAR_URL @"/cart/removeCart"
+// 查询桌台未结账订单
+#define GETORDER_URL @"/order/getOrder"
+// 服务员提交订单
+#define SAVEORDER_URL @"/order/saveOrder"
+// 结账
+#define CHECK_URL @"/order/check"
+// 取消订单
+#define CANCELORDER_URL @"/order/cancleOrder"
+// 服务员订单列表(分页，每页10条)
+#define ORDERLISTFORWRITER @"/order/getOrderListForWaiter"
+// 查询服务列表(分页,每页10条)
+#define SELECTSERVICELIST @"/service/selectServiceListWaiter"
+// 服务员处理服务
+#define TODOSERVICE @"/service/updateService"
+// 查询单个服务
+#define SELECTONESERVICE @"/service/selectOneService"
+// 服务员确认顾客订单
+#define CONFIRMORDER @"/order/confirmOrder"
+// 根据订单编号查询订单
+#define GETORDERBYNO @"/order/getOneOrderBynNum"
+// 划菜
+#define GOODSUPDATE @"/cart/updateGoodsIfUp"
+//修改时价菜价格
+#define UPDATEGOODSPRICE @"/cart/updateGoodsPrice"
+//退菜
+#define RETURNGOODS @"/cart/returnGoods"
+//减菜
+#define REMGOODS @"/cart/removeGoods"
+//换桌
+#define CHANGETABLES @"/tableservice/changeTable"
+//打印
+#define DOPRINT @"/printer/doPrinter"
+//查询店铺信息
+#define GETSHOPINFO @"/shop/getShopInfo/"
+//查询打印机列表
+#define PRINTLIST @"/printer/printerlist"
+//根据订单ID查询打印内容
+#define PRINTBYORDER @"/order/getPrintContentByOrder"
+//修改订单信息(服务员确认订单之前)
+#define UPDATEORDERINFO @"/order/updateOrderInfo"
+//服务员提交建议
+#define SAVESUGGEST @"/waiter/saveSuggest"
+//服务员修改密码
+#define UPDATEPASSWORD @"/waiter/updatePassword"
+//查询店铺未处理订单及服务数量
+#define GETNOREADNUMBER @"/order/getCountForOrderService"
+//菜品销量统计按照菜品
+#define GOODSSTATICS @"/statics/goodsStatics"
+//菜品销量统计按照菜品销量
+#define SHOPSTATIS @"/statics/shopStatics"
+//服务数量统计
+#define SERVICESTSTICS @"/statics/serviceStatics"
+
+
+#endif /* Mxpch_pch */
