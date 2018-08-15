@@ -217,7 +217,12 @@
 		47F199511FC936B2000201BE /* ResModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 47F199501FC936B2000201BE /* ResModel.m */; };
 		EE2E35CF20B13DCD00C0A8CF /* HWPopTool.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2E35CE20B13DCD00C0A8CF /* HWPopTool.m */; };
 		EE2E35D120B1421E00C0A8CF /* red_packge_close.png in Resources */ = {isa = PBXBuildFile; fileRef = EE2E35D020B1421E00C0A8CF /* red_packge_close.png */; };
+		EE31EFFB212451A800C42E54 /* ManagerPrintViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE31EFFA212451A800C42E54 /* ManagerPrintViewController.m */; };
+		EE31EFFE2124542C00C42E54 /* PrintTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EE31EFFD2124542C00C42E54 /* PrintTableViewCell.m */; };
+		EE31F001212456F300C42E54 /* PrintModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EE31F000212456F300C42E54 /* PrintModel.m */; };
+		EE31F004212460CA00C42E54 /* ManagerPrintAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE31F003212460CA00C42E54 /* ManagerPrintAddViewController.m */; };
 		EE4E8D0020E3BF6F0002138F /* ic_logo1024.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EE4E8CFF20E3BF6F0002138F /* ic_logo1024.jpg */; };
+		EE5EAD9C2122F175005E37A5 /* ManagerShopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE5EAD9B2122F175005E37A5 /* ManagerShopViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -587,7 +592,17 @@
 		EE2E35CD20B13DCD00C0A8CF /* HWPopTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWPopTool.h; sourceTree = "<group>"; };
 		EE2E35CE20B13DCD00C0A8CF /* HWPopTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWPopTool.m; sourceTree = "<group>"; };
 		EE2E35D020B1421E00C0A8CF /* red_packge_close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = red_packge_close.png; sourceTree = "<group>"; };
+		EE31EFF9212451A800C42E54 /* ManagerPrintViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ManagerPrintViewController.h; sourceTree = "<group>"; };
+		EE31EFFA212451A800C42E54 /* ManagerPrintViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ManagerPrintViewController.m; sourceTree = "<group>"; };
+		EE31EFFC2124542C00C42E54 /* PrintTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrintTableViewCell.h; sourceTree = "<group>"; };
+		EE31EFFD2124542C00C42E54 /* PrintTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PrintTableViewCell.m; sourceTree = "<group>"; };
+		EE31EFFF212456F300C42E54 /* PrintModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrintModel.h; sourceTree = "<group>"; };
+		EE31F000212456F300C42E54 /* PrintModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PrintModel.m; sourceTree = "<group>"; };
+		EE31F002212460CA00C42E54 /* ManagerPrintAddViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ManagerPrintAddViewController.h; sourceTree = "<group>"; };
+		EE31F003212460CA00C42E54 /* ManagerPrintAddViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ManagerPrintAddViewController.m; sourceTree = "<group>"; };
 		EE4E8CFF20E3BF6F0002138F /* ic_logo1024.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ic_logo1024.jpg; sourceTree = "<group>"; };
+		EE5EAD9A2122F175005E37A5 /* ManagerShopViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ManagerShopViewController.h; sourceTree = "<group>"; };
+		EE5EAD9B2122F175005E37A5 /* ManagerShopViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ManagerShopViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -845,6 +860,8 @@
 				47F199501FC936B2000201BE /* ResModel.m */,
 				477888421FEA5170008A0109 /* ExtsModel.h */,
 				477888431FEA5170008A0109 /* ExtsModel.m */,
+				EE31EFFF212456F300C42E54 /* PrintModel.h */,
+				EE31F000212456F300C42E54 /* PrintModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -878,6 +895,8 @@
 				47CCA01C1FC44ACC00339B1A /* OrderEndTableViewCell.m */,
 				47F1994C1FC93377000201BE /* ResTableViewCell.h */,
 				47F1994D1FC93377000201BE /* ResTableViewCell.m */,
+				EE31EFFC2124542C00C42E54 /* PrintTableViewCell.h */,
+				EE31EFFD2124542C00C42E54 /* PrintTableViewCell.m */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -1162,6 +1181,12 @@
 				473AE78D1FB7FC590004E146 /* FeedBackViewController.m */,
 				473AE78F1FB7FC790004E146 /* AboutUsViewController.h */,
 				473AE7901FB7FC790004E146 /* AboutUsViewController.m */,
+				EE5EAD9A2122F175005E37A5 /* ManagerShopViewController.h */,
+				EE5EAD9B2122F175005E37A5 /* ManagerShopViewController.m */,
+				EE31EFF9212451A800C42E54 /* ManagerPrintViewController.h */,
+				EE31EFFA212451A800C42E54 /* ManagerPrintViewController.m */,
+				EE31F002212460CA00C42E54 /* ManagerPrintAddViewController.h */,
+				EE31F003212460CA00C42E54 /* ManagerPrintAddViewController.m */,
 			);
 			path = "我的信息";
 			sourceTree = "<group>";
@@ -1438,6 +1463,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EE31F004212460CA00C42E54 /* ManagerPrintAddViewController.m in Sources */,
 				473AE7911FB7FC790004E146 /* AboutUsViewController.m in Sources */,
 				4711A1D91FAEB74300AD26C1 /* MBProgressHUD.m in Sources */,
 				4711A1C61FAEA9FF00AD26C1 /* LoginViewController.m in Sources */,
@@ -1482,6 +1508,7 @@
 				4711A1D21FAEAA8400AD26C1 /* OrderViewController.m in Sources */,
 				4719E7ED1FB0836F00BFDFB6 /* YLButton.m in Sources */,
 				477888441FEA5170008A0109 /* ExtsModel.m in Sources */,
+				EE5EAD9C2122F175005E37A5 /* ManagerShopViewController.m in Sources */,
 				47E0A5F61FAEA39700959C8A /* QRCodeBacgrouView.m in Sources */,
 				47E0A5FB1FAEA39700959C8A /* AFNetworkActivityIndicatorManager.m in Sources */,
 				47E0A60B1FAEA39700959C8A /* SDPhotoBrowser.m in Sources */,
@@ -1490,6 +1517,7 @@
 				47786D021FC01D9A00D1996D /* FoodListTableViewCell.m in Sources */,
 				471F66F21FC071A20097EE8D /* GoodInfoModel.m in Sources */,
 				473AE7821FB7FBBE0004E146 /* ServiceStatisticsViewController.m in Sources */,
+				EE31F001212456F300C42E54 /* PrintModel.m in Sources */,
 				47E0A6341FAEA39700959C8A /* SBJsonStreamWriterState.m in Sources */,
 				47E0A5101FAEA1DF00959C8A /* ViewController.m in Sources */,
 				47E0A5F11FAEA39700959C8A /* MJRefreshHeaderView.m in Sources */,
@@ -1500,6 +1528,7 @@
 				47E0A5F21FAEA39700959C8A /* UIScrollView+MJExtension.m in Sources */,
 				47E0A62C1FAEA39700959C8A /* NSObject+SBJson.m in Sources */,
 				47E0A5F31FAEA39700959C8A /* UIScrollView+MJRefresh.m in Sources */,
+				EE31EFFE2124542C00C42E54 /* PrintTableViewCell.m in Sources */,
 				471210FC1FC5A46700E4E49F /* OrderDeatiledViewController.m in Sources */,
 				47E0A6491FAEA7AB00959C8A /* RootViewController.m in Sources */,
 				47E0A60C1FAEA39700959C8A /* SDWaitingView.m in Sources */,
@@ -1533,6 +1562,7 @@
 				47000DC21FB1E5440016FE4D /* LMJTab.m in Sources */,
 				47F199511FC936B2000201BE /* ResModel.m in Sources */,
 				47E0A60E1FAEA39700959C8A /* AFHTTPRequestOperationManager.m in Sources */,
+				EE31EFFB212451A800C42E54 /* ManagerPrintViewController.m in Sources */,
 				47F1992C1FC8ED2F000201BE /* PayImageViewController.m in Sources */,
 				47E0A6321FAEA39700959C8A /* SBJsonStreamWriter.m in Sources */,
 				47E0A50D1FAEA1DF00959C8A /* AppDelegate.m in Sources */,

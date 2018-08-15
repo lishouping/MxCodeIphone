@@ -96,5 +96,51 @@
 //服务数量统计
 #define SERVICESTSTICS @"/statics/serviceStatics"
 
+// 2.0版本新增接口
+// 更新店铺
+#define UPDATESHOP @"/shop/updateShop2"
+// 查询服务员列表
+#define GETWAITER @"/waiter/selectWaiters"
+// 新增服务员
+#define ADDWAITER @"/waiter/addWaiter"
+// 冻结、解冻
+#define CHANGEWAITER @"/waiter/changWaiterStatus"
+// 删除ID服务员
+#define DELWAITER @"/waiter/deleteWaiter"
+// 增加分区
+#define INSERTAREA @"/tableservice/addArea"
+// 删除分区
+#define DELAREA @"/tableservice/deleteArea"
+// 修改分区
+#define UNDATEAREA @"/tableservice/updateArea"
+// 添加菜品分类
+#define ADDGOODSCATEGORY @"/goods/addCategory"
+// 删除分类
+#define DELGOODSCATEGORY @"/goods/deleteCategory"
+// 修改分类
+#define UPDATEGOODSCATEGORY @"/goods/updateCategory"
+// 删除桌台信息
+#define DELTABLE @"/tableservice/deleteTable"
+// 新增桌台
+#define ADDTABLE @"/tableservice/addTable"
+// 修改桌台
+#define UPDATETABLE @"/tableservice/updateTable"
+// 查询单个桌台
+#define GETONETABLE @"/tableservice/getOneTable/"
+// 添加菜品
+#define ADDGOODS @"/goods/addGoods"
+// 删除菜品
+#define DELGOODS @"/goods/deleteGoods"
+// 查询单个菜品
+#define SELECTGOODS @"/goods/selectGoods"
+// 修改菜品
+#define UPDETEGOODS @"/goods/updateGoods"
+// 新增打印机
+#define PRINTADD @"/printer/addprinter"
+// 打印机删除
+#define PRINTDEL @"/printer/deletePrinter"
+// 打印机删除
+#define PRINTUPDATE @"/printer/updatePrinter"
+
 
 #endif /* Mxpch_pch */

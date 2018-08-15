@@ -18,6 +18,8 @@
 #import "AboutUsViewController.h"
 #import "PayImageViewController.h"
 #import "QRCodeingViewController.h"
+#import "ManagerShopViewController.h"
+#import "ManagerPrintViewController.h"
 
 @interface MineViewController ()<UITableViewDelegate,UITableViewDataSource>{
     UIView *headerView;
@@ -193,8 +195,8 @@
         [self.dateArray addObjectsFromArray:array1];
          [self.dateArray2 addObjectsFromArray:arrayimg1];
     }else{
-         NSArray *array = @[@"销售统计",@"服务统计",@"密码修改",@"意见反馈",@"关于我们"];
-        NSArray *arrayimg = @[@"icon_my1",@"icon_my2",@"icon_my4",@"icon_my6",@"icon_my7"];
+         NSArray *array = @[@"销售统计",@"服务统计",@"密码修改",@"意见反馈",@"关于我们",@"店铺管理",@"打印机设置",@"员工管理",@"桌台分区",@"桌台管理",@"菜品分类",@"菜品管理"];
+        NSArray *arrayimg = @[@"icon_my1",@"icon_my2",@"icon_my4",@"icon_my6",@"icon_my7",@"icon_my7",@"icon_my7",@"icon_my7",@"icon_my7",@"icon_my7",@"icon_my7",@"icon_my7"];
         [self.dateArray addObjectsFromArray:array];
         [self.dateArray2 addObjectsFromArray:arrayimg];
     }
@@ -237,7 +239,7 @@
         ChangePassViewController *atvs = [[ChangePassViewController alloc] init];
         [self.navigationController pushViewController:atvs animated:YES];
     }else if ([content isEqualToString:@"打印机设置"]){
-        PrintSettingViewController *atvs = [[PrintSettingViewController alloc] init];
+        ManagerPrintViewController *atvs = [[ManagerPrintViewController alloc] init];
         [self.navigationController pushViewController:atvs animated:YES];
     }else if ([content isEqualToString:@"意见反馈"]){
         FeedBackViewController *atvs = [[FeedBackViewController alloc] init];
@@ -245,6 +247,12 @@
     }else if ([content isEqualToString:@"关于我们"]){
         AboutUsViewController *atvs = [[AboutUsViewController alloc] init];
         [self.navigationController pushViewController:atvs animated:YES];
+    }else if([content isEqualToString:@"店铺管理"]){
+        ManagerShopViewController *mashop = [[ManagerShopViewController alloc] init];
+        [self.navigationController pushViewController:mashop animated:YES];
+    }else if([content isEqualToString:@"打印机设置"]){
+        ManagerShopViewController *mashop = [[ManagerShopViewController alloc] init];
+        [self.navigationController pushViewController:mashop animated:YES];
     }
 }
 // 获取徽标上的数字 通知未读条数
