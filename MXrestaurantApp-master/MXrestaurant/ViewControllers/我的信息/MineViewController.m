@@ -20,6 +20,8 @@
 #import "QRCodeingViewController.h"
 #import "ManagerShopViewController.h"
 #import "ManagerPrintViewController.h"
+#import "ManagerEmployeeViewController.h"
+#import "ManagerTableAreaViewController.h"
 
 @interface MineViewController ()<UITableViewDelegate,UITableViewDataSource>{
     UIView *headerView;
@@ -253,6 +255,12 @@
     }else if([content isEqualToString:@"打印机设置"]){
         ManagerShopViewController *mashop = [[ManagerShopViewController alloc] init];
         [self.navigationController pushViewController:mashop animated:YES];
+    }else if([content isEqualToString:@"员工管理"]){
+        ManagerEmployeeViewController *emvc = [[ManagerEmployeeViewController alloc] init];
+        [self.navigationController pushViewController:emvc animated:YES];
+    }else if([content isEqualToString:@"桌台分区"]){
+        ManagerTableAreaViewController *sv = [ManagerTableAreaViewController alloc];
+        [self.navigationController pushViewController:sv animated:YES];
     }
 }
 // 获取徽标上的数字 通知未读条数
