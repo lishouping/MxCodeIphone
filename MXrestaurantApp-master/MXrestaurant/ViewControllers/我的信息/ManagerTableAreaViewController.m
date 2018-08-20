@@ -20,6 +20,15 @@
 
 @implementation ManagerTableAreaViewController
 
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        // Custom initialization
+        self.hidesBottomBarWhenPushed=YES;
+    }
+    return self;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"桌台分区管理";
@@ -42,15 +51,6 @@
     
 }
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-        self.hidesBottomBarWhenPushed=YES;
-    }
-    return self;
-}
 - (void)makeUI{
     UIButton *rightBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 30)];
     [rightBtn setImage:[UIImage imageNamed:@"payimg"] forState:UIControlStateNormal];

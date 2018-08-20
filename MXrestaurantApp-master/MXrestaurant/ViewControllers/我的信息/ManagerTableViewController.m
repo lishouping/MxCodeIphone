@@ -1,33 +1,31 @@
 //
-//  ManagerEmployeeViewController.m
+//  ManagerTableViewController.m
 //  MXrestaurant
 //
-//  Created by MX on 2018/8/16.
+//  Created by MX on 2018/8/20.
 //  Copyright © 2018年 lishouping. All rights reserved.
 //
 
-#import "ManagerEmployeeViewController.h"
-#import "ManagerEmployeeAddViewController.h"
-#import "EmployeeModel.h"
-#import "PrintTableViewCell.h"
-#import "PrintModel.h"
-@interface ManagerEmployeeViewController ()<UITableViewDelegate,UITableViewDataSource>
+#import "ManagerTableViewController.h"
+#import "TableModel.h"
+#import "ManageTableViewCell.h"
+#import "ManagerTableAddViewController.h"
+
+@interface ManagerTableViewController ()<UITableViewDelegate,UITableViewDataSource>
 {
     UITableView *_tableManage;
     NSUserDefaults * userDefaults;
     MBProgressHUD *hud;
-    int page;
-    int totalnum;
     
 }
 @property(nonatomic,strong)NSMutableArray *dataArray;
 @end
 
-@implementation ManagerEmployeeViewController
+@implementation ManagerTableViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationItem.title = @"员工管理";
+    self.navigationItem.title = @"桌台管理";
     self.view.backgroundColor = [UIColor whiteColor];
     [self makeUI];
     userDefaults=[NSUserDefaults standardUserDefaults];
@@ -42,7 +40,7 @@
         [_tableManage reloadData];
         [self loadData];
     }else{
-         [self setupTableView];
+        [self loadData];
     }
     
 }
@@ -56,7 +54,6 @@
     }
     return self;
 }
-
 - (void)makeUI{
     UIButton *rightBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 30)];
     [rightBtn setImage:[UIImage imageNamed:@"payimg"] forState:UIControlStateNormal];
@@ -79,39 +76,13 @@
     [self.view addSubview:_tableManage];
 }
 - (void)rightBtnButtonClick{
-    ManagerEmployeeAddViewController *mav = [[ManagerEmployeeAddViewController alloc] init];
-    [self.navigationController pushViewController:mav animated:YES];
+    ManagerTableAddViewController *matv = [[ManagerTableAddViewController alloc] init];
+    matv.pagetype = @"1";
+    [self.navigationController pushViewController:matv animated:YES];
 }
-//加上刷新控件
--(void)setupTableView
-{
-    //下拉刷新
-    [_tableManage addHeaderWithTarget:self action:@selector(headerRereshing)];
-    //上拉加载
-    [_tableManage addFooterWithTarget:self action:@selector(footerRereshing)];
-    [_tableManage headerBeginRefreshing];
-}
-
-
-//下拉
-- (void)headerRereshing
-{
-    page=1;
-    [self.dataArray removeAllObjects];
-    [self loadData];
-}
-//上拉
--(void)footerRereshing
-{
-    page++;
-    [self loadData];
-}
-
 - (void)loadData{
-    NSString *postUrl = [NSString stringWithFormat:@"%@%@",API_URL,GETWAITER];
-    NSDictionary *parameters = @{@"shop_id": [userDefaults objectForKey:@"shop_id_MX"],
-                                 @"pageNo":[NSString stringWithFormat:@"%d",page]
-                                 };
+    NSString *postUrl = [NSString stringWithFormat:@"%@%@",API_URL,GETTABLEINFO_URL];
+    NSDictionary *parameters = @{@"shopid": [userDefaults objectForKey:@"shop_id_MX"]};
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
@@ -131,52 +102,40 @@
     
     [manager POST:postUrl parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"结果: %@", responseObject);
-        
         if ([[responseObject objectForKey:@"CODE"] isEqualToString:@"1000"]) {
-            
-           
             
             NSArray *dateArray = [responseObject objectForKey:@"DATA"];
             
-            if (dateArray.count==0) {
-                [_tableManage footerEndRefreshing];
-                [_tableManage headerEndRefreshing];
-                UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"无更多数据" message:@"" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"好", nil];
-                [alert show];
-                return ;
-            }
-            
-            totalnum = [[responseObject objectForKey:@"totalnum"] intValue];
-            
             for (NSDictionary * dic in dateArray)
             {
-                NSString *name = [dic objectForKey:@"name"];
-                NSString *username = [dic objectForKey:@"username"];
-                NSString *phonenum = [dic objectForKey:@"phonenum"];
+                NSString *area_name = [dic objectForKey:@"area_name"];
+                NSArray *table_list = [dic objectForKey:@"table_list"];
                 
-                NSDictionary *userdic = [dic objectForKey:@"user"];
-                
-                NSNumber *statusnum = [userdic objectForKey:@"user_status"];
-                NSString *user_status = [statusnum stringValue];
-                
-                NSNumber *numType = [userdic objectForKey:@"type"];
-                NSString *type = [numType stringValue];
-                
-                NSNumber *numWrite = [dic objectForKey:@"waiter_id"];
-                NSString *waiter_id = [numWrite stringValue];
-                
-                EmployeeModel *model = [[EmployeeModel alloc] init];
-                model.name = name;
-                model.username = username;
-                model.phonenum = phonenum;
-                model.user_status = user_status;
-                model.type = type;
-                model.waiter_id = waiter_id;
-                [self.dataArray addObject:model];
+                for (NSDictionary * dic1 in table_list)
+                {
+                    
+                    NSString *table_name = [dic1 objectForKey:@"table_name"];
+                    NSNumber *statusnum = [dic1 objectForKey:@"table_status"];
+                    NSString *table_status = [statusnum stringValue];
+                    NSString *table_id = [dic1 objectForKey:@"table_id"];
+                    NSString *people_count = [dic1 objectForKey:@"people_count"];
+                    NSString *create_time = [dic1 objectForKey:@"create_time"];
+                    NSString *area_id = [dic1 objectForKey:@"area_id"];
+                    
+                    TableModel *model = [[TableModel alloc] init];
+                    model.table_name = table_name;
+                    model.area_name = area_name;
+                    model.table_status = table_status;
+                    model.table_id = table_id;
+                    model.create_time = create_time;
+                    model.people_count = people_count;
+                    model.area_id = area_id;
+                    [self.dataArray addObject:model];
+                    
+                }
                 
             }
             [_tableManage reloadData];
-             [_tableManage headerEndRefreshing];
         }
         
         else
@@ -204,93 +163,52 @@
     return 55.0;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    PrintTableViewCell *tabcell = [tableView dequeueReusableCellWithIdentifier:@"idc"];
+    ManageTableViewCell *tabcell = [tableView dequeueReusableCellWithIdentifier:@"idc"];
     if (tabcell==nil) {
-        tabcell = [[PrintTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"idc"];
+        tabcell = [[ManageTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"idc"];
         tabcell.selectionStyle = UITableViewCellStyleDefault;
     }
-    EmployeeModel *model =  self.dataArray[indexPath.section];
-    tabcell.labName.text = [NSString stringWithFormat:@"%@(%@)",model.name,model.username];
-    tabcell.labNumber.text = [NSString stringWithFormat:@"电话:%@",model.phonenum] ;
-    if([model.user_status isEqualToString:@"1"]){
-        tabcell.labNo.text = [NSString stringWithFormat:@"状态:%@",@"正常"] ;
-    }else{
-        tabcell.labNo.text = [NSString stringWithFormat:@"状态:%@",@"冻结"] ;
+    TableModel *model =  self.dataArray[indexPath.section];
+    tabcell.labName.text = [NSString stringWithFormat:@"桌台名:%@",model.table_name];
+    tabcell.labType.text = [NSString stringWithFormat:@"分区名称:%@",model.area_name] ;
+    tabcell.labNumber.text = [NSString stringWithFormat:@"%@",[self timeWithTimeIntervalString:model.create_time]] ;
+    if ([model.table_status isEqualToString:@"0"]) {
+        tabcell.labNo.text = @"桌台状态:未使用";
+    }else if ([model.table_status isEqualToString:@"1"]){
+         tabcell.labNo.text = @"桌台状态:使用中";
+    }else if ([model.table_status isEqualToString:@"2"]){
+         tabcell.labNo.text = @"桌台状态:预定";
+    }else if ([model.table_status isEqualToString:@"3"]){
+         tabcell.labNo.text = @"桌台状态:占用";
+    }else if ([model.table_status isEqualToString:@"4"]){
+         tabcell.labNo.text = @"桌台状态:其他";
     }
-    
-    if ([model.type isEqualToString:@"1"]) {
-        tabcell.labType.text = [NSString stringWithFormat:@"类型:%@",@"店长"];
-    }else {
-        tabcell.labType.text = [NSString stringWithFormat:@"打印类型:%@",@"服务员"];
-    }
+
     tabcell.labNo.textColor = [UIColor colorWithRed:251.0/255.0 green:139.0/255.0 blue:57.0/255.0 alpha:1];
     return tabcell;
 }
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    EmployeeModel *model =  self.dataArray[indexPath.section];
-    NSString *status;
-    NSString *userStatus;
-    if ([model.user_status isEqualToString:@"1"]) {
-        status = @"冻结";
-        userStatus = @"2";
-    }else{
-        status = @"取消冻结";
-        userStatus = @"1";
-    }
+    TableModel *model =  self.dataArray[indexPath.section];
+    
+    
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"请选择一个操作" message:nil preferredStyle:  UIAlertControllerStyleAlert];
     
-    [alert addAction:[UIAlertAction actionWithTitle:status style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        hud=[MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
-        hud.minSize = CGSizeMake(100.f, 100.f);
-        hud.color=[UIColor blackColor];
-        NSString *postUrl = [NSString stringWithFormat:@"%@%@",API_URL,CHANGEWAITER];
-        NSDictionary *parameters = @{@"waiter_id": model.waiter_id,
-                                     @"status":userStatus
-                                     };
+    
+    [alert addAction:[UIAlertAction actionWithTitle:@"修改" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
-        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-        [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-        
-        NSString *key =[userDefaults objectForKey:@"login_key_MX"];
-        NSString *longbusid = [[userDefaults objectForKey:@"business_id_MX"] stringValue];
-        
-        [manager.requestSerializer setValue:key forHTTPHeaderField:@"key"];
-        [manager.requestSerializer setValue:longbusid forHTTPHeaderField:@"id"];
-        
-        manager.responseSerializer = [AFJSONResponseSerializer serializer];//使用这个将得到的是JSON
-        manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/json", @"text/plain", @"text/html", nil];
-        // 设置超时时间
-        [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
-        manager.requestSerializer.timeoutInterval = 10.f;
-        [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
-        
-        [manager POST:postUrl parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            NSLog(@"结果: %@", responseObject);
-            if ([[responseObject objectForKey:@"CODE"] isEqualToString:@"1000"]) {
-                hud.labelText = @"成功";
-                [hud hide:YES afterDelay:0.5];
-                
-                [self.dataArray removeAllObjects];
-                [self loadData];
-            }
-            
-            else
-            {
-                
-            }
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            
-            NSLog(@"Error: ==============%@", error);
-        }];
+        ManagerTableAddViewController *matv = [[ManagerTableAddViewController alloc] init];
+        matv.pagetype = @"2";
+        matv.table_id = model.table_id;
+        [self.navigationController pushViewController:matv animated:YES];
         
     }]];
     [alert addAction:[UIAlertAction actionWithTitle:@"删除" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         hud=[MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+        hud.labelText=@"删除中...";
         hud.minSize = CGSizeMake(100.f, 100.f);
         hud.color=[UIColor blackColor];
-        NSString *postUrl = [NSString stringWithFormat:@"%@%@",API_URL,DELWAITER];
-        NSDictionary *parameters = @{@"waiter_id": model.waiter_id
+        NSString *postUrl = [NSString stringWithFormat:@"%@%@",API_URL,DELTABLE];
+        NSDictionary *parameters = @{@"table_id": model.table_id
                                      };
         
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -321,11 +239,13 @@
             
             else
             {
-                
+                hud.labelText = [responseObject objectForKey:@"MESSAGE"];
+                [hud hide:YES afterDelay:0.5];
             }
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             
             NSLog(@"Error: ==============%@", error);
+            
         }];
         
     }]];
@@ -337,11 +257,33 @@
     
     
 }
-
+- (NSString *)timeWithTimeIntervalString:(NSString *)timeString
+{
+    // 格式化时间
+    NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
+    formatter.timeZone = [NSTimeZone timeZoneWithName:@"shanghai"];
+    [formatter setDateStyle:NSDateFormatterMediumStyle];
+    [formatter setTimeStyle:NSDateFormatterShortStyle];
+    [formatter setDateFormat:@"yyyy年MM月dd日 HH:mm"];
+    
+    // 毫秒值转化为秒
+    NSDate* date = [NSDate dateWithTimeIntervalSince1970:[timeString doubleValue]/ 1000.0];
+    NSString* dateString = [formatter stringFromDate:date];
+    return dateString;
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
 
 @end

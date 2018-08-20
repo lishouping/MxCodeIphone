@@ -22,6 +22,7 @@
 #import "ManagerPrintViewController.h"
 #import "ManagerEmployeeViewController.h"
 #import "ManagerTableAreaViewController.h"
+#import "ManagerTableViewController.h"
 
 @interface MineViewController ()<UITableViewDelegate,UITableViewDataSource>{
     UIView *headerView;
@@ -259,8 +260,11 @@
         ManagerEmployeeViewController *emvc = [[ManagerEmployeeViewController alloc] init];
         [self.navigationController pushViewController:emvc animated:YES];
     }else if([content isEqualToString:@"桌台分区"]){
-        ManagerTableAreaViewController *sv = [ManagerTableAreaViewController alloc];
+        ManagerTableAreaViewController *sv = [[ManagerTableAreaViewController alloc] init];
         [self.navigationController pushViewController:sv animated:YES];
+    }else if([content isEqualToString:@"桌台管理"]){
+        ManagerTableViewController *mtc = [[ManagerTableViewController alloc] init];
+        [self.navigationController pushViewController:mtc animated:YES];
     }
 }
 // 获取徽标上的数字 通知未读条数
