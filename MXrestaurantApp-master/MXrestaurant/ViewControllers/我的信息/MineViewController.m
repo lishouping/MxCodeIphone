@@ -23,6 +23,9 @@
 #import "ManagerEmployeeViewController.h"
 #import "ManagerTableAreaViewController.h"
 #import "ManagerTableViewController.h"
+#import "ManagerDishClassViewController.h"
+#import "ManagerDishViewController.h"
+#import "ManagerDishAddViewController.h"
 
 @interface MineViewController ()<UITableViewDelegate,UITableViewDataSource>{
     UIView *headerView;
@@ -265,6 +268,12 @@
     }else if([content isEqualToString:@"桌台管理"]){
         ManagerTableViewController *mtc = [[ManagerTableViewController alloc] init];
         [self.navigationController pushViewController:mtc animated:YES];
+    }else if([content isEqualToString:@"菜品分类"]){
+        ManagerDishClassViewController *mcc = [[ManagerDishClassViewController alloc] init];
+        [self.navigationController pushViewController:mcc animated:YES];
+    }else if([content isEqualToString:@"菜品管理"]){
+        ManagerDishViewController *mcc = [[ManagerDishViewController alloc] init];
+        [self.navigationController pushViewController:mcc animated:YES];
     }
 }
 // 获取徽标上的数字 通知未读条数

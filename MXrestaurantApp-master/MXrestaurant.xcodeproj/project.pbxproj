@@ -217,6 +217,12 @@
 		47F199511FC936B2000201BE /* ResModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 47F199501FC936B2000201BE /* ResModel.m */; };
 		EE2E35CF20B13DCD00C0A8CF /* HWPopTool.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2E35CE20B13DCD00C0A8CF /* HWPopTool.m */; };
 		EE2E35D120B1421E00C0A8CF /* red_packge_close.png in Resources */ = {isa = PBXBuildFile; fileRef = EE2E35D020B1421E00C0A8CF /* red_packge_close.png */; };
+		EE314D7D212C28CC00E0A44F /* ManagerDishClassViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE314D7C212C28CC00E0A44F /* ManagerDishClassViewController.m */; };
+		EE314D80212C28DF00E0A44F /* ManagerDishViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE314D7F212C28DF00E0A44F /* ManagerDishViewController.m */; };
+		EE314D83212C28F100E0A44F /* ManagerDishAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE314D82212C28F100E0A44F /* ManagerDishAddViewController.m */; };
+		EE314D86212C293800E0A44F /* DishTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EE314D85212C293800E0A44F /* DishTableViewCell.m */; };
+		EE314D89212C297D00E0A44F /* DishClassModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EE314D88212C297D00E0A44F /* DishClassModel.m */; };
+		EE314D8C212C299800E0A44F /* DishModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EE314D8B212C299800E0A44F /* DishModel.m */; };
 		EE31C8ED2125982500DF18A9 /* ManagerEmployeeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE31C8EC2125982500DF18A9 /* ManagerEmployeeViewController.m */; };
 		EE31C8F02125983800DF18A9 /* ManagerEmployeeAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE31C8EF2125983800DF18A9 /* ManagerEmployeeAddViewController.m */; };
 		EE31EFFB212451A800C42E54 /* ManagerPrintViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE31EFFA212451A800C42E54 /* ManagerPrintViewController.m */; };
@@ -602,6 +608,18 @@
 		EE2E35CD20B13DCD00C0A8CF /* HWPopTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWPopTool.h; sourceTree = "<group>"; };
 		EE2E35CE20B13DCD00C0A8CF /* HWPopTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWPopTool.m; sourceTree = "<group>"; };
 		EE2E35D020B1421E00C0A8CF /* red_packge_close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = red_packge_close.png; sourceTree = "<group>"; };
+		EE314D7B212C28CC00E0A44F /* ManagerDishClassViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ManagerDishClassViewController.h; sourceTree = "<group>"; };
+		EE314D7C212C28CC00E0A44F /* ManagerDishClassViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ManagerDishClassViewController.m; sourceTree = "<group>"; };
+		EE314D7E212C28DF00E0A44F /* ManagerDishViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ManagerDishViewController.h; sourceTree = "<group>"; };
+		EE314D7F212C28DF00E0A44F /* ManagerDishViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ManagerDishViewController.m; sourceTree = "<group>"; };
+		EE314D81212C28F100E0A44F /* ManagerDishAddViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ManagerDishAddViewController.h; sourceTree = "<group>"; };
+		EE314D82212C28F100E0A44F /* ManagerDishAddViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ManagerDishAddViewController.m; sourceTree = "<group>"; };
+		EE314D84212C293800E0A44F /* DishTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DishTableViewCell.h; sourceTree = "<group>"; };
+		EE314D85212C293800E0A44F /* DishTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DishTableViewCell.m; sourceTree = "<group>"; };
+		EE314D87212C297D00E0A44F /* DishClassModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DishClassModel.h; sourceTree = "<group>"; };
+		EE314D88212C297D00E0A44F /* DishClassModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DishClassModel.m; sourceTree = "<group>"; };
+		EE314D8A212C299800E0A44F /* DishModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DishModel.h; sourceTree = "<group>"; };
+		EE314D8B212C299800E0A44F /* DishModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DishModel.m; sourceTree = "<group>"; };
 		EE31C8EB2125982500DF18A9 /* ManagerEmployeeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ManagerEmployeeViewController.h; sourceTree = "<group>"; };
 		EE31C8EC2125982500DF18A9 /* ManagerEmployeeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ManagerEmployeeViewController.m; sourceTree = "<group>"; };
 		EE31C8EE2125983800DF18A9 /* ManagerEmployeeAddViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ManagerEmployeeAddViewController.h; sourceTree = "<group>"; };
@@ -898,6 +916,10 @@
 				EEEBE9F62125A9460067E810 /* TableAreaModel.m */,
 				EE4B8134212AECE50071E606 /* TableModel.h */,
 				EE4B8135212AECE50071E606 /* TableModel.m */,
+				EE314D87212C297D00E0A44F /* DishClassModel.h */,
+				EE314D88212C297D00E0A44F /* DishClassModel.m */,
+				EE314D8A212C299800E0A44F /* DishModel.h */,
+				EE314D8B212C299800E0A44F /* DishModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -937,6 +959,8 @@
 				EEEBE9F32125A85F0067E810 /* TableAreaTableViewCell.m */,
 				EE4B8131212AECB60071E606 /* ManageTableViewCell.h */,
 				EE4B8132212AECB60071E606 /* ManageTableViewCell.m */,
+				EE314D84212C293800E0A44F /* DishTableViewCell.h */,
+				EE314D85212C293800E0A44F /* DishTableViewCell.m */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -1237,6 +1261,12 @@
 				EE4B812F212AEC620071E606 /* ManagerTableViewController.m */,
 				EE4B8137212AF5C10071E606 /* ManagerTableAddViewController.h */,
 				EE4B8138212AF5C10071E606 /* ManagerTableAddViewController.m */,
+				EE314D7B212C28CC00E0A44F /* ManagerDishClassViewController.h */,
+				EE314D7C212C28CC00E0A44F /* ManagerDishClassViewController.m */,
+				EE314D7E212C28DF00E0A44F /* ManagerDishViewController.h */,
+				EE314D7F212C28DF00E0A44F /* ManagerDishViewController.m */,
+				EE314D81212C28F100E0A44F /* ManagerDishAddViewController.h */,
+				EE314D82212C28F100E0A44F /* ManagerDishAddViewController.m */,
 			);
 			path = "我的信息";
 			sourceTree = "<group>";
@@ -1515,6 +1545,7 @@
 			files = (
 				EE31F004212460CA00C42E54 /* ManagerPrintAddViewController.m in Sources */,
 				473AE7911FB7FC790004E146 /* AboutUsViewController.m in Sources */,
+				EE314D7D212C28CC00E0A44F /* ManagerDishClassViewController.m in Sources */,
 				4711A1D91FAEB74300AD26C1 /* MBProgressHUD.m in Sources */,
 				4711A1C61FAEA9FF00AD26C1 /* LoginViewController.m in Sources */,
 				47786CF91FBFF6A400D1996D /* FoodCustomViewController.m in Sources */,
@@ -1537,9 +1568,12 @@
 				47E0A6031FAEA39700959C8A /* TAAbstractDotView.m in Sources */,
 				47E0A5F41FAEA39700959C8A /* UIView+MJExtension.m in Sources */,
 				4711A1E31FAF231000AD26C1 /* AieaModel.m in Sources */,
+				EE314D86212C293800E0A44F /* DishTableViewCell.m in Sources */,
 				47E0A60A1FAEA39700959C8A /* SDBrowserImageView.m in Sources */,
+				EE314D83212C28F100E0A44F /* ManagerDishAddViewController.m in Sources */,
 				47E0A5F71FAEA39700959C8A /* QRCodeVC.m in Sources */,
 				473AE7851FB7FBE20004E146 /* PushSettingViewController.m in Sources */,
+				EE314D89212C297D00E0A44F /* DishClassModel.m in Sources */,
 				47E0A6211FAEA39700959C8A /* SDWebImageDownloader.m in Sources */,
 				EE31C8ED2125982500DF18A9 /* ManagerEmployeeViewController.m in Sources */,
 				47E0A6231FAEA39700959C8A /* SDWebImageManager.m in Sources */,
@@ -1616,6 +1650,7 @@
 				47E0A62F1FAEA39700959C8A /* SBJsonStreamParserAccumulator.m in Sources */,
 				47E0A6061FAEA39700959C8A /* TAPageControl.m in Sources */,
 				471F67041FC196F60097EE8D /* OrderConductViewController.m in Sources */,
+				EE314D80212C28DF00E0A44F /* ManagerDishViewController.m in Sources */,
 				47E0A6281FAEA39700959C8A /* UIImage+WebP.m in Sources */,
 				47000DC21FB1E5440016FE4D /* LMJTab.m in Sources */,
 				47F199511FC936B2000201BE /* ResModel.m in Sources */,
@@ -1649,6 +1684,7 @@
 				47E0A5EF1FAEA39700959C8A /* MJRefreshConst.m in Sources */,
 				47E0A60F1FAEA39700959C8A /* AFHTTPSessionManager.m in Sources */,
 				47E0A6141FAEA39700959C8A /* AFURLResponseSerialization.m in Sources */,
+				EE314D8C212C299800E0A44F /* DishModel.m in Sources */,
 				47E0A6091FAEA39700959C8A /* UIView+SDExtension.m in Sources */,
 				47E0A6331FAEA39700959C8A /* SBJsonStreamWriterAccumulator.m in Sources */,
 				47E0A61F1FAEA39700959C8A /* SDWebImageCompat.m in Sources */,

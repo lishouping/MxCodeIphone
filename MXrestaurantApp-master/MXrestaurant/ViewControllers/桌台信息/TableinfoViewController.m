@@ -385,6 +385,7 @@
 }
 - (void)setTableStatesInfo:(NSString *)stateName{
      [self.tableDateArray removeAllObjects];
+      [self.collectionView reloadData];
     for (int i=0; i<self.aierDateArray.count; i++) {
         AieaModel *model = self.aierDateArray[i];
         NSString *areaid = model.area_id;

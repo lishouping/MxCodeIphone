@@ -67,6 +67,7 @@ typedef void(^completeBlock)(void);
  *  @param complete complete block
  */
 - (void)closeWithBlcok:(void(^)())complete;
+- (void)hideAnimated:(BOOL)animated withCompletionBlock:(void(^)())completion ;
 
 @end
 
