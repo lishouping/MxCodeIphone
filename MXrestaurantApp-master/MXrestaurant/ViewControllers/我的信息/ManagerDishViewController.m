@@ -12,7 +12,7 @@
 #import "DishTableViewCell.h"
 #import "DishModel.h"
 #import "HWPopTool.h"
-@interface ManagerDishViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface ManagerDishViewController ()<UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate>
 {
     UITableView *_tableManage;
     NSUserDefaults * userDefaults;
@@ -29,9 +29,12 @@
     NSString *selecType;
     
     NSArray *mdateArray;
-    UITextField *searchBar;
+    
+    UISearchBar *searchBar;
+    
     
 }
+@property(nonatomic)UIBarStyle *barStyle;
 @property(nonatomic,strong)NSMutableArray *dataArray;
 @property(nonatomic,strong)NSMutableArray *areaArray;
 @end
@@ -94,12 +97,18 @@
     [self.view addSubview:titleView];
     
     
+    searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(40, 5, kWidth-40-5, 40)];
+    [titleView addSubview:searchBar];
+    searchBar.delegate = self;
+    searchBar.searchBarStyle = UISearchBarStyleMinimal;
     
+   
     
     btnArea = [[UIButton alloc] initWithFrame:CGRectMake(5, 10, 30, 30)];
     [btnArea setImage:[UIImage imageNamed:@"icon_add"] forState:UIControlStateNormal];
     [titleView addSubview:btnArea];
     [btnArea addTarget:self action:@selector(selectOnclick) forControlEvents:UIControlEventTouchUpInside];
+    
     
     _tableManage = [[UITableView alloc] initWithFrame:CGRectMake(0, 60, kWidth, kHeight-44-20-60) style:UITableViewStylePlain];
     _tableManage.delegate = self;
@@ -143,9 +152,29 @@
     
 }
 
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText;{
+    
+    if (searchBar.text.length == 0) {
+        [self performSelector:@selector(hideKeyboardWithSearchBar:) withObject:searchBar afterDelay:0];
+    }
+    
+}
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
+     NSLog(@"textDidChange---%@",searchBar.text);
+    
+     [searchBar resignFirstResponder];
+}
+
+
+- (void)hideKeyboardWithSearchBar:(UISearchBar *)searchBar
+{
+    [searchBar resignFirstResponder];
+}
+
 
 - (void)rightBtnButtonClick{
     ManagerDishAddViewController *madis = [[ManagerDishAddViewController alloc] init];
+    madis.pagetype = @"0";
     [self.navigationController pushViewController:madis animated:YES];
     
 }
@@ -239,7 +268,7 @@
                 
                 for (NSDictionary * dic1 in goods_list) {
                     NSString *goods_name = [dic1 objectForKey:@"goods_name"];
-                    NSString *pre_price = [dic1 objectForKey:@"pre_price"];
+                    NSString *pre_price = [[NSNumber numberWithLong:[ [dic1 objectForKey:@"pre_price"]longValue]] stringValue];
                     NSString *good_id = [dic1 objectForKey:@"good_id"];
                     
                     DishModel *model = [[DishModel alloc] init];
@@ -331,16 +360,24 @@
         [alert addAction:[UIAlertAction actionWithTitle:@"详情" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             
             
-            //弹出提示框；
-            [self presentViewController:alert animated:true completion:nil];
+            ManagerDishAddViewController *mdav = [[ManagerDishAddViewController alloc] init];
+             mdav.pagetype = @"1";
+            mdav.category_name = model.category_name;
+            mdav.goods_id = model.good_id;
+            [self.navigationController pushViewController:mdav animated:YES];
+            
+
             
         }]];
         
         [alert addAction:[UIAlertAction actionWithTitle:@"修改" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            
-            
-            //弹出提示框；
-            [self presentViewController:alert animated:true completion:nil];
+            ManagerDishAddViewController *mdav = [[ManagerDishAddViewController alloc] init];
+            mdav.pagetype = @"2";
+            mdav.category_name = model.category_name;
+            mdav.goods_id = model.good_id;
+            [self.navigationController pushViewController:mdav animated:YES];
+
+     
             
         }]];
         [alert addAction:[UIAlertAction actionWithTitle:@"删除" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {

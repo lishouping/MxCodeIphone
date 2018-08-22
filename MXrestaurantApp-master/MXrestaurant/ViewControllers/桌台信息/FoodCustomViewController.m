@@ -37,6 +37,8 @@ static int showview = 0;
     NSString *cart_id;
     
      NSTimer *timer;
+    
+      UISearchBar *searchBar;
 }
 @property(nonatomic,strong)NSMutableArray *dateArrayCategory;
 @property(nonatomic,strong)NSMutableArray *dateArrayFoodList;
@@ -91,9 +93,17 @@ static int showview = 0;
     
 }
 -(void)makeUI{
-    UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(0,0, kWidth, 40)];
+    searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(5, 5, kWidth-5-5, 40)];
+    [self.view addSubview:searchBar];
+    searchBar.delegate = self;
+    searchBar.searchBarStyle = UISearchBarStyleMinimal;
+    
+    
+    UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(0,50, kWidth, 40)];
     [titleView setBackgroundColor:[UIColor colorWithRed:233.0/255.0 green:236.0/255.0 blue:241.0/255.0 alpha:1]];
     [self.view addSubview:titleView];
+    
+    
     
     UILabel *labClass = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, kWidth/3, 40)];
     labClass.textAlignment = UITextAlignmentCenter;
@@ -114,13 +124,13 @@ static int showview = 0;
     [titleView addSubview:labPri];
     
     
-    tableViewClass = [[UITableView alloc] initWithFrame:CGRectMake(0, 40, kWidth/3, kHeight-40-80-44) style:UITableViewStylePlain];
+    tableViewClass = [[UITableView alloc] initWithFrame:CGRectMake(0, 40+50, kWidth/3, kHeight-40-80-44) style:UITableViewStylePlain];
     tableViewClass.delegate = self;
     tableViewClass.dataSource = self;
     [self.view addSubview:tableViewClass];
     tableViewClass.tableFooterView = [[UIView alloc] init];
     
-    tableViewFood = [[UITableView alloc] initWithFrame:CGRectMake(kWidth/3, 40, kWidth/3*2, kHeight-40-80-44) style:UITableViewStylePlain];
+    tableViewFood = [[UITableView alloc] initWithFrame:CGRectMake(kWidth/3, 40+50, kWidth/3*2, kHeight-40-80-44) style:UITableViewStylePlain];
     tableViewFood.delegate = self;
     tableViewFood.dataSource = self;
     [self.view addSubview:tableViewFood];
@@ -209,6 +219,25 @@ static int showview = 0;
     
     [self createNav];
 }
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText;{
+    
+    if (searchBar.text.length == 0) {
+        [self performSelector:@selector(hideKeyboardWithSearchBar:) withObject:searchBar afterDelay:0];
+    }
+    
+}
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
+    NSLog(@"textDidChange---%@",searchBar.text);
+     [searchBar resignFirstResponder];
+}
+
+
+- (void)hideKeyboardWithSearchBar:(UISearchBar *)searchBar
+{
+    [searchBar resignFirstResponder];
+}
+
 -(void)createNav
 {
     UIButton *leftButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 30)];
