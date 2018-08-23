@@ -954,11 +954,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MXrestaurant/ViewControllers/&#x6211;&#x7684;&#x4fe1;&#x606f;/ManagerShopViewController.m"
-            timestampString = "556639528.378462"
+            timestampString = "556724784.287223"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "245"
-            endingLineNumber = "245"
+            startingLineNumber = "303"
+            endingLineNumber = "303"
             landmarkName = "-getShopInfo"
             landmarkType = "7">
          </BreakpointContent>
@@ -970,11 +970,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MXrestaurant/ViewControllers/&#x6211;&#x7684;&#x4fe1;&#x606f;/ManagerShopViewController.m"
-            timestampString = "556639528.378504"
+            timestampString = "556724784.287599"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "313"
-            endingLineNumber = "313"
+            startingLineNumber = "371"
+            endingLineNumber = "371"
             landmarkName = "-sumbitClick"
             landmarkType = "7">
          </BreakpointContent>
@@ -986,11 +986,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MXrestaurant/ViewControllers/&#x6211;&#x7684;&#x4fe1;&#x606f;/ManagerShopViewController.m"
-            timestampString = "556639528.3785419"
+            timestampString = "556724784.2878489"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "330"
-            endingLineNumber = "330"
+            startingLineNumber = "388"
+            endingLineNumber = "388"
             landmarkName = "-sumbitClick"
             landmarkType = "7">
          </BreakpointContent>
@@ -1002,11 +1002,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MXrestaurant/ViewControllers/&#x6211;&#x7684;&#x4fe1;&#x606f;/ManagerShopViewController.m"
-            timestampString = "556639528.378579"
+            timestampString = "556724784.288072"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "318"
-            endingLineNumber = "318"
+            startingLineNumber = "376"
+            endingLineNumber = "376"
             landmarkName = "-sumbitClick"
             landmarkType = "7">
          </BreakpointContent>
@@ -1082,11 +1082,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MXrestaurant/ViewControllers/&#x6211;&#x7684;&#x4fe1;&#x606f;/ManagerTableAddViewController.m"
-            timestampString = "556550577.624573"
+            timestampString = "556719626.479179"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "344"
-            endingLineNumber = "344"
+            startingLineNumber = "350"
+            endingLineNumber = "350"
             landmarkName = "-getOneTable"
             landmarkType = "7">
          </BreakpointContent>
@@ -1098,11 +1098,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MXrestaurant/ViewControllers/&#x6211;&#x7684;&#x4fe1;&#x606f;/ManagerTableAddViewController.m"
-            timestampString = "556550577.624632"
+            timestampString = "556719626.479234"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "155"
-            endingLineNumber = "155"
+            startingLineNumber = "158"
+            endingLineNumber = "158"
             landmarkName = "-selectOnclick"
             landmarkType = "7">
          </BreakpointContent>
@@ -1114,11 +1114,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MXrestaurant/ViewControllers/&#x6211;&#x7684;&#x4fe1;&#x606f;/ManagerTableAddViewController.m"
-            timestampString = "556550577.6246769"
+            timestampString = "556719626.47928"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "156"
-            endingLineNumber = "156"
+            startingLineNumber = "159"
+            endingLineNumber = "159"
             landmarkName = "-selectOnclick"
             landmarkType = "7">
          </BreakpointContent>
@@ -1130,11 +1130,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MXrestaurant/ViewControllers/&#x6211;&#x7684;&#x4fe1;&#x606f;/ManagerTableAddViewController.m"
-            timestampString = "556550577.624718"
+            timestampString = "556719626.479324"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "188"
-            endingLineNumber = "188"
+            startingLineNumber = "191"
+            endingLineNumber = "191"
             landmarkName = "-sumbitClick"
             landmarkType = "7">
          </BreakpointContent>
@@ -1146,11 +1146,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MXrestaurant/ViewControllers/&#x6211;&#x7684;&#x4fe1;&#x606f;/ManagerTableAddViewController.m"
-            timestampString = "556550577.6247571"
+            timestampString = "556719626.4793659"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "184"
-            endingLineNumber = "184"
+            startingLineNumber = "187"
+            endingLineNumber = "187"
             landmarkName = "-sumbitClick"
             landmarkType = "7">
          </BreakpointContent>
@@ -1162,7 +1162,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MXrestaurant/ViewControllers/&#x6211;&#x7684;&#x4fe1;&#x606f;/ManagerDishViewController.m"
-            timestampString = "556639528.3787971"
+            timestampString = "556715309.3047709"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "433"
@@ -1210,7 +1210,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MXrestaurant/ViewControllers/&#x6211;&#x7684;&#x4fe1;&#x606f;/ManagerDishViewController.m"
-            timestampString = "556639528.379123"
+            timestampString = "556715309.305503"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "432"
@@ -1258,7 +1258,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MXrestaurant/ViewControllers/&#x6211;&#x7684;&#x4fe1;&#x606f;/ManagerDishViewController.m"
-            timestampString = "556639528.379351"
+            timestampString = "556715309.305847"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "68"
@@ -1290,11 +1290,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MXrestaurant/ViewControllers/&#x6211;&#x7684;&#x4fe1;&#x606f;/ManagerDishAddViewController.m"
-            timestampString = "556639528.3796901"
+            timestampString = "556724784.288694"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "432"
-            endingLineNumber = "432"
+            startingLineNumber = "522"
+            endingLineNumber = "522"
             landmarkName = "-selectGoods"
             landmarkType = "7">
          </BreakpointContent>
@@ -1306,11 +1306,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MXrestaurant/ViewControllers/&#x6211;&#x7684;&#x4fe1;&#x606f;/ManagerDishAddViewController.m"
-            timestampString = "556639528.379777"
+            timestampString = "556724784.288785"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "438"
-            endingLineNumber = "438"
+            startingLineNumber = "528"
+            endingLineNumber = "528"
             landmarkName = "-selectGoods"
             landmarkType = "7">
          </BreakpointContent>
@@ -1322,11 +1322,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MXrestaurant/ViewControllers/&#x6211;&#x7684;&#x4fe1;&#x606f;/ManagerDishAddViewController.m"
-            timestampString = "556639528.37983"
+            timestampString = "556724784.2888401"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "221"
-            endingLineNumber = "221"
+            startingLineNumber = "261"
+            endingLineNumber = "261"
             landmarkName = "-sumbitClick"
             landmarkType = "7">
          </BreakpointContent>
@@ -1338,12 +1338,188 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MXrestaurant/ViewControllers/&#x6211;&#x7684;&#x4fe1;&#x606f;/ManagerDishAddViewController.m"
-            timestampString = "556639528.379876"
+            timestampString = "556724784.288891"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "437"
-            endingLineNumber = "437"
+            startingLineNumber = "527"
+            endingLineNumber = "527"
             landmarkName = "-selectGoods"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MXrestaurant/ViewControllers/&#x6211;&#x7684;&#x4fe1;&#x606f;/ManagerTableAddViewController.m"
+            timestampString = "556719626.479565"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "375"
+            endingLineNumber = "375"
+            landmarkName = "-getAreaName:"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[ManagerTableAddViewController getAreaName:]"
+                  moduleName = "MXrestaurant"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mx/Desktop/MxCodeIphone/MXrestaurantApp-master/MXrestaurant/ViewControllers/%E6%88%91%E7%9A%84%E4%BF%A1%E6%81%AF/ManagerTableAddViewController.m"
+                  timestampString = "556716265.741946"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "372"
+                  endingLineNumber = "372"
+                  offsetFromSymbolStart = "86">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[ManagerTableAddViewController getAreaName:]"
+                  moduleName = "MXrestaurant"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mx/Desktop/MxCodeIphone/MXrestaurantApp-master/MXrestaurant/ViewControllers/%E6%88%91%E7%9A%84%E4%BF%A1%E6%81%AF/ManagerTableAddViewController.m"
+                  timestampString = "556716265.7451349"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "372"
+                  endingLineNumber = "372"
+                  offsetFromSymbolStart = "101">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MXrestaurant/ViewControllers/&#x6211;&#x7684;&#x4fe1;&#x606f;/ManagerTableAddViewController.m"
+            timestampString = "556719626.4796129"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "378"
+            endingLineNumber = "378"
+            landmarkName = "-getAreaName:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MXrestaurant/ViewControllers/&#x6211;&#x7684;&#x4fe1;&#x606f;/ManagerTableAddViewController.m"
+            timestampString = "556719626.479658"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "380"
+            endingLineNumber = "380"
+            landmarkName = "-getAreaName:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MXrestaurant/ViewControllers/&#x6211;&#x7684;&#x4fe1;&#x606f;/ManagerTableAddViewController.m"
+            timestampString = "556719626.479702"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "259"
+            endingLineNumber = "259"
+            landmarkName = "-loadData"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MXrestaurant/ViewControllers/&#x6211;&#x7684;&#x4fe1;&#x606f;/ManagerShopViewController.m"
+            timestampString = "556724784.2890511"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "418"
+            endingLineNumber = "418"
+            landmarkName = "-sumbitClick"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MXrestaurant/ViewControllers/&#x6211;&#x7684;&#x4fe1;&#x606f;/ManagerShopViewController.m"
+            timestampString = "556724784.289338"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "282"
+            endingLineNumber = "282"
+            landmarkName = "-imagePickerController:didFinishPickingPhotos:sourceAssets:isSelectOriginalPhoto:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MXrestaurant/ViewControllers/&#x6211;&#x7684;&#x4fe1;&#x606f;/ManagerShopViewController.m"
+            timestampString = "556724784.289582"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "279"
+            endingLineNumber = "279"
+            landmarkName = "-imagePickerController:didFinishPickingPhotos:sourceAssets:isSelectOriginalPhoto:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MXrestaurant/ViewControllers/&#x6211;&#x7684;&#x4fe1;&#x606f;/ManagerShopViewController.m"
+            timestampString = "556724784.2899491"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "254"
+            endingLineNumber = "254"
+            landmarkName = "-selectPic:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MXrestaurant/ViewControllers/&#x6211;&#x7684;&#x4fe1;&#x606f;/ManagerShopViewController.m"
+            timestampString = "556724794.395348"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "276"
+            endingLineNumber = "276"
+            landmarkName = "-imagePickerController:didFinishPickingPhotos:sourceAssets:isSelectOriginalPhoto:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

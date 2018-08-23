@@ -9,8 +9,9 @@
 #import "ManagerDishAddViewController.h"
 #import "HWPopTool.h"
 #import "CategoryModel.h"
+#import "TZImagePickerController.h"
 
-@interface ManagerDishAddViewController ()<UITextFieldDelegate,UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource>
+@interface ManagerDishAddViewController ()<UITextFieldDelegate,UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource,UIImagePickerControllerDelegate>
 {
     MBProgressHUD *hud;
     NSUserDefaults * userDefaults;
@@ -31,6 +32,10 @@
     UIView *viewTableState;
     
     NSString *mcategory_id;
+    
+    UIButton *btnAlLogo;
+    
+    NSData *mdata ;
 }
 //餐桌分类
 @property(nonatomic,strong)NSMutableArray *dateArray;
@@ -151,6 +156,11 @@
     imgLogo = [[UIImageView alloc] initWithFrame:CGRectMake(15+80+10, 10+40+10+50+50+50+50, 60, 60)];
     [_scrollView addSubview:imgLogo];
     
+    btnAlLogo = [[UIButton alloc] initWithFrame:CGRectMake(15+80+10+60+10, 10+40+10+50+50+50+50, 60, 60)];
+    [btnAlLogo addTarget:self action:@selector(selectPic) forControlEvents:UIControlEventTouchUpInside];
+    [btnAlLogo setBackgroundColor:[UIColor grayColor]];
+    [_scrollView addSubview:btnAlLogo];
+    
     
     
     btnSubmit = [[UIButton alloc] initWithFrame:CGRectMake(30,  kHeight-30-44-20-10, kWidth-30-30, 30)];
@@ -201,7 +211,37 @@
         [self selectGoods];
     }
 }
+-(void)selectPic{
+    
+    TZImagePickerController *imagePickerVc = [[TZImagePickerController alloc] initWithMaxImagesCount:1 delegate:self];
+    
+    // You can get the photos by block, the same as by delegate.
+    // 你可以通过block或者代理，来得到用户选择的照片.
+    [imagePickerVc setDidFinishPickingPhotosHandle:^(NSArray<UIImage *> *photos, NSArray *assets, BOOL isSelectOriginalPhoto) {
+        
+    }];
+    
+    
+    [self presentViewController:imagePickerVc animated:YES completion:nil];
+}
 
+
+//当相片选取完成之后回来到这个函数
+//完成后获取图片
+- (void)imagePickerController:(TZImagePickerController *)picker didFinishPickingPhotos:(NSArray *)photos sourceAssets:(NSArray *)assets isSelectOriginalPhoto:(BOOL)isSelectOriginalPhoto {
+    
+    NSMutableArray *selectedPhotos = [NSMutableArray arrayWithArray:photos];
+    
+    
+    
+    imgLogo.image = selectedPhotos[0];
+    
+    
+    mdata = UIImageJPEGRepresentation(imgLogo.image, 0.5);
+    
+    
+    
+}
 
 -(void)selectOnclick{
     [tableViewChoose reloadData];
@@ -259,7 +299,7 @@
                                          @"introduction":_tfShopAddress.text,
                                          };
             
-            
+
             AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
             manager.responseSerializer = [AFJSONResponseSerializer serializer];//使用这个将得到的是JSON
             manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/json", @"text/plain", @"text/html", nil];
@@ -272,25 +312,61 @@
             [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
             manager.requestSerializer.timeoutInterval = 10.f;
             [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
-            [manager POST:postUrl parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            
+            [manager POST:postUrl parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+                
+        
+//                NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
+//                [dictionary setObject:@"multipart/form-data" forKey:@"Content-Type"];
+//                [dictionary setObject:[NSNumber numberWithInteger:mdata.length] forKey:@"Content-Length"];
+                //[dictionary setObject:@"form-data; name=\"f2\"; filename=\"时钟.zip\"" forKey:@"Content-Disposition"];
+                
+                //[formData appendPartWithHeaders:dictionary body:mdata];
+                
+                if(mdata.length>0){
+                    [formData appendPartWithFileData:mdata name:@"file" fileName:@"" mimeType:@"image/jpeg"];
+                }
+                
+            } success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                
                 NSLog(@"结果: %@", responseObject);
-                if ([[responseObject objectForKey:@"CODE"] isEqualToString:@"1000"]) {
-                    hud.labelText = @"成功";
-                    [hud hide:YES afterDelay:0.5];
-                    //说明不是跟视图
-                    [self.navigationController popViewControllerAnimated:NO];
-                }
-                else
-                {
-                    hud.labelText = @"失败";
-                    [hud hide:YES afterDelay:0.5];
-                    
-                }
+                                if ([[responseObject objectForKey:@"CODE"] isEqualToString:@"1000"]) {
+                                    hud.labelText = @"成功";
+                                    [hud hide:YES afterDelay:0.5];
+                                    //说明不是跟视图
+                                    [self.navigationController popViewControllerAnimated:NO];
+                                }
+                                else
+                                {
+                                    hud.labelText = @"失败";
+                                    [hud hide:YES afterDelay:0.5];
+                
+                                }
+                
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                hud.labelText = @"网络连接异常";
-                [hud hide:YES afterDelay:0.5];
-                NSLog(@"Error: ==============%@", error);
+                NSLog(@"error = %@", error);
             }];
+            
+            
+//            [manager POST:postUrl parameters:parameters, success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//                NSLog(@"结果: %@", responseObject);
+//                if ([[responseObject objectForKey:@"CODE"] isEqualToString:@"1000"]) {
+//                    hud.labelText = @"成功";
+//                    [hud hide:YES afterDelay:0.5];
+//                    //说明不是跟视图
+//                    [self.navigationController popViewControllerAnimated:NO];
+//                }
+//                else
+//                {
+//                    hud.labelText = @"失败";
+//                    [hud hide:YES afterDelay:0.5];
+//
+//                }
+//            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//                hud.labelText = @"网络连接异常";
+//                [hud hide:YES afterDelay:0.5];
+//                NSLog(@"Error: ==============%@", error);
+//            }];
             
             
             
@@ -324,7 +400,22 @@
             [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
             manager.requestSerializer.timeoutInterval = 10.f;
             [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
-            [manager POST:postUrl parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            [manager POST:postUrl parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+                
+                
+                //                NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
+                //                [dictionary setObject:@"multipart/form-data" forKey:@"Content-Type"];
+                //                [dictionary setObject:[NSNumber numberWithInteger:mdata.length] forKey:@"Content-Length"];
+                //[dictionary setObject:@"form-data; name=\"f2\"; filename=\"时钟.zip\"" forKey:@"Content-Disposition"];
+                
+                //[formData appendPartWithHeaders:dictionary body:mdata];
+                
+                if(mdata.length>0){
+                    [formData appendPartWithFileData:mdata name:@"file" fileName:@"" mimeType:@"image/jpeg"];
+                }
+                
+            } success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                
                 NSLog(@"结果: %@", responseObject);
                 if ([[responseObject objectForKey:@"CODE"] isEqualToString:@"1000"]) {
                     hud.labelText = @"成功";
@@ -338,10 +429,9 @@
                     [hud hide:YES afterDelay:0.5];
                     
                 }
+                
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                hud.labelText = @"网络连接异常";
-                [hud hide:YES afterDelay:0.5];
-                NSLog(@"Error: ==============%@", error);
+                NSLog(@"error = %@", error);
             }];
         }
         
@@ -450,7 +540,11 @@
             [_tfShopAddress setText:introduction];
             [btnSelect setTitle:self.category_name forState:UIControlStateNormal];
             
-            NSURL *icon_img = [[NSURL alloc] initWithString:img_url];
+       
+            
+            
+            NSString *img = [NSString stringWithFormat:@"%@/%@",RESOURCE_URL,img_url];
+            NSURL *icon_img = [[NSURL alloc] initWithString:img];
             [imgLogo sd_setImageWithURL:icon_img placeholderImage:[UIImage imageNamed:@"icon"]];
             
         }

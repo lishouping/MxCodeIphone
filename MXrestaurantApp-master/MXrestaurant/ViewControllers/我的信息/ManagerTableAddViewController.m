@@ -29,6 +29,8 @@
     UITableView *tableViewChoose;
     UIView *headView;
     UIView *viewTableState;
+    
+    NSArray *mdateArray;
 }
 //餐桌分类
 @property(nonatomic,strong)NSMutableArray *dateArray;
@@ -123,7 +125,8 @@
         
     } else {
         //修改
-        [self getOneTable];
+        [self loadData];
+        
     }
     
     viewTableState = [[UIView alloc] initWithFrame:CGRectMake(20, 100, kWidth-20-20, kHeight-100-100)];
@@ -253,9 +256,9 @@
         NSLog(@"结果: %@", responseObject);
         if ([[responseObject objectForKey:@"CODE"] isEqualToString:@"1000"]) {
             
-            NSArray *dateArray = [responseObject objectForKey:@"DATA"];
+             mdateArray = [responseObject objectForKey:@"DATA"];
             
-            for (NSDictionary * dic in dateArray)
+            for (NSDictionary * dic in mdateArray)
             {
                 NSString *area_name = [dic objectForKey:@"area_name"];
                 NSNumber *areid = [dic objectForKey:@"area_id"];
@@ -270,6 +273,9 @@
                 
             }
             [tableViewChoose reloadData];
+            if ([self.pagetype isEqualToString:@"2"]) {
+                [self getOneTable];
+            }
         }
         
         else
@@ -346,10 +352,16 @@
             NSString *table_name = [dics objectForKey:@"table_name"];
             NSNumber *content = [dics objectForKey:@"people_count"];
             NSString *people_count = [content stringValue];
-            area_id =[dics objectForKey:@"area_id"];
+            NSNumber *areaid = [dics objectForKey:@"area_id"];
+            
+            area_id =[areaid stringValue];
             
             [_tfShopName setText:table_name];
             [_tfShopPersonName setText:people_count];
+            
+            
+            
+            [self getAreaName:area_id];
             
         }
         
@@ -359,7 +371,20 @@
     }];
 }
 
-
+- (void)getAreaName:(NSString *)areaId{
+    for (NSDictionary * dic in mdateArray)
+    {
+        
+        NSString *area_name = [dic objectForKey:@"area_name"];
+        NSNumber *areid = [dic objectForKey:@"area_id"];
+        NSString *area_id = [areid stringValue];
+        
+        if ([areaId isEqualToString:area_id]) {
+            [btnSelect setTitle:area_name forState:UIControlStateNormal];
+            break;
+        }
+    }
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

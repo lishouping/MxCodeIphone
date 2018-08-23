@@ -230,6 +230,26 @@
     return tabcell;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    if (section==5) {
+        return 15;
+    }else{
+        return 1;
+    }
+    
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    
+    UIView *headerView = [[UIView alloc]init];
+    
+    headerView.backgroundColor = [UIColor groupTableViewBackgroundColor];
+   return headerView;
+    
+    
+}
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     NSString *content = self.dateArray[indexPath.section];
     if ([content isEqualToString:@"销售统计"]) {

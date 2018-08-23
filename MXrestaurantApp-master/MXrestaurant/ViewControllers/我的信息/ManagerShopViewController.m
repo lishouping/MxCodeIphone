@@ -8,8 +8,9 @@
 
 #import "ManagerShopViewController.h"
 #import "YLButton.h"
+#import "TZImagePickerController.h"
 
-@interface ManagerShopViewController ()<UITextFieldDelegate,UIScrollViewDelegate>{
+@interface ManagerShopViewController ()<UITextFieldDelegate,UIScrollViewDelegate,UIImagePickerControllerDelegate>{
     UIScrollView *_scrollView;
     UITextField *_tfShopName;
     UITextField *_tfShopPersonName;
@@ -34,8 +35,17 @@
     NSString *shop_id;
     
     UIImageView *imgLogo;
+    UIButton *btnImageLogo;
     UIImageView *wxLogo;
+    UIButton *btnWxLogo;
     UIImageView *alpayLogo;
+    UIButton *btnAlLogo;
+    
+    NSInteger *managerType;
+    
+    NSData *logoData;
+    NSData *wxData;
+    NSData *alData;
 }
 
 @end
@@ -193,6 +203,13 @@
     imgLogo = [[UIImageView alloc] initWithFrame:CGRectMake(15+80+10, 10+40+10+50+50+50+50+50+50, 60, 60)];
     [_scrollView addSubview:imgLogo];
     
+    btnImageLogo = [[UIButton alloc] initWithFrame:CGRectMake(15+80+10+60+10, 10+40+10+50+50+50+50+50+50, 60, 60)];
+    btnImageLogo.tag = 0;
+        [btnImageLogo setBackgroundColor:[UIColor grayColor]];
+    [btnImageLogo addTarget:self action:@selector(selectPic:) forControlEvents:UIControlEventTouchUpInside];
+    [_scrollView addSubview:btnImageLogo];
+    
+    
     UILabel *labShopI = [[UILabel alloc] initWithFrame:CGRectMake(15, 10+40+10+50+50+50+50+50+50+10+60, 80, 60)];
     [labShopI setText:@"微信支付图片"];
     labShopI.font = [UIFont systemFontOfSize:13];
@@ -200,6 +217,13 @@
     
     wxLogo = [[UIImageView alloc] initWithFrame:CGRectMake(15+80+10, 10+40+10+50+50+50+50+50+50+10+60, 60, 60)];
     [_scrollView addSubview:wxLogo];
+    
+    btnWxLogo = [[UIButton alloc] initWithFrame:CGRectMake(15+80+10+60+10, 10+40+10+50+50+50+50+50+50+10+60, 60, 60)];
+    btnWxLogo.tag = 1;
+    [btnWxLogo addTarget:self action:@selector(selectPic:) forControlEvents:UIControlEventTouchUpInside];
+    [btnWxLogo setBackgroundColor:[UIColor grayColor]];
+    [_scrollView addSubview:btnWxLogo];
+    
     
     UILabel *labShopJ = [[UILabel alloc] initWithFrame:CGRectMake(15, 10+40+10+50+50+50+50+50+50+10+60+10+60, 90, 60)];
     [labShopJ setText:@"支付宝支付"];
@@ -209,7 +233,11 @@
     alpayLogo = [[UIImageView alloc] initWithFrame:CGRectMake(15+80+10, 10+40+10+50+50+50+50+50+50+10+60+10+60, 60, 60)];
     [_scrollView addSubview:alpayLogo];
     
-    
+    btnAlLogo = [[UIButton alloc] initWithFrame:CGRectMake(15+80+10+60+10, 10+40+10+50+50+50+50+50+50+10+60+10+60, 60, 60)];
+    btnAlLogo.tag = 2;
+    [btnAlLogo setBackgroundColor:[UIColor grayColor]];
+    [btnAlLogo addTarget:self action:@selector(selectPic:) forControlEvents:UIControlEventTouchUpInside];
+    [_scrollView addSubview:btnAlLogo];
     
     btnSubmit = [[UIButton alloc] initWithFrame:CGRectMake(30,  kHeight-30-44-20-10, kWidth-30-30, 30)];
     [btnSubmit setBackgroundColor:[UIColor colorWithRed:67.0/255.0 green:136.0/255.0 blue:253.0/255.0 alpha:1]];
@@ -221,6 +249,43 @@
     [self.view addSubview:btnSubmit];
     
 }
+
+-(void)selectPic:(UIButton *)btn{
+    managerType = btn.tag;
+    
+    TZImagePickerController *imagePickerVc = [[TZImagePickerController alloc] initWithMaxImagesCount:1 delegate:self];
+    
+    // You can get the photos by block, the same as by delegate.
+    // 你可以通过block或者代理，来得到用户选择的照片.
+    [imagePickerVc setDidFinishPickingPhotosHandle:^(NSArray<UIImage *> *photos, NSArray *assets, BOOL isSelectOriginalPhoto) {
+    
+    }];
+    
+    
+    [self presentViewController:imagePickerVc animated:YES completion:nil];
+}
+
+
+//当相片选取完成之后回来到这个函数
+//完成后获取图片
+- (void)imagePickerController:(TZImagePickerController *)picker didFinishPickingPhotos:(NSArray *)photos sourceAssets:(NSArray *)assets isSelectOriginalPhoto:(BOOL)isSelectOriginalPhoto {
+    
+    NSMutableArray *selectedPhotos = [NSMutableArray arrayWithArray:photos];
+    
+    
+    if (managerType==0) {
+         imgLogo.image = selectedPhotos[0];
+        logoData = UIImageJPEGRepresentation(imgLogo.image, 0.5);
+    }else if (managerType==1){
+         wxLogo.image = selectedPhotos[0];
+        wxData = UIImageJPEGRepresentation(wxLogo.image, 0.5);
+    }else if (managerType==2){
+         alpayLogo.image = selectedPhotos[0];
+        alData = UIImageJPEGRepresentation(alpayLogo.image, 0.5);
+    }
+}
+    
+
 
 
 -(void)getShopInfo{
@@ -339,7 +404,29 @@
         [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
         manager.requestSerializer.timeoutInterval = 10.f;
         [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
-        [manager POST:postUrl parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        [manager POST:postUrl parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+            
+            
+            //                NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
+            //                [dictionary setObject:@"multipart/form-data" forKey:@"Content-Type"];
+            //                [dictionary setObject:[NSNumber numberWithInteger:mdata.length] forKey:@"Content-Length"];
+            //[dictionary setObject:@"form-data; name=\"f2\"; filename=\"时钟.zip\"" forKey:@"Content-Disposition"];
+            
+            //[formData appendPartWithHeaders:dictionary body:mdata];
+            
+            if(logoData.length>0){
+                [formData appendPartWithFileData:logoData name:@"file" fileName:@"" mimeType:@"image/jpeg"];
+            }
+            if(wxData.length>0){
+                [formData appendPartWithFileData:wxData name:@"wechat_img_file" fileName:@"" mimeType:@"image/jpeg"];
+            }
+            if(alData.length>0){
+                [formData appendPartWithFileData:alData name:@"alipay_img_file" fileName:@"" mimeType:@"image/jpeg"];
+            }
+            
+        } success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            
             NSLog(@"结果: %@", responseObject);
             if ([[responseObject objectForKey:@"CODE"] isEqualToString:@"1000"]) {
                 hud.labelText = @"修改成功";
@@ -351,12 +438,10 @@
                 [hud hide:YES afterDelay:0.5];
                 
             }
+            
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            hud.labelText = @"网络连接异常";
-            [hud hide:YES afterDelay:0.5];
-            NSLog(@"Error: ==============%@", error);
+            NSLog(@"error = %@", error);
         }];
-        
     }
     
     

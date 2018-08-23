@@ -27,7 +27,7 @@
     [self.labtitle setFont:[UIFont systemFontOfSize:12]];
     [self.contentView addSubview:self.labtitle];
     
-    self.imgarrow = [[UIImageView alloc] initWithFrame:CGRectMake(kWidth-10-20, 10, 20, 20)];
+    self.imgarrow = [[UIImageView alloc] initWithFrame:CGRectMake(kWidth-10-15, 10, 15, 20)];
     [self.imgarrow setImage:[UIImage imageNamed:@"icon_tip"]];
     [self.contentView addSubview:self.imgarrow];
     
