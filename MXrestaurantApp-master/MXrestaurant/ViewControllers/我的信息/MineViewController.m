@@ -237,7 +237,6 @@
     }else{
         return 1;
     }
-    
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
@@ -246,8 +245,7 @@
     
     headerView.backgroundColor = [UIColor groupTableViewBackgroundColor];
    return headerView;
-    
-    
+
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
