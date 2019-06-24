@@ -68,6 +68,8 @@
     [tfuserName setTextColor:[UIColor blackColor]];
     tfuserName.font = [UIFont systemFontOfSize:13];
     [userView addSubview:tfuserName];
+    //关闭键盘输入第一个字母大写的问题
+    [tfuserName setAutocapitalizationType:UITextAutocapitalizationTypeNone];
     
     UIView *passView = [[UIView alloc] initWithFrame:CGRectMake(30, 100+120+20+40+10, kWidth-30-30, 40)];
     passView.layer.cornerRadius = 3.0;
@@ -104,8 +106,9 @@
     NSString *passWord = [userDefaults objectForKey:@"passWord_MX"];
     tfuserName.text = userName;
     tfpassWord.text = passWord;
-    
+
 }
+
 -(void)LoginClick{
     if (tfuserName.text.length == 0) {
         UIAlertView * al=[[UIAlertView alloc]initWithTitle:nil message:@"请输入用户名" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];

@@ -16,8 +16,8 @@
     if (self) {
         // Initialization code
       
-        self.tableInfoView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, (kWidth-20-20*3)/4, (kWidth-20-20*3)/4)];
-        [self.tableInfoView.layer setCornerRadius:10];
+        self.tableInfoView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, (kWidth-20-20*3)/4, 50)];
+        [self.tableInfoView.layer setCornerRadius:5];
         self.tableInfoView.layer.borderWidth = 0.5;
          self.tableInfoView.layer.masksToBounds = YES;
         [self addSubview:self.tableInfoView];

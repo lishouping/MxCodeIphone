@@ -32,13 +32,15 @@ static int showview = 0;
     
     UILabel *labPrice;
     
-     NSUserDefaults * userDefaults;
+    NSUserDefaults * userDefaults;
     
     NSString *cart_id;
     
-     NSTimer *timer;
+    NSTimer *timer;
     
-      UISearchBar *searchBar;
+    UISearchBar *searchBar;
+    
+     MBProgressHUD *hud;
 }
 @property(nonatomic,strong)NSMutableArray *dateArrayCategory;
 @property(nonatomic,strong)NSMutableArray *dateArrayFoodList;
@@ -64,7 +66,7 @@ static int showview = 0;
 //        [self.dateArrayShoppingCar removeAllObjects];
 //        [self getShoppingCar];
 //    }
-    timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateAction) userInfo:nil repeats:YES];
+    timer = [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(updateAction) userInfo:nil repeats:YES];
     [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
 
 }
@@ -181,20 +183,32 @@ static int showview = 0;
     
     
     shoppingCarView = [UIView new];
-    shoppingCarView.backgroundColor =[UIColor colorWithRed:239.0/255.0 green:239.0/255.0 blue:239.0/255.0 alpha:1];
+    shoppingCarView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.5];
+   
     [self.view addSubview:shoppingCarView];
     [shoppingCarView zxp_addConstraints:^(ZXPAutoLayoutMaker *layout) {
         layout.widthValue(kWidth);
-        layout.heightValue(250);
+        layout.heightValue(kHeight-20-40-22);
         layout.bottomSpace(50);
     }];
     shoppingCarView.hidden= YES;
     
+    UIView *mypageView = [UIView new];
+    mypageView.backgroundColor = [UIColor colorWithRed:239.0/255.0 green:239.0/255.0 blue:239.0/255.0 alpha:1];
+    mypageView.alpha = 100;
+    [shoppingCarView addSubview:mypageView];
+    [mypageView zxp_addConstraints:^(ZXPAutoLayoutMaker *layout) {
+        layout.widthValue(kWidth);
+        layout.heightValue((kHeight-50-40-22)/2);
+        layout.bottomSpace(22);
+    }];
+    
+
     UILabel *labShopCar = [[UILabel alloc] initWithFrame:CGRectMake(kWidth/2-40, 5, 80, 20)];
     labShopCar.text = @"购物车";
     [labShopCar setFont:[UIFont systemFontOfSize:14]];
     labShopCar.textAlignment = UITextAlignmentCenter;
-    [shoppingCarView addSubview:labShopCar];
+    [mypageView addSubview:labShopCar];
     
     
     btnClearShopCar = [[UIButton alloc] initWithFrame:CGRectMake(kWidth-40-5, 5, 40, 20)];
@@ -203,7 +217,7 @@ static int showview = 0;
     [btnClearShopCar setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [btnClearShopCar addTarget:self action:@selector(shoppingCarClear) forControlEvents:UIControlEventTouchUpInside];
     [btnClearShopCar setBackgroundColor:[UIColor colorWithRed:239.0/255.0 green:239.0/255.0 blue:239.0/255.0 alpha:1]];
-    [shoppingCarView addSubview:btnClearShopCar];
+    [mypageView addSubview:btnClearShopCar];
     
     
    
@@ -211,7 +225,7 @@ static int showview = 0;
     tableViewShopCar.backgroundColor =[UIColor colorWithRed:239.0/255.0 green:239.0/255.0 blue:239.0/255.0 alpha:1];
     tableViewShopCar.delegate = self;
     tableViewShopCar.dataSource = self;
-    [shoppingCarView addSubview:tableViewShopCar];
+    [mypageView addSubview:tableViewShopCar];
     tableViewShopCar.tableFooterView = [[UIView alloc] init];
     
     
@@ -219,6 +233,7 @@ static int showview = 0;
     
     [self createNav];
 }
+
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText;{
     
@@ -486,7 +501,10 @@ static int showview = 0;
 }
 // 添加菜品
 - (void)addFoodClick:(NSString *)good_id{
-    
+    //开始显示HUD
+    hud=[MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+    hud.minSize = CGSizeMake(100.f, 100.f);
+    hud.color=[UIColor blackColor];
     
     NSString *postUrl = [NSString stringWithFormat:@"%@%@",API_URL,ADDSHOPPINGCAR_URL];
     NSDictionary *parameters = @{@"shop_id": [userDefaults objectForKey:@"shop_id_MX"],
@@ -513,6 +531,8 @@ static int showview = 0;
     
     [manager POST:postUrl parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"结果: %@", responseObject);
+        hud.labelText = @"添加成功";
+        [hud hide:YES afterDelay:0.5];
         if ([[responseObject objectForKey:@"CODE"] isEqualToString:@"1000"]) {
             [self.dateArrayShoppingCar removeAllObjects];
             [self getShoppingCar];
@@ -534,6 +554,11 @@ static int showview = 0;
 }
 // 添加菜品购物车
 - (void)addFoodShopcar:(GoodInfoModel *)model{
+    //开始显示HUD
+    hud=[MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+    hud.minSize = CGSizeMake(100.f, 100.f);
+    hud.color=[UIColor blackColor];
+    
     NSDictionary *parameters;
     
     NSString *postUrl = [NSString stringWithFormat:@"%@%@",API_URL,ADDSHOPPINGCAR_URL];
@@ -570,6 +595,10 @@ static int showview = 0;
     
     [manager POST:postUrl parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"结果: %@", responseObject);
+        
+        hud.labelText = @"添加成功";
+        [hud hide:YES afterDelay:0.5];
+        
         if ([[responseObject objectForKey:@"CODE"] isEqualToString:@"1000"]) {
             [self.dateArrayShoppingCar removeAllObjects];
             [self getShoppingCar];
@@ -668,6 +697,8 @@ static int showview = 0;
         if ([[responseObject objectForKey:@"CODE"] isEqualToString:@"1000"]) {
             [self.dateArrayShoppingCar removeAllObjects];
             [self getShoppingCar];
+            shoppingCarView.hidden = YES;
+            showview = 0;
         }
         else
         {

@@ -260,7 +260,11 @@
                         
                     }else{
                         writerobj = [dic objectForKey:@"waiter"];
-                        name = [writerobj objectForKey:@"name"];
+                        if ([writerobj isEqual:[NSNull null]]) {
+                            name = @"";
+                        }else{
+                            name = [writerobj objectForKey:@"name"];
+                        }
                     }
                     NSString *table_name = [tableobj objectForKey:@"table_name"];
                     NSString *people_count = [dic objectForKey:@"people_count"];
@@ -631,14 +635,19 @@
 
 - (NSString *)timeWithTimeIntervalString:(NSString *)timeString
 {
-    NSTimeInterval interval    =[timeString doubleValue] / 1000.0;
-    NSDate *date               = [NSDate dateWithTimeIntervalSince1970:interval];
     
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-    NSString *dateString       = [formatter stringFromDate: date];
-
-    return dateString;
+    if ([timeString isEqual:[NSNull  null]]) {
+        return @"";
+    }else{
+        NSTimeInterval interval    =[timeString doubleValue] / 1000.0;
+        NSDate *date               = [NSDate dateWithTimeIntervalSince1970:interval];
+        
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+        NSString *dateString       = [formatter stringFromDate: date];
+        
+        return dateString;
+    }
 }
 // 获取徽标上的数字 通知未读条数
 -(void)loadUnreadInform{
