@@ -36,12 +36,12 @@
     self.labSendServiceTime.text = @"服务时间:2017-12-12 22:20";
     [self.contentView addSubview:self.labSendServiceTime];
     
-    self.labServiceContent = [[UILabel alloc] initWithFrame:CGRectMake(10, 5+20+20, 200, 20)];
+    self.labServiceContent = [[UILabel alloc] initWithFrame:CGRectMake(10, 5+20+20,  kWidth-10-10, 50)];
     self.labServiceContent.font = [UIFont systemFontOfSize:12];
     self.labServiceContent.text = @"内容内容";
     [self.contentView addSubview:self.labServiceContent];
     
-    self.btnServiceHander = [[UIButton alloc] initWithFrame:CGRectMake(kWidth-5-40, 10+5, 40, 30)];
+    self.btnServiceHander = [[UIButton alloc] initWithFrame:CGRectMake(kWidth-10-40, 10+5, 40, 30)];
     [self.btnServiceHander setTitle:@"处理" forState:UIControlStateNormal];
     self.btnServiceHander.font = [UIFont systemFontOfSize:14];
     [self.btnServiceHander setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];

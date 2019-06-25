@@ -66,9 +66,9 @@ static int showview = 0;
 //        [self.dateArrayShoppingCar removeAllObjects];
 //        [self getShoppingCar];
 //    }
-    timer = [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(updateAction) userInfo:nil repeats:YES];
-    [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
-
+//    timer = [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(updateAction) userInfo:nil repeats:YES];
+//    [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
+    [self updateAction];
 }
 
 -(void)updateAction{

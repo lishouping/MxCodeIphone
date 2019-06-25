@@ -26,7 +26,7 @@
     self.labTableNumber.text = @"桌号:101";
     [self.contentView addSubview:self.labTableNumber];
     
-    self.labServicePerson = [[UILabel alloc] initWithFrame:CGRectMake(10+100+5, 5, 100, 20)];
+    self.labServicePerson = [[UILabel alloc] initWithFrame:CGRectMake(10+100+5, 5, 150, 20)];
     self.labServicePerson.font = [UIFont systemFontOfSize:12];
     self.labServicePerson.text = @"服务员:小里";
     [self.contentView addSubview:self.labServicePerson];
@@ -41,15 +41,15 @@
     self.labServiceTime.text = @"服务时间:2017-12-12 22:20";
     [self.contentView addSubview:self.labServiceTime];
     
-    self.labServiceContent = [[UILabel alloc] initWithFrame:CGRectMake(10, 5+20+20+20, 200, 20)];
+    self.labServiceContent = [[UILabel alloc] initWithFrame:CGRectMake(10, 5+20+20+20, kWidth-10-10, 40)];
     self.labServiceContent.font = [UIFont systemFontOfSize:12];
     self.labServiceContent.text = @"服务内容:加水";
     [self.contentView addSubview:self.labServiceContent];
     
-    self.labServiceState = [[UILabel alloc] initWithFrame:CGRectMake(kWidth/2+20, 5+20+20+20, 200, 20)];
-    self.labServiceState.font = [UIFont systemFontOfSize:12];
-     self.labServiceState.text = @"服务状态:已服务";
-    [self.contentView addSubview:self.labServiceState];
+//    self.labServiceState = [[UILabel alloc] initWithFrame:CGRectMake(kWidth/2+20, 5+20+20+20, 200, 20)];
+//    self.labServiceState.font = [UIFont systemFontOfSize:12];
+//     self.labServiceState.text = @"服务状态:已服务";
+//    [self.contentView addSubview:self.labServiceState];
     
     
 }

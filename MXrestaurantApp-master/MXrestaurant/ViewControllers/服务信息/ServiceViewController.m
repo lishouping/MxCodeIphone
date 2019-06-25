@@ -276,9 +276,9 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if ([selectBtnFlag isEqualToString:@"0"]) {
-        return 70.0;
-    }else{
         return 90.0;
+    }else{
+        return 110.0;
     }
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -291,7 +291,8 @@
         ServiceModel *svm = self.dateArray[indexPath.section];
         tabcell.labTableNumber.text = [NSString stringWithFormat:@"桌号:%@",svm.table_name];
         tabcell.labSendServiceTime.text = [NSString stringWithFormat:@"创建时间:%@",[self timeWithTimeIntervalString:svm.create_time]] ;
-        tabcell.labServiceContent.text = [NSString stringWithFormat:@"服务内容:%@",svm.service_content];
+        tabcell.labServiceContent.text = [NSString stringWithFormat:@"%@",svm.service_content];
+        tabcell.labServiceContent.numberOfLines = 2;
         if ([svm.status isEqualToString:@"0"]) {
             tabcell.labServiceState.text = @"状态:未处理";
         }else if ([svm.status isEqualToString:@"1"]){
@@ -300,6 +301,7 @@
             tabcell.labServiceState.text = @"状态:已取消";
         }
         tabcell.tag = indexPath.section;
+        tabcell.btnServiceHander.tag = indexPath.section;
         [tabcell.btnServiceHander addTarget:self action:@selector(serviceTodo:) forControlEvents:UIControlEventTouchUpInside];
         
         return tabcell;
@@ -313,15 +315,16 @@
         tabcell.labTableNumber.text = [NSString stringWithFormat:@"桌号:%@",svm.table_name];
         tabcell.labCreateTime.text = [NSString stringWithFormat:@"创建时间:%@",[self timeWithTimeIntervalString:svm.create_time]] ;
         tabcell.labServiceTime.text = [NSString stringWithFormat:@"服务时间:%@",[self timeWithTimeIntervalString:svm.receive_time]] ;
-        tabcell.labServiceContent.text = [NSString stringWithFormat:@"服务内容:%@",svm.service_content];
+        tabcell.labServiceContent.text = [NSString stringWithFormat:@"%@",svm.service_content];
+        tabcell.labServiceContent.numberOfLines = 2;
         tabcell.labServicePerson.text = [NSString stringWithFormat:@"服务人:%@",svm.name];
-        if ([svm.status isEqualToString:@"0"]) {
-            tabcell.labServiceState.text = @"状态:未处理";
-        }else if ([svm.status isEqualToString:@"1"]){
-            tabcell.labServiceState.text = @"状态:已处理";
-        }else if ([svm.status isEqualToString:@"2"]){
-            tabcell.labServiceState.text = @"状态:已取消";
-        }
+//        if ([svm.status isEqualToString:@"0"]) {
+//            tabcell.labServiceState.text = @"状态:未处理";
+//        }else if ([svm.status isEqualToString:@"1"]){
+//            tabcell.labServiceState.text = @"状态:已处理";
+//        }else if ([svm.status isEqualToString:@"2"]){
+//            tabcell.labServiceState.text = @"状态:已取消";
+//        }
         return tabcell;
     }
 }
@@ -396,17 +399,17 @@
     //弹出提示框；
     [self presentViewController:alert animated:true completion:nil];
 }
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if ([selectBtnFlag isEqualToString:@"0"]) {
-        ServiceDetaliedViewController *serde = [[ServiceDetaliedViewController alloc] init];
-        ServiceModel *svm = self.dateArray[indexPath.section];
-        serde.service_id = svm.service_id;
-        serde.content = svm.service_content;
-        serde.table_name = svm.table_name;
-        serde.serviceTime = [self timeWithTimeIntervalString:svm.create_time];
-        [self.navigationController pushViewController:serde animated:YES];
-    }
-}
+//-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+//    if ([selectBtnFlag isEqualToString:@"0"]) {
+//        ServiceDetaliedViewController *serde = [[ServiceDetaliedViewController alloc] init];
+//        ServiceModel *svm = self.dateArray[indexPath.section];
+//        serde.service_id = svm.service_id;
+//        serde.content = svm.service_content;
+//        serde.table_name = svm.table_name;
+//        serde.serviceTime = [self timeWithTimeIntervalString:svm.create_time];
+//        [self.navigationController pushViewController:serde animated:YES];
+//    }
+//}
 
 - (NSString *)timeWithTimeIntervalString:(NSString *)timeString
 {
