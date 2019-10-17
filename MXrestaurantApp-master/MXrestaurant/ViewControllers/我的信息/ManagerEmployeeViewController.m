@@ -59,7 +59,7 @@
 
 - (void)makeUI{
     UIButton *rightBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 30)];
-    [rightBtn setImage:[UIImage imageNamed:@"payimg"] forState:UIControlStateNormal];
+    [rightBtn setImage:[UIImage imageNamed:@"tianjia"] forState:UIControlStateNormal];
     UIBarButtonItem *rightBtnItem=[[UIBarButtonItem alloc]initWithCustomView:rightBtn];
     [rightBtn addTarget:self action:@selector(rightBtnButtonClick) forControlEvents:UIControlEventTouchUpInside];
     if ([[[UIDevice currentDevice] systemVersion] floatValue]>=7.0)

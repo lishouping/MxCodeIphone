@@ -108,7 +108,7 @@
     userImage.layer.borderColor = [UIColor whiteColor].CGColor;
     [headerView addSubview:userImage];
     
-    labUserName = [[UILabel alloc] initWithFrame:CGRectMake(kWidth/2-30, 10+60+10, 60, 25)];
+    labUserName = [[UILabel alloc] initWithFrame:CGRectMake(15, 10+60+10, kWidth-15-15, 25)];
     labUserName.textAlignment = UITextAlignmentCenter;
     [labUserName setTextColor:[UIColor whiteColor]];
     [headerView addSubview:labUserName];
@@ -201,8 +201,8 @@
         [self.dateArray addObjectsFromArray:array1];
          [self.dateArray2 addObjectsFromArray:arrayimg1];
     }else{
-         NSArray *array = @[@"销售统计",@"服务统计",@"密码修改",@"意见反馈",@"关于我们",@"店铺管理",@"打印机设置",@"员工管理",@"桌台分区",@"桌台管理",@"菜品分类",@"菜品管理"];
-        NSArray *arrayimg = @[@"icon_my1",@"icon_my2",@"icon_my4",@"icon_my6",@"icon_my7",@"icon_my7",@"icon_my7",@"icon_my7",@"icon_my7",@"icon_my7",@"icon_my7",@"icon_my7"];
+         NSArray *array = @[@"销售统计",@"收款统计",@"桌台统计",@"会员统计",@"服务统计",@"密码修改",@"意见反馈",@"关于我们",@"店铺管理",@"打印机设置",@"员工管理",@"桌台分区",@"桌台管理",@"菜品分类",@"菜品管理",@"会员查询"];
+        NSArray *arrayimg = @[@"ic_new_1",@"ic_new_15",@"ic_new_4",@"ic_new_14",@"ic_new_9",@"ic_new_16",@"ic_new_13",@"ic_new_17",@"ic_new_10",@"ic_new_8",@"ic_new_7",@"ic_new_10",@"ic_new_5",@"ic_new_6",@"ic_new_2",@"ic_new_3",@"ic_new_11"];
         [self.dateArray addObjectsFromArray:array];
         [self.dateArray2 addObjectsFromArray:arrayimg];
     }
@@ -253,6 +253,15 @@
     if ([content isEqualToString:@"销售统计"]) {
         SalesStatisticsViewController *atvs = [[SalesStatisticsViewController alloc] init];
         [self.navigationController pushViewController:atvs animated:YES];
+    }else if ([content isEqualToString:@"收款统计"]){
+        ServiceStatisticsViewController *atvs = [[ServiceStatisticsViewController alloc] init];
+        [self.navigationController pushViewController:atvs animated:YES];
+    }else if ([content isEqualToString:@"桌台统计"]){
+        ServiceStatisticsViewController *atvs = [[ServiceStatisticsViewController alloc] init];
+        [self.navigationController pushViewController:atvs animated:YES];
+    }else if ([content isEqualToString:@"会员统计"]){
+        ServiceStatisticsViewController *atvs = [[ServiceStatisticsViewController alloc] init];
+        [self.navigationController pushViewController:atvs animated:YES];
     }else if ([content isEqualToString:@"服务统计"]){
         ServiceStatisticsViewController *atvs = [[ServiceStatisticsViewController alloc] init];
         [self.navigationController pushViewController:atvs animated:YES];
@@ -290,6 +299,9 @@
         ManagerDishClassViewController *mcc = [[ManagerDishClassViewController alloc] init];
         [self.navigationController pushViewController:mcc animated:YES];
     }else if([content isEqualToString:@"菜品管理"]){
+        ManagerDishViewController *mcc = [[ManagerDishViewController alloc] init];
+        [self.navigationController pushViewController:mcc animated:YES];
+    }else if([content isEqualToString:@"会员查询"]){
         ManagerDishViewController *mcc = [[ManagerDishViewController alloc] init];
         [self.navigationController pushViewController:mcc animated:YES];
     }

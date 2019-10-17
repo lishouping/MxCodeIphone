@@ -44,14 +44,14 @@
     [lineView setBackgroundColor:[UIColor colorWithRed:239.0/255.0 green:239.0/255.0 blue:239.0/255.0 alpha:1]];
     [headView addSubview:lineView];
     
-    UILabel *labablutinfo = [[UILabel alloc] initWithFrame:CGRectMake(10, 40+5, kWidth-10-10-10-10, 80)];
-    labablutinfo.text = @"“嘿！伙计”坚持用高效创造服务，让服务缔造品质。高效率、高服务、高品质，助你打造星级品牌。";
+    UILabel *labablutinfo = [[UILabel alloc] initWithFrame:CGRectMake(10, 40+5, kWidth-10-10-10-10, 150)];
+    labablutinfo.text = @"“聚巷客栈管理平台”和“嘿伙计”APP致力于提高餐饮行业的服务质量和工作效率，方便商家管理，易于操作，在经营管理过程中为商家提供经营数据并做出统计，也为了提升消费者的用户体验，把消费者和商家紧密的联系起来。我们秉承助商家打造星级品牌的宗旨，力争利用大数据为商家做出相关问题预判，有效帮助商家提高顾客数量和服务质量。";
     labablutinfo.font = [UIFont systemFontOfSize:12];
-    labablutinfo.numberOfLines = 5;
+    labablutinfo.numberOfLines = 10;
     [headView addSubview:labablutinfo];
     
     
-    UIView *headView1 = [[UIView alloc] initWithFrame:CGRectMake(10, 120+20+20, kWidth-10-10, 100)];
+    UIView *headView1 = [[UIView alloc] initWithFrame:CGRectMake(10, 150+20+20, kWidth-10-10, 100)];
     headView1.backgroundColor = [UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1];
     [self.view addSubview:headView1];
     
@@ -66,7 +66,7 @@
     [headView1 addSubview:lineView1];
     
     UILabel *labphone = [[UILabel alloc] initWithFrame:CGRectMake(10, 5+40, 100, 20)];
-    labphone.text = @"024-31128174";
+    labphone.text = @"400-060-5665";
     labphone.font = [UIFont systemFontOfSize:12];
     [headView1 addSubview:labphone];
     
