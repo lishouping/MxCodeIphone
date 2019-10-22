@@ -27,6 +27,8 @@
 
 #define API_URL @"http://47.92.66.33:8080/heygay"
 #define RESOURCE_URL @"http://www.heyguy.cn/images"
+#define API_URL_MEMBER @"http://47.92.208.3:8090"
+#define String UPLOADIMAGE_URL = "http://39.104.125.56:8080/heygay/"
 
 // 接口详细地址的调用
 // 用户登录
@@ -141,6 +143,11 @@
 #define PRINTDEL @"/printer/deletePrinter"
 // 打印机删除
 #define PRINTUPDATE @"/printer/updatePrinter"
+
+
+// 新增的接口 2019 10 22 需求变更
+// 查询是否是会员
+#define FINDONEBYPHONE @"/user/customer/findOneByUserPhone"
 
 
 #endif /* Mxpch_pch */

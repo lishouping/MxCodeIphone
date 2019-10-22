@@ -164,6 +164,8 @@
                 [userDefaults setObject:role_id forKey:@"role_id_MX"];
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"loginState" object:@YES];
                 
+                [self getShopInfo];
+                
                 [JPUSHService setAlias:alias callbackSelector:@selector(tagsAliasCallback:tags:alias:) object:self];
             }
 
@@ -194,6 +196,45 @@
         NSLog(@"----设置别名成功");
     }
 }
+
+-(void)getShopInfo{
+    
+    NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
+    NSString *postUrl = [NSString stringWithFormat:@"%@%@/%@",API_URL,GETSHOPINFO,[userDefaults objectForKey:@"shop_id_MX"]];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    
+    NSString *key =[userDefaults objectForKey:@"login_key_MX"];
+    NSString *longbusid = [[userDefaults objectForKey:@"business_id_MX"] stringValue];
+    
+    [manager.requestSerializer setValue:key forHTTPHeaderField:@"key"];
+    [manager.requestSerializer setValue:longbusid forHTTPHeaderField:@"id"];
+    
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];//使用这个将得到的是JSON
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/json", @"text/plain", @"text/html", nil];
+    // 设置超时时间
+    [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
+    manager.requestSerializer.timeoutInterval = 10.f;
+    [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
+    
+    [manager GET:postUrl parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"结果: %@", responseObject);
+        if ([[responseObject objectForKey:@"CODE"] isEqualToString:@"1000"]) {
+            NSDictionary *dics =[responseObject objectForKey:@"DATA"];
+            
+            NSString *shop_name = [NSString stringWithFormat:@"%@",[dics objectForKey:@"shop_name"]];
+            NSString *menmbers_shop_id = [NSString stringWithFormat:@"%@",[dics objectForKey:@"menmbers_shop_id"]];
+            [userDefaults setObject:shop_name forKey:@"shop_name"];
+            [userDefaults setObject:menmbers_shop_id forKey:@"menmbers_shop_id"];
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        NSLog(@"Error: ==============%@", error);
+    }];
+}
+
+
 
 #pragma mark UITextFieldDelegate
 -(BOOL)textFieldShouldReturn:(UITextField *)textField

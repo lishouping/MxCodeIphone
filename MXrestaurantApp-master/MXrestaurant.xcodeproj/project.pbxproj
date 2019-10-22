@@ -250,6 +250,8 @@
 		EE4B8139212AF5C10071E606 /* ManagerTableAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE4B8138212AF5C10071E606 /* ManagerTableAddViewController.m */; };
 		EE4E8D0020E3BF6F0002138F /* ic_logo1024.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EE4E8CFF20E3BF6F0002138F /* ic_logo1024.jpg */; };
 		EE5EAD9C2122F175005E37A5 /* ManagerShopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE5EAD9B2122F175005E37A5 /* ManagerShopViewController.m */; };
+		EE62A8A5235F2330002CBCC5 /* StatisticalAnalysisViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE62A8A4235F2330002CBCC5 /* StatisticalAnalysisViewController.m */; };
+		EE62A8A8235F277F002CBCC5 /* AnalysisTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EE62A8A7235F277F002CBCC5 /* AnalysisTableViewCell.m */; };
 		EEEBE9EE21259A240067E810 /* EmployeeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EEEBE9ED21259A240067E810 /* EmployeeModel.m */; };
 		EEEBE9F12125A7AC0067E810 /* ManagerTableAreaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEEBE9F02125A7AC0067E810 /* ManagerTableAreaViewController.m */; };
 		EEEBE9F42125A85F0067E810 /* TableAreaTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EEEBE9F32125A85F0067E810 /* TableAreaTableViewCell.m */; };
@@ -713,6 +715,10 @@
 		EE4E8CFF20E3BF6F0002138F /* ic_logo1024.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ic_logo1024.jpg; sourceTree = "<group>"; };
 		EE5EAD9A2122F175005E37A5 /* ManagerShopViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ManagerShopViewController.h; sourceTree = "<group>"; };
 		EE5EAD9B2122F175005E37A5 /* ManagerShopViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ManagerShopViewController.m; sourceTree = "<group>"; };
+		EE62A8A3235F2330002CBCC5 /* StatisticalAnalysisViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StatisticalAnalysisViewController.h; sourceTree = "<group>"; };
+		EE62A8A4235F2330002CBCC5 /* StatisticalAnalysisViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StatisticalAnalysisViewController.m; sourceTree = "<group>"; };
+		EE62A8A6235F277F002CBCC5 /* AnalysisTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AnalysisTableViewCell.h; sourceTree = "<group>"; };
+		EE62A8A7235F277F002CBCC5 /* AnalysisTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AnalysisTableViewCell.m; sourceTree = "<group>"; };
 		EEEBE9EC21259A240067E810 /* EmployeeModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EmployeeModel.h; sourceTree = "<group>"; };
 		EEEBE9ED21259A240067E810 /* EmployeeModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EmployeeModel.m; sourceTree = "<group>"; };
 		EEEBE9EF2125A7AC0067E810 /* ManagerTableAreaViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ManagerTableAreaViewController.h; sourceTree = "<group>"; };
@@ -1084,6 +1090,8 @@
 				EE4B8132212AECB60071E606 /* ManageTableViewCell.m */,
 				EE314D84212C293800E0A44F /* DishTableViewCell.h */,
 				EE314D85212C293800E0A44F /* DishTableViewCell.m */,
+				EE62A8A6235F277F002CBCC5 /* AnalysisTableViewCell.h */,
+				EE62A8A7235F277F002CBCC5 /* AnalysisTableViewCell.m */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -1390,6 +1398,8 @@
 				EE314D7F212C28DF00E0A44F /* ManagerDishViewController.m */,
 				EE314D81212C28F100E0A44F /* ManagerDishAddViewController.h */,
 				EE314D82212C28F100E0A44F /* ManagerDishAddViewController.m */,
+				EE62A8A3235F2330002CBCC5 /* StatisticalAnalysisViewController.h */,
+				EE62A8A4235F2330002CBCC5 /* StatisticalAnalysisViewController.m */,
 			);
 			path = "我的信息";
 			sourceTree = "<group>";
@@ -1742,9 +1752,11 @@
 				47F199291FC84D33000201BE /* OrderUpdateViewController.m in Sources */,
 				47F1994B1FC930B4000201BE /* ResViewController.m in Sources */,
 				EEEBE9F42125A85F0067E810 /* TableAreaTableViewCell.m in Sources */,
+				EE62A8A8235F277F002CBCC5 /* AnalysisTableViewCell.m in Sources */,
 				47E0A5F81FAEA39700959C8A /* UIViewExt.m in Sources */,
 				47E0A5F01FAEA39700959C8A /* MJRefreshFooterView.m in Sources */,
 				47E0A6311FAEA39700959C8A /* SBJsonStreamParserState.m in Sources */,
+				EE62A8A5235F2330002CBCC5 /* StatisticalAnalysisViewController.m in Sources */,
 				47E0A6241FAEA39700959C8A /* SDWebImagePrefetcher.m in Sources */,
 				47E0A6131FAEA39700959C8A /* AFURLRequestSerialization.m in Sources */,
 				47E0A62D1FAEA39700959C8A /* SBJsonParser.m in Sources */,

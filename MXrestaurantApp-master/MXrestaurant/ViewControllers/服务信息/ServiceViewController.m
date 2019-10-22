@@ -57,6 +57,8 @@
     self.navigationItem.title = @"聚巷客栈";
 
     userDefaults=[NSUserDefaults standardUserDefaults];
+    
+     self.navigationItem.title = [userDefaults objectForKey:@"shop_name"];
     self.dateArray = [[NSMutableArray alloc] initWithCapacity:0];
     [self makeUI];
     selectBtnFlag = @"0";

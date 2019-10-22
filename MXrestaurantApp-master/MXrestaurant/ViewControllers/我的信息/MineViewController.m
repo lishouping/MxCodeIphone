@@ -26,16 +26,19 @@
 #import "ManagerDishClassViewController.h"
 #import "ManagerDishViewController.h"
 #import "ManagerDishAddViewController.h"
+#import "StatisticalAnalysisViewController.h"
 
-@interface MineViewController ()<UITableViewDelegate,UITableViewDataSource>{
+@interface MineViewController ()<UITableViewDelegate,UITableViewDataSource,UIAlertViewDelegate>{
     UIView *headerView;
     UIImageView *userImage;
     UILabel *labUserName;
     UITableView *tableUser;
-     NSUserDefaults * userDefaults;
+    NSUserDefaults * userDefaults;
     NSString *roalid;
     
     UIView *footView;
+    
+    MBProgressHUD *hud;
 }
 @property(nonatomic,strong)NSMutableArray *dateArray;
 @property(nonatomic,strong)NSMutableArray *dateArray2;
@@ -62,9 +65,9 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationItem.title = @"聚巷客栈";
-    userDefaults=[NSUserDefaults standardUserDefaults];
     
+    userDefaults=[NSUserDefaults standardUserDefaults];
+     self.navigationItem.title = [userDefaults objectForKey:@"shop_name"];
     NSNumber *longNumber = [userDefaults objectForKey:@"role_id_MX"];
     roalid = [longNumber stringValue];
     
@@ -201,8 +204,8 @@
         [self.dateArray addObjectsFromArray:array1];
          [self.dateArray2 addObjectsFromArray:arrayimg1];
     }else{
-         NSArray *array = @[@"销售统计",@"收款统计",@"桌台统计",@"会员统计",@"服务统计",@"密码修改",@"意见反馈",@"关于我们",@"店铺管理",@"打印机设置",@"员工管理",@"桌台分区",@"桌台管理",@"菜品分类",@"菜品管理",@"会员查询"];
-        NSArray *arrayimg = @[@"ic_new_1",@"ic_new_15",@"ic_new_4",@"ic_new_14",@"ic_new_9",@"ic_new_16",@"ic_new_13",@"ic_new_17",@"ic_new_10",@"ic_new_8",@"ic_new_7",@"ic_new_10",@"ic_new_5",@"ic_new_6",@"ic_new_2",@"ic_new_3",@"ic_new_11"];
+        NSArray *array = @[@"统计分析",@"系统设置",@"密码修改",@"意见反馈",@"关于我们",@"会员查询"];
+        NSArray *arrayimg = @[@"ic_new_1",@"ic_new_15",@"ic_new_16",@"ic_new_13",@"ic_new_17",@"ic_new_10",@"ic_new_11"];
         [self.dateArray addObjectsFromArray:array];
         [self.dateArray2 addObjectsFromArray:arrayimg];
     }
@@ -232,7 +235,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    if (section==5) {
+    if (section==2) {
         return 15;
     }else{
         return 1;
@@ -250,29 +253,16 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     NSString *content = self.dateArray[indexPath.section];
-    if ([content isEqualToString:@"销售统计"]) {
-        SalesStatisticsViewController *atvs = [[SalesStatisticsViewController alloc] init];
+    if ([content isEqualToString:@"统计分析"]) {
+        StatisticalAnalysisViewController *atvs = [[StatisticalAnalysisViewController alloc] init];
+        atvs.myType = @"1";
         [self.navigationController pushViewController:atvs animated:YES];
-    }else if ([content isEqualToString:@"收款统计"]){
-        ServiceStatisticsViewController *atvs = [[ServiceStatisticsViewController alloc] init];
-        [self.navigationController pushViewController:atvs animated:YES];
-    }else if ([content isEqualToString:@"桌台统计"]){
-        ServiceStatisticsViewController *atvs = [[ServiceStatisticsViewController alloc] init];
-        [self.navigationController pushViewController:atvs animated:YES];
-    }else if ([content isEqualToString:@"会员统计"]){
-        ServiceStatisticsViewController *atvs = [[ServiceStatisticsViewController alloc] init];
-        [self.navigationController pushViewController:atvs animated:YES];
-    }else if ([content isEqualToString:@"服务统计"]){
-        ServiceStatisticsViewController *atvs = [[ServiceStatisticsViewController alloc] init];
-        [self.navigationController pushViewController:atvs animated:YES];
-    }else if ([content isEqualToString:@"推送消息"]){
-        PushSettingViewController *atvs = [[PushSettingViewController alloc] init];
+    }else if ([content isEqualToString:@"系统设置"]){
+        StatisticalAnalysisViewController *atvs = [[StatisticalAnalysisViewController alloc] init];
+        atvs.myType = @"2";
         [self.navigationController pushViewController:atvs animated:YES];
     }else if ([content isEqualToString:@"密码修改"]){
         ChangePassViewController *atvs = [[ChangePassViewController alloc] init];
-        [self.navigationController pushViewController:atvs animated:YES];
-    }else if ([content isEqualToString:@"打印机设置"]){
-        ManagerPrintViewController *atvs = [[ManagerPrintViewController alloc] init];
         [self.navigationController pushViewController:atvs animated:YES];
     }else if ([content isEqualToString:@"意见反馈"]){
         FeedBackViewController *atvs = [[FeedBackViewController alloc] init];
@@ -280,30 +270,22 @@
     }else if ([content isEqualToString:@"关于我们"]){
         AboutUsViewController *atvs = [[AboutUsViewController alloc] init];
         [self.navigationController pushViewController:atvs animated:YES];
-    }else if([content isEqualToString:@"店铺管理"]){
-        ManagerShopViewController *mashop = [[ManagerShopViewController alloc] init];
-        [self.navigationController pushViewController:mashop animated:YES];
-    }else if([content isEqualToString:@"打印机设置"]){
-        ManagerShopViewController *mashop = [[ManagerShopViewController alloc] init];
-        [self.navigationController pushViewController:mashop animated:YES];
-    }else if([content isEqualToString:@"员工管理"]){
-        ManagerEmployeeViewController *emvc = [[ManagerEmployeeViewController alloc] init];
-        [self.navigationController pushViewController:emvc animated:YES];
-    }else if([content isEqualToString:@"桌台分区"]){
-        ManagerTableAreaViewController *sv = [[ManagerTableAreaViewController alloc] init];
-        [self.navigationController pushViewController:sv animated:YES];
-    }else if([content isEqualToString:@"桌台管理"]){
-        ManagerTableViewController *mtc = [[ManagerTableViewController alloc] init];
-        [self.navigationController pushViewController:mtc animated:YES];
-    }else if([content isEqualToString:@"菜品分类"]){
-        ManagerDishClassViewController *mcc = [[ManagerDishClassViewController alloc] init];
-        [self.navigationController pushViewController:mcc animated:YES];
-    }else if([content isEqualToString:@"菜品管理"]){
-        ManagerDishViewController *mcc = [[ManagerDishViewController alloc] init];
-        [self.navigationController pushViewController:mcc animated:YES];
     }else if([content isEqualToString:@"会员查询"]){
-        ManagerDishViewController *mcc = [[ManagerDishViewController alloc] init];
-        [self.navigationController pushViewController:mcc animated:YES];
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"会员查询" message:nil preferredStyle:  UIAlertControllerStyleAlert];
+        //在AlertView中添加一个输入框
+        [alert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+            textField.placeholder = @"请输入会员手机号";
+        }];
+        
+        [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            UITextField *tf = alert.textFields.firstObject;
+            
+            [self searchMember:tf.text];
+        }]];
+        [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        }]];
+        //弹出提示框；
+        [self presentViewController:alert animated:true completion:nil];
     }
 }
 // 获取徽标上的数字 通知未读条数
@@ -358,6 +340,56 @@
     }];
     
 }
+
+// 查询是否是会员
+-(void)searchMember:(NSString *)phone{
+    //开始显示HUD
+    hud=[MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+    hud.labelText=@"";
+    hud.minSize = CGSizeMake(100.f, 100.f);
+    hud.color=[UIColor blackColor];
+    
+    NSString *postUrl = [NSString stringWithFormat:@"%@%@",API_URL_MEMBER,FINDONEBYPHONE];
+    NSDictionary *parameters = @{@"shopId": [userDefaults objectForKey:@"menmbers_shop_id"],@"userPhone":phone};
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    
+    NSString *key =[userDefaults objectForKey:@"login_key_MX"];
+    NSString *longbusid = [[userDefaults objectForKey:@"business_id_MX"] stringValue];
+    
+    [manager.requestSerializer setValue:key forHTTPHeaderField:@"key"];
+    [manager.requestSerializer setValue:longbusid forHTTPHeaderField:@"id"];
+    
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];//使用这个将得到的是JSON
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/json", @"text/plain", @"text/html", nil];
+    // 设置超时时间
+    [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
+    manager.requestSerializer.timeoutInterval = 10.f;
+    [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
+    [manager POST:postUrl parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"结果: %@", responseObject);
+        
+        NSString *code = [responseObject objectForKey:@"code"];
+        NSString *msg = [responseObject objectForKey:@"msg"];
+        if ([code isEqualToString:@"1"]) {
+            hud.labelText = msg;
+            [hud hide:YES afterDelay:0.5];
+        }else{
+            hud.labelText = msg;
+            [hud hide:YES afterDelay:0.5];
+        }
+        
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        hud.labelText = @"网络连接异常";
+        [hud hide:YES afterDelay:0.5];
+        NSLog(@"Error: ==============%@", error);
+    }];
+    
+}
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
