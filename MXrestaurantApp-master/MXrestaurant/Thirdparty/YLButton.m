@@ -23,9 +23,9 @@
     self.frame=frame;
     [self setTitle:title forState:UIControlStateNormal];
     [self setImage:image forState:UIControlStateNormal];
-    self.imageEdgeInsets = UIEdgeInsetsMake(0, self.frame.size.width - self.imageView.frame.origin.x - self.imageView.frame.size.width, 0, 0);
+    self.imageEdgeInsets = UIEdgeInsetsMake(0, self.frame.size.width - self.imageView.frame.origin.x - self.imageView.frame.size.width+30, 0, 0);
     
-    self.titleEdgeInsets = UIEdgeInsetsMake(0, -(self.frame.size.width - self.titleLabel.frame.size.width)+10, 0, 0);
+    self.titleEdgeInsets = UIEdgeInsetsMake(0, -(self.frame.size.width - self.titleLabel.frame.size.width)+10+40, 0, 0);
     return self;
 }
 

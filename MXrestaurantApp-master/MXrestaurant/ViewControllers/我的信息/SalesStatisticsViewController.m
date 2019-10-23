@@ -46,6 +46,10 @@
     
     int timespos;
     
+    int page;
+    int totalnum;
+    
+    UIView *nodateView;
 }
 @property(nonatomic,strong)NSMutableArray *dateArray;
 @end
@@ -68,13 +72,12 @@
     self.view.backgroundColor = [UIColor whiteColor];
     time_flag = @"3";
     [self makeUI];
-    [self selectgoodstatic];
-    [self selecShopSt];
+    [self setupTableView];
     // Do any additional setup after loading the view.
 }
 - (void)makeUI{
     LMJTab * tab = [[LMJTab alloc] initWithFrame:CGRectMake(10, 10, 300, 30) lineWidth:1 lineColor:[UIColor colorWithRed:79.0/255.0 green:145.0/255.0 blue:244/255.0 alpha:1]];
-    [tab setItemsWithTitle:[NSArray arrayWithObjects:@"菜品统计",@"店铺统计", nil] normalItemColor:[UIColor whiteColor] selectItemColor:[UIColor colorWithRed:79.0/255.0 green:145.0/255.0 blue:244/255.0 alpha:1] normalTitleColor:[UIColor colorWithRed:79.0/255.0 green:145.0/255.0 blue:244/255.0 alpha:1] selectTitleColor:[UIColor whiteColor] titleTextSize:15 selectItemNumber:0];
+    [tab setItemsWithTitle:[NSArray arrayWithObjects:@"菜品统计",@"订单统计", nil] normalItemColor:[UIColor whiteColor] selectItemColor:[UIColor colorWithRed:79.0/255.0 green:145.0/255.0 blue:244/255.0 alpha:1] normalTitleColor:[UIColor colorWithRed:79.0/255.0 green:145.0/255.0 blue:244/255.0 alpha:1] selectTitleColor:[UIColor whiteColor] titleTextSize:15 selectItemNumber:0];
     tab.delegate = self;
     tab.layer.cornerRadius = 5.0;
     [self.view addSubview:tab];
@@ -144,12 +147,12 @@
     shopview.hidden = YES;
     
     
-    img1 = [[UIImageView alloc] initWithFrame:CGRectMake(20, 20, 20, 20)];
+    img1 = [[UIImageView alloc] initWithFrame:CGRectMake(20, 20+5, 20, 20)];
     [img1 setImage:[UIImage imageNamed:@"num"]];
     [shopview addSubview:img1];
     
-    shopOrderNumTitle = [[UILabel alloc] initWithFrame:CGRectMake(20+20+10+10, 20, 120, 30)];
-    [shopOrderNumTitle setText:@"店铺总接单数:"];
+    shopOrderNumTitle = [[UILabel alloc] initWithFrame:CGRectMake(20+20+10, 20, 120, 30)];
+    [shopOrderNumTitle setText:@"定单数:"];
     [shopOrderNumTitle setFont:[UIFont systemFontOfSize:12]];
     [shopview addSubview:shopOrderNumTitle];
     
@@ -159,11 +162,11 @@
     shopOrderNum.textColor = [UIColor colorWithRed:251.0/255.0 green:139.0/255.0 blue:57.0/255.0 alpha:1];
     [shopview addSubview:shopOrderNum];
     
-    img2 = [[UIImageView alloc] initWithFrame:CGRectMake(20, 20+30+20, 20, 20)];
+    img2 = [[UIImageView alloc] initWithFrame:CGRectMake(20, 20+30+20+5, 20, 20)];
     [img2 setImage:[UIImage imageNamed:@"price"]];
     [shopview addSubview:img2];
     
-    shopOrderZeTitle = [[UILabel alloc] initWithFrame:CGRectMake(20+20+10+10, 20+30+20, 120, 30)];
+    shopOrderZeTitle = [[UILabel alloc] initWithFrame:CGRectMake(20+20+10, 20+30+20, 120, 30)];
     [shopOrderZeTitle setText:@"店铺总销售额:"];
     [shopOrderZeTitle setFont:[UIFont systemFontOfSize:12]];
     [shopview addSubview:shopOrderZeTitle];
@@ -191,11 +194,12 @@
     [labStaNum setTextColor:[UIColor colorWithRed:251.0/255.0 green:139.0/255.0 blue:57.0/255.0 alpha:1]];
     [labStaNum setText:@"销售数量"];
        [labStaNum setFont:[UIFont systemFontOfSize:12]];
-     [footView addSubview:labStaNum];
+     //[footView addSubview:labStaNum];
+ 
     
     labTotalPrice = [[UILabel alloc] initWithFrame:CGRectMake(kWidth-(kWidth/2/2), 0, kWidth/2/2, 30)];
     [labTotalPrice setTextColor:[UIColor colorWithRed:251.0/255.0 green:139.0/255.0 blue:57.0/255.0 alpha:1]];
-    [labTotalPrice setText:@"总金额"];
+    [labTotalPrice setText:@"销售额排行"];
      [labTotalPrice setFont:[UIFont systemFontOfSize:12]];
      [footView addSubview:labTotalPrice];
     
@@ -204,18 +208,56 @@
     tabSalesFood.delegate = self;
     tabSalesFood.dataSource = self;
     [self.view addSubview:tabSalesFood];
+    
+    nodateView = [[UIView alloc] initWithFrame:CGRectMake(0, 30+10+40+10+10+10+20+10+30+10, kWidth, kHeight-(30+10+40+10+10+10+20+10+30+10+50+10))];
+    [nodateView setBackgroundColor:[UIColor whiteColor]];
+    UIImageView *imgNodate = [[UIImageView alloc] initWithFrame:CGRectMake(kWidth/2-(196/2), 80, 196, 128)];
+    [imgNodate setImage:[UIImage imageNamed:@"common_nodata"]];
+    [nodateView addSubview:imgNodate];
+    [self.view addSubview:nodateView];
+    
 }
 -(void)selectStartTimeClick{
+    if (timespos ==1) {
+        [self dismiss];
+    }
     timespos = 0;
     dataPicker = nil;
     [self dataChoose];
 }
 -(void)selectEndTimeClick{
+    if (timespos ==0) {
+        [self dismiss];
+    }
     timespos = 1;
     dataPicker = nil;
     [self dataChoose];
 }
 
+//加上刷新控件
+-(void)setupTableView
+{
+    //下拉刷新
+    [tabSalesFood addHeaderWithTarget:self action:@selector(headerRereshing)];
+    //上拉加载
+    [tabSalesFood addFooterWithTarget:self action:@selector(footerRereshing)];
+}
+
+
+//下拉
+- (void)headerRereshing
+{
+    [self.dateArray removeAllObjects];
+    [tabSalesFood reloadData];
+    page=1;
+    [self selectgoodstatic];
+}
+//上拉
+-(void)footerRereshing
+{
+    page++;
+    [self selectgoodstatic];
+}
 
 - (void)dataChoose{
     dataPicker= [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height-260, self.view.frame.size.width, 216+44)];
@@ -237,7 +279,7 @@
 - (void)done
 {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd hh:ss"];
     NSString *destDateString = [dateFormatter stringFromDate:date.date];
     
     if (timespos ==0) {
@@ -259,18 +301,21 @@
 
 -(void)monthClick{
     time_flag = @"3";
+    [self getMonthBeginAndEndWith];
     [self selectgoodstatic];
     [self selecShopSt];
 }
 
 -(void)weekClick{
      time_flag = @"2";
+    [self getWeekBeginAndEndWith];
     [self selectgoodstatic];
     [self selecShopSt];
 }
 
 -(void)dateClick{
      time_flag = @"1";
+    [self getNowDate];
     [self selectgoodstatic];
     [self selecShopSt];
 }
@@ -297,32 +342,40 @@
         footView.hidden = NO;
         tabSalesFood.hidden = NO;
         shopview.hidden = YES;
+        if(self.dateArray.count==0){
+            nodateView.hidden = NO;
+        }else{
+            nodateView.hidden = YES;
+        }
     }else if (number==1){
         footView.hidden = YES;
         tabSalesFood.hidden = YES;
         shopview.hidden = NO;
+        nodateView.hidden = YES;
     }
 }
 
-
+// 查询菜品统计信息
 - (void)selectgoodstatic{
+    if (starttime==nil) {
+        UIAlertView * al=[[UIAlertView alloc]initWithTitle:nil message:@"请选择开始时间" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+        [al show];
+    }else if (endtime==nil){
+        UIAlertView *alv = [[UIAlertView alloc] initWithTitle:nil message:@"请选择结束时间" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+        [alv show];
+    }
     if (self.dateArray.count>0) {
         [self.dateArray removeAllObjects];
         [tabSalesFood reloadData];
     }
-    NSString *postUrl = [NSString stringWithFormat:@"%@%@",API_URL,GOODSSTATICS];
+    NSString *postUrl = [NSString stringWithFormat:@"%@%@",API_URL,GETFOODSSTATICS];
     NSDictionary *parameters;
     
-    if ([time_flag isEqualToString:@"-1"]) {
-        parameters = @{@"shop_id":[userDefaults objectForKey:@"shop_id_MX"],
-                       @"start_time":starttime,
-                       @"end_time": endtime
-                       };
-    }else{
-        parameters = @{@"shop_id":[userDefaults objectForKey:@"shop_id_MX"],
-                       @"time_flag": time_flag
-                       };
-    }
+    parameters = @{@"shop_id":[userDefaults objectForKey:@"shop_id_MX"],
+                   @"start_date":starttime,
+                   @"end_date": endtime,
+                   @"page_no":@"1"
+                   };
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
@@ -343,21 +396,35 @@
     [manager POST:postUrl parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"结果: %@", responseObject);
         if ([[responseObject objectForKey:@"CODE"] isEqualToString:@"1000"]) {
-            NSArray *dateArray = [responseObject objectForKey:@"DATA"];
+            NSDictionary *myDic = [responseObject objectForKey:@"DATA"];
+            NSArray *dateArray = [myDic objectForKey:@"list"];
+            
+            if (dateArray.count==0) {
+                nodateView.hidden = NO;
+                [tabSalesFood footerEndRefreshing];
+                [tabSalesFood headerEndRefreshing];
+                [tabSalesFood reloadData];
+                UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"无更多数据" message:@"" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"好", nil];
+                [alert show];
+                return ;
+            }
+            
             for (NSDictionary * dic in dateArray)
             {
                 NSString *GOOD_NAME = [dic objectForKey:@"GOOD_NAME"];
-                NSNumber *zs = [dic objectForKey:@"zs"];
-                NSString *good_zs = [zs stringValue];
-                NSNumber *ze = [dic objectForKey:@"ze"];
-                NSString *good_ze = [ze stringValue];
+                NSString *good_ze = [dic objectForKey:@"total_sales_count"];
                 
                 FoodStatisModel *model = [[FoodStatisModel alloc] init];
                 model.food_name = GOOD_NAME;
-                model.food_num = good_zs;
                 model.food_price = good_ze;
                 [self.dateArray addObject:model];
             }
+            
+             nodateView.hidden = YES;
+   
+            [tabSalesFood headerEndRefreshing];
+            [tabSalesFood footerEndRefreshing];
+            
             [tabSalesFood reloadData];
         }
         
@@ -374,6 +441,7 @@
     }];
 }
 
+// 查询订单统计接口
 - (void)selecShopSt{
     NSString *postUrl = [NSString stringWithFormat:@"%@%@",API_URL,SHOPSTATIS];
     NSDictionary *parameters;
@@ -456,7 +524,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-     return 40.0;
+     return 30.0;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     StatisFoodTableViewCell  *tabcell = [tableView dequeueReusableCellWithIdentifier:@"idc1"];
@@ -469,8 +537,8 @@
     tabcell.labNum.text = [NSString stringWithFormat:@"%ld",indexPath.section+1];
     tabcell.labFoodName.text = model.food_name;
     
-    tabcell.labStatisNum.text = model.food_num;
-    tabcell.labTotalPrice.text = [NSString stringWithFormat:@"￥%@",model.food_price];
+    tabcell.labStatisNum.text = @"";
+    tabcell.labTotalPrice.text = [NSString stringWithFormat:@"%@",model.food_price];
     
     return tabcell;
 }
@@ -489,5 +557,135 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+
+
+
+// 获取当前时间
+- (void)getNowDate{
+    // 获取当前时间
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd hh:ss"];
+    
+    // 得到当前时间（世界标准时间 UTC/GMT）
+    NSDate *newDate = [NSDate date];
+    // 设置系统时区为本地时区
+    NSTimeZone *zone = [NSTimeZone systemTimeZone];
+    // 计算本地时区与 GMT 时区的时间差
+    NSInteger interval = [zone secondsFromGMT];
+    // 在 GMT 时间基础上追加时间差值，得到本地时间
+    newDate = [newDate dateByAddingTimeInterval:interval];
+    
+    NSString *nowDateString = [dateFormatter stringFromDate:newDate];
+    
+    starttime = nowDateString;
+    endtime = nowDateString;
+
+}
+
+// 获取周
+- (void)getWeekBeginAndEndWith{
+    
+    NSDate *nowDate = [NSDate date];
+    
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    
+    NSDateComponents *comp = [calendar components:NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitWeekday  fromDate:nowDate];
+    
+    // 获取今天是周几
+    NSInteger weekDay = [comp weekday];
+    /**获取当几个月*/
+    NSInteger monthDay = [comp month];
+    NSLog(@"%ld",monthDay);
+    // 获取几天是几号
+    NSInteger day = [comp day];
+    
+    NSLog(@"%ld----%ld",weekDay,day);
+    // 计算当前日期和本周的星期一和星期天相差天数
+    long firstDiff,lastDiff;
+    if (weekDay == 1)
+    {
+        firstDiff = -6;
+        lastDiff = 0;
+    }
+    else
+    
+    {
+        firstDiff = [calendar firstWeekday] - weekDay + 1;
+        
+        lastDiff = 8 - weekDay;
+    }
+    NSLog(@"firstDiff: %ld   lastDiff: %ld",firstDiff,lastDiff);
+    // 在当前日期(去掉时分秒)基础上加上差的天数
+    
+    NSDateComponents *firstDayComp = [calendar components:NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay  fromDate:nowDate];
+    
+    [firstDayComp setDay:day + firstDiff];
+    
+    NSDate *firstDayOfWeek = [calendar dateFromComponents:firstDayComp];
+    
+    
+    
+    NSDateComponents *lastDayComp = [calendar components:NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay   fromDate:nowDate];
+    
+    [lastDayComp setDay:day + lastDiff];
+    
+    NSDate *lastDayOfWeek = [calendar dateFromComponents:lastDayComp];
+    
+    
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    
+    [formatter setDateFormat:@"yyyy-MM-dd hh:ss"];
+    
+    NSString *firstDay = [formatter stringFromDate:firstDayOfWeek];
+    
+    NSString *lastDay = [formatter stringFromDate:lastDayOfWeek];
+    
+    starttime = firstDay;
+    endtime = lastDay;
+}
+
+- (void)getMonthBeginAndEndWith{
+    NSDate *nowDate = [NSDate date];
+    if (nowDate == nil) {
+        nowDate = [NSDate date];
+    }
+    
+    double interval = 0;
+    
+    NSDate *beginDate = nil;
+    
+    NSDate *endDate = nil;
+    
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    
+    [calendar setFirstWeekday:2];
+    
+    //设定周一为周首日
+    
+    BOOL ok = [calendar rangeOfUnit:NSCalendarUnitMonth startDate:&beginDate interval:&interval forDate:nowDate]; //分别修改为 NSDayCalendarUnit NSWeekCalendarUnit NSYearCalendarUnit
+    
+    if (ok) {
+        
+        endDate = [beginDate dateByAddingTimeInterval:interval-1];
+        
+    }else {
+        
+        return;
+    }
+    NSDateFormatter *myDateFormatter = [[NSDateFormatter alloc] init];
+    [myDateFormatter setDateFormat:@"yyyy-MM-dd hh:ss"];
+    
+    NSString *beginString = [myDateFormatter stringFromDate:beginDate];
+    
+    NSString *endString = [myDateFormatter stringFromDate:endDate];
+    
+    starttime = beginString;
+    endtime = endString;
+    
+    
+    
+}
 
 @end

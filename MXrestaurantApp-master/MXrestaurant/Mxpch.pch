@@ -148,6 +148,10 @@
 // 新增的接口 2019 10 22 需求变更
 // 查询是否是会员
 #define FINDONEBYPHONE @"/user/customer/findOneByUserPhone"
+// 菜品销量排行
+#define GETFOODSSTATICS @"/statics/getGoodsSalesCount"
+// 结账方式统计
+#define GETCHECKSTATICS @"/statics/getCheckStatics"
 
 
 #endif /* Mxpch_pch */
