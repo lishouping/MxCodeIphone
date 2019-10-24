@@ -246,6 +246,10 @@
 		EE31F004212460CA00C42E54 /* ManagerPrintAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE31F003212460CA00C42E54 /* ManagerPrintAddViewController.m */; };
 		EE3A7D71236070A100B1D4CC /* canlo.png in Resources */ = {isa = PBXBuildFile; fileRef = EE3A7D70236070A000B1D4CC /* canlo.png */; };
 		EE3A7D74236087F700B1D4CC /* CollectionStatisticsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3A7D73236087F700B1D4CC /* CollectionStatisticsViewController.m */; };
+		EE3E86022361C34D00510477 /* TableStatisticsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3E86012361C34D00510477 /* TableStatisticsViewController.m */; };
+		EE3E86052361C64400510477 /* TableStaticsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3E86042361C64400510477 /* TableStaticsTableViewCell.m */; };
+		EE3E86082361D5E800510477 /* MemberStatisticsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3E86072361D5E800510477 /* MemberStatisticsViewController.m */; };
+		EE3E860B2361DC4A00510477 /* MemberTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3E860A2361DC4A00510477 /* MemberTableViewCell.m */; };
 		EE4B8130212AEC620071E606 /* ManagerTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE4B812F212AEC620071E606 /* ManagerTableViewController.m */; };
 		EE4B8133212AECB60071E606 /* ManageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EE4B8132212AECB60071E606 /* ManageTableViewCell.m */; };
 		EE4B8136212AECE50071E606 /* TableModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EE4B8135212AECE50071E606 /* TableModel.m */; };
@@ -709,6 +713,14 @@
 		EE3A7D70236070A000B1D4CC /* canlo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = canlo.png; path = ../../../../../Downloads/canlo.png; sourceTree = "<group>"; };
 		EE3A7D72236087F700B1D4CC /* CollectionStatisticsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CollectionStatisticsViewController.h; sourceTree = "<group>"; };
 		EE3A7D73236087F700B1D4CC /* CollectionStatisticsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CollectionStatisticsViewController.m; sourceTree = "<group>"; };
+		EE3E86002361C34D00510477 /* TableStatisticsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TableStatisticsViewController.h; sourceTree = "<group>"; };
+		EE3E86012361C34D00510477 /* TableStatisticsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TableStatisticsViewController.m; sourceTree = "<group>"; };
+		EE3E86032361C64400510477 /* TableStaticsTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TableStaticsTableViewCell.h; sourceTree = "<group>"; };
+		EE3E86042361C64400510477 /* TableStaticsTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TableStaticsTableViewCell.m; sourceTree = "<group>"; };
+		EE3E86062361D5E800510477 /* MemberStatisticsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MemberStatisticsViewController.h; sourceTree = "<group>"; };
+		EE3E86072361D5E800510477 /* MemberStatisticsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MemberStatisticsViewController.m; sourceTree = "<group>"; };
+		EE3E86092361DC4A00510477 /* MemberTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MemberTableViewCell.h; sourceTree = "<group>"; };
+		EE3E860A2361DC4A00510477 /* MemberTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MemberTableViewCell.m; sourceTree = "<group>"; };
 		EE4B812E212AEC620071E606 /* ManagerTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ManagerTableViewController.h; sourceTree = "<group>"; };
 		EE4B812F212AEC620071E606 /* ManagerTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ManagerTableViewController.m; sourceTree = "<group>"; };
 		EE4B8131212AECB60071E606 /* ManageTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ManageTableViewCell.h; sourceTree = "<group>"; };
@@ -1098,6 +1110,10 @@
 				EE314D85212C293800E0A44F /* DishTableViewCell.m */,
 				EE62A8A6235F277F002CBCC5 /* AnalysisTableViewCell.h */,
 				EE62A8A7235F277F002CBCC5 /* AnalysisTableViewCell.m */,
+				EE3E86032361C64400510477 /* TableStaticsTableViewCell.h */,
+				EE3E86042361C64400510477 /* TableStaticsTableViewCell.m */,
+				EE3E86092361DC4A00510477 /* MemberTableViewCell.h */,
+				EE3E860A2361DC4A00510477 /* MemberTableViewCell.m */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -1408,6 +1424,10 @@
 				EE62A8A4235F2330002CBCC5 /* StatisticalAnalysisViewController.m */,
 				EE3A7D72236087F700B1D4CC /* CollectionStatisticsViewController.h */,
 				EE3A7D73236087F700B1D4CC /* CollectionStatisticsViewController.m */,
+				EE3E86002361C34D00510477 /* TableStatisticsViewController.h */,
+				EE3E86012361C34D00510477 /* TableStatisticsViewController.m */,
+				EE3E86062361D5E800510477 /* MemberStatisticsViewController.h */,
+				EE3E86072361D5E800510477 /* MemberStatisticsViewController.m */,
 			);
 			path = "我的信息";
 			sourceTree = "<group>";
@@ -1786,6 +1806,7 @@
 				EE30DF6B212ED748005B69D3 /* TZLocationManager.m in Sources */,
 				EE314D89212C297D00E0A44F /* DishClassModel.m in Sources */,
 				47E0A6211FAEA39700959C8A /* SDWebImageDownloader.m in Sources */,
+				EE3E86082361D5E800510477 /* MemberStatisticsViewController.m in Sources */,
 				EE31C8ED2125982500DF18A9 /* ManagerEmployeeViewController.m in Sources */,
 				47E0A6231FAEA39700959C8A /* SDWebImageManager.m in Sources */,
 				471F66FA1FC12F9C0097EE8D /* GoodInfoTableViewCell.m in Sources */,
@@ -1812,6 +1833,7 @@
 				EE5EAD9C2122F175005E37A5 /* ManagerShopViewController.m in Sources */,
 				47E0A5F61FAEA39700959C8A /* QRCodeBacgrouView.m in Sources */,
 				47E0A5FB1FAEA39700959C8A /* AFNetworkActivityIndicatorManager.m in Sources */,
+				EE3E860B2361DC4A00510477 /* MemberTableViewCell.m in Sources */,
 				47E0A60B1FAEA39700959C8A /* SDPhotoBrowser.m in Sources */,
 				4719E7F31FB08F0600BFDFB6 /* ChooseClassModel.m in Sources */,
 				47E0A62B1FAEA39700959C8A /* UIView+WebCacheOperation.m in Sources */,
@@ -1849,6 +1871,7 @@
 				47E0A6121FAEA39700959C8A /* AFURLConnectionOperation.m in Sources */,
 				47000DB81FB1D6080016FE4D /* ServiceModel.m in Sources */,
 				4711A1D81FAEB00800AD26C1 /* QRCodeingViewController.m in Sources */,
+				EE3E86052361C64400510477 /* TableStaticsTableViewCell.m in Sources */,
 				473AE6A81FB6F3530004E146 /* ServiceDetaliedViewController.m in Sources */,
 				47E0A6051FAEA39700959C8A /* TADotView.m in Sources */,
 				47786D051FC01DAB00D1996D /* ShoppingCarLIstTableViewCell.m in Sources */,
@@ -1870,6 +1893,7 @@
 				EE30DF63212ED748005B69D3 /* NSBundle+TZImagePicker.m in Sources */,
 				47E0A6281FAEA39700959C8A /* UIImage+WebP.m in Sources */,
 				47000DC21FB1E5440016FE4D /* LMJTab.m in Sources */,
+				EE3E86022361C34D00510477 /* TableStatisticsViewController.m in Sources */,
 				47F199511FC936B2000201BE /* ResModel.m in Sources */,
 				47E0A60E1FAEA39700959C8A /* AFHTTPRequestOperationManager.m in Sources */,
 				EE31EFFB212451A800C42E54 /* ManagerPrintViewController.m in Sources */,

@@ -426,7 +426,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MXrestaurant/AppDelegate.m"
-            timestampString = "549712465.200516"
+            timestampString = "593617191.749483"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "203"
@@ -586,7 +586,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MXrestaurant/AppDelegate.m"
-            timestampString = "550287539.898916"
+            timestampString = "593617191.749977"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "194"
@@ -602,7 +602,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MXrestaurant/AppDelegate.m"
-            timestampString = "550287552.570671"
+            timestampString = "593617191.7500221"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "41"
@@ -1636,11 +1636,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MXrestaurant/ViewControllers/&#x6211;&#x7684;&#x4fe1;&#x606f;/StatisticalAnalysisViewController.m"
-            timestampString = "593531621.546559"
+            timestampString = "593617191.7515039"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "136"
-            endingLineNumber = "136"
+            startingLineNumber = "138"
+            endingLineNumber = "138"
             landmarkName = "-collectionView:cellForItemAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1684,7 +1684,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MXrestaurant/ViewControllers/&#x6211;&#x7684;&#x4fe1;&#x606f;/SalesStatisticsViewController.m"
-            timestampString = "593531621.5466861"
+            timestampString = "593615869.900748"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "380"
@@ -1700,7 +1700,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MXrestaurant/ViewControllers/&#x6211;&#x7684;&#x4fe1;&#x606f;/SalesStatisticsViewController.m"
-            timestampString = "593531621.546757"
+            timestampString = "593615869.901005"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "374"
@@ -1716,7 +1716,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MXrestaurant/ViewControllers/&#x6211;&#x7684;&#x4fe1;&#x606f;/SalesStatisticsViewController.m"
-            timestampString = "593531621.546821"
+            timestampString = "593615869.9010741"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "684"
@@ -1732,7 +1732,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MXrestaurant/ViewControllers/&#x6211;&#x7684;&#x4fe1;&#x606f;/SalesStatisticsViewController.m"
-            timestampString = "593531621.546876"
+            timestampString = "593615869.901147"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "645"
@@ -1748,12 +1748,108 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MXrestaurant/ViewControllers/&#x6211;&#x7684;&#x4fe1;&#x606f;/CollectionStatisticsViewController.m"
-            timestampString = "593531621.5469331"
+            timestampString = "593610057.574334"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "302"
             endingLineNumber = "302"
             landmarkName = "-selectgoodstatic"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MXrestaurant/ViewControllers/&#x6211;&#x7684;&#x4fe1;&#x606f;/TableStatisticsViewController.m"
+            timestampString = "593617191.751874"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "324"
+            endingLineNumber = "324"
+            landmarkName = "-selectgoodstatic"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MXrestaurant/ViewControllers/&#x6211;&#x7684;&#x4fe1;&#x606f;/TableStatisticsViewController.m"
+            timestampString = "593617191.752059"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "372"
+            endingLineNumber = "372"
+            landmarkName = "-tableView:cellForRowAtIndexPath:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MXrestaurant/ViewControllers/&#x6211;&#x7684;&#x4fe1;&#x606f;/TableStatisticsViewController.m"
+            timestampString = "593617191.75212"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "322"
+            endingLineNumber = "322"
+            landmarkName = "-selectgoodstatic"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MXrestaurant/ViewControllers/&#x6211;&#x7684;&#x4fe1;&#x606f;/MemberStatisticsViewController.m"
+            timestampString = "593617191.752179"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "354"
+            endingLineNumber = "354"
+            landmarkName = "-selectgoodstatic3"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MXrestaurant/ViewControllers/&#x6211;&#x7684;&#x4fe1;&#x606f;/MemberStatisticsViewController.m"
+            timestampString = "593617191.752797"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "407"
+            endingLineNumber = "407"
+            landmarkName = "-tableView:cellForRowAtIndexPath:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MXrestaurant/ViewControllers/&#x6211;&#x7684;&#x4fe1;&#x606f;/MemberStatisticsViewController.m"
+            timestampString = "593617191.7530971"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "355"
+            endingLineNumber = "355"
+            landmarkName = "-selectgoodstatic3"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

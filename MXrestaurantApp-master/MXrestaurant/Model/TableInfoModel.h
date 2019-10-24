@@ -16,4 +16,8 @@
 @property(nonatomic,strong)NSString *orderstate;
 @property(nonatomic,strong)NSString *order_num;
 
+@property(nonatomic,strong)NSString *sales_count;
+@property(nonatomic,strong)NSString *order_count;
+@property(nonatomic,strong)NSString *sales_payment;
+
 @end

@@ -1,16 +1,16 @@
 //
-//  ServiceStatisticsViewController.m
+//  TableStatisticsViewController.m
 //  MXrestaurant
 //
-//  Created by lishouping on 2017/11/12.
-//  Copyright © 2017年 lishouping. All rights reserved.
+//  Created by MX on 2019/10/24.
+//  Copyright © 2019年 lishouping. All rights reserved.
 //
 
-#import "ServiceStatisticsViewController.h"
+#import "TableStatisticsViewController.h"
 #import "YLButton.h"
 #import "TableStaticsTableViewCell.h"
 #import "TableInfoModel.h"
-@interface ServiceStatisticsViewController ()<UITableViewDelegate,UITableViewDataSource>{
+@interface TableStatisticsViewController ()<UITableViewDelegate,UITableViewDataSource>{
     UITableView *tabSalesFood;
     YLButton *btnStartTime;
     YLButton *btnEndTime;
@@ -57,7 +57,7 @@
 
 @end
 
-@implementation ServiceStatisticsViewController
+@implementation TableStatisticsViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -70,7 +70,7 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationItem.title = @"服务统计";
+    self.navigationItem.title = @"桌台统计";
     self.dateArray = [[NSMutableArray alloc] initWithCapacity:0];
     userDefaults=[NSUserDefaults standardUserDefaults];
     self.view.backgroundColor = [UIColor whiteColor];
@@ -122,7 +122,7 @@
     
     labFoodName = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, kWidth/4-20, 30)];
     [labFoodName setTextColor:[UIColor colorWithRed:251.0/255.0 green:139.0/255.0 blue:57.0/255.0 alpha:1]];
-    [labFoodName setText:@"姓名"];
+    [labFoodName setText:@"餐桌号"];
     [labFoodName setFont:[UIFont systemFontOfSize:12]];
     [footView addSubview:labFoodName];
     
@@ -135,14 +135,14 @@
     
     labStaNum = [[UILabel alloc] initWithFrame:CGRectMake((kWidth/4)*2, 0, kWidth/4, 30)];
     [labStaNum setTextColor:[UIColor colorWithRed:251.0/255.0 green:139.0/255.0 blue:57.0/255.0 alpha:1]];
-    [labStaNum setText:@"下单次数"];
+    [labStaNum setText:@"销售数量"];
     [labStaNum setFont:[UIFont systemFontOfSize:12]];
     [footView addSubview:labStaNum];
     
     
     labTotalPrice = [[UILabel alloc] initWithFrame:CGRectMake(kWidth-(kWidth/4), 0, kWidth/4, 30)];
     [labTotalPrice setTextColor:[UIColor colorWithRed:251.0/255.0 green:139.0/255.0 blue:57.0/255.0 alpha:1]];
-    [labTotalPrice setText:@"服务次数"];
+    [labTotalPrice setText:@"销售金额"];
     [labTotalPrice setFont:[UIFont systemFontOfSize:12]];
     [footView addSubview:labTotalPrice];
     
@@ -269,7 +269,7 @@
 }
 
 
-// 查询服务统计信息
+// 查询桌台统计信息
 - (void)selectgoodstatic{
     if (starttime==nil) {
         UIAlertView * al=[[UIAlertView alloc]initWithTitle:nil message:@"请选择开始时间" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
@@ -278,7 +278,7 @@
         UIAlertView *alv = [[UIAlertView alloc] initWithTitle:nil message:@"请选择结束时间" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
         [alv show];
     }
-    NSString *postUrl = [NSString stringWithFormat:@"%@%@",API_URL,GETWIRITESTATIS];
+    NSString *postUrl = [NSString stringWithFormat:@"%@%@",API_URL,GETTABLESST];
     NSDictionary *parameters;
     
     parameters = @{@"shop_id":[userDefaults objectForKey:@"shop_id_MX"],
@@ -321,19 +321,17 @@
             
             for (NSDictionary * dic in dateArray)
             {
-                NSString *NAME = [dic objectForKey:@"NAME"];
-                NSNumber *sacon =[dic objectForKey:@"check_count"];
-                NSString *check_count = [sacon stringValue];
+                NSString *table_name = [dic objectForKey:@"table_name"];
+                NSNumber *sacon =[dic objectForKey:@"sales_count"];
+                NSString *sales_count = [sacon stringValue];
                 NSNumber *order_num = [dic objectForKey:@"order_count"];
                 NSString *order_count = [order_num stringValue];
-                NSNumber *service_count = [dic objectForKey:@"service_count"];
-                NSString *scont =[service_count stringValue];
-                
+
                 TableInfoModel *model = [[TableInfoModel alloc] init];
-                model.table_name = NAME;
-                model.sales_count =check_count;
+                model.table_name = table_name;
+                model.sales_count =sales_count;
                 model.order_count = order_count;
-                model.sales_payment = scont;
+                model.sales_payment = [NSString stringWithFormat:@"%2f",[[dic objectForKey:@"sales_payment"] doubleValue]];
                 [self.dateArray addObject:model];
             }
             

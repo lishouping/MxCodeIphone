@@ -152,6 +152,15 @@
 #define GETFOODSSTATICS @"/statics/getGoodsSalesCount"
 // 结账方式统计
 #define GETCHECKSTATICS @"/statics/getCheckStatics"
-
+// 桌台统计列表(分页)
+#define GETTABLESST @"/statics/getTableStatics"
+// 服务员统计
+#define GETWIRITESTATIS @"/statics/getWaiterStatics"
+// 根据日期段查询会员充值金额
+#define SUMBYDATE @"/statistics/getSumRechargeByDate"
+// 根据日期查询会员新开数量
+#define GETUSERCOUNT @"/statistics/getUserCountByDate"
+// 根据日期查询会员新开数量图表
+#define GETUSERCHARTS @"/statistics/getUserChartsByDate"
 
 #endif /* Mxpch_pch */

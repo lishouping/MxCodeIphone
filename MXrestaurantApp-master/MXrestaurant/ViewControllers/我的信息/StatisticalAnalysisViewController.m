@@ -27,6 +27,8 @@
 #import "ManagerDishViewController.h"
 #import "ManagerDishAddViewController.h"
 #import "CollectionStatisticsViewController.h"
+#import "TableStatisticsViewController.h"
+#import "MemberStatisticsViewController.h"
 
 @interface StatisticalAnalysisViewController (){
     NSUserDefaults * userDefaults;
@@ -157,10 +159,10 @@
         CollectionStatisticsViewController *atvs = [[CollectionStatisticsViewController alloc] init];
         [self.navigationController pushViewController:atvs animated:YES];
     }else if ([content isEqualToString:@"桌台统计"]){
-        ServiceStatisticsViewController *atvs = [[ServiceStatisticsViewController alloc] init];
+        TableStatisticsViewController *atvs = [[TableStatisticsViewController alloc] init];
         [self.navigationController pushViewController:atvs animated:YES];
     }else if ([content isEqualToString:@"会员统计"]){
-        ServiceStatisticsViewController *atvs = [[ServiceStatisticsViewController alloc] init];
+        MemberStatisticsViewController *atvs = [[MemberStatisticsViewController alloc] init];
         [self.navigationController pushViewController:atvs animated:YES];
     }else if ([content isEqualToString:@"服务统计"]){
         ServiceStatisticsViewController *atvs = [[ServiceStatisticsViewController alloc] init];

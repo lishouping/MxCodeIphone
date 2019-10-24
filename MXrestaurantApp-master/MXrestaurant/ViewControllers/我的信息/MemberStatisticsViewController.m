@@ -1,16 +1,17 @@
 //
-//  ServiceStatisticsViewController.m
+//  MemberStatisticsViewController.m
 //  MXrestaurant
 //
-//  Created by lishouping on 2017/11/12.
-//  Copyright © 2017年 lishouping. All rights reserved.
+//  Created by MX on 2019/10/24.
+//  Copyright © 2019年 lishouping. All rights reserved.
 //
 
-#import "ServiceStatisticsViewController.h"
+#import "MemberStatisticsViewController.h"
 #import "YLButton.h"
-#import "TableStaticsTableViewCell.h"
+#import "MemberTableViewCell.h"
 #import "TableInfoModel.h"
-@interface ServiceStatisticsViewController ()<UITableViewDelegate,UITableViewDataSource>{
+
+@interface MemberStatisticsViewController ()<UITableViewDelegate,UITableViewDataSource>{
     UITableView *tabSalesFood;
     YLButton *btnStartTime;
     YLButton *btnEndTime;
@@ -50,14 +51,12 @@
     int totalnum;
     
     UIView *nodateView;
-    
 }
 @property(nonatomic,strong)NSMutableArray *dateArray;
 
-
 @end
 
-@implementation ServiceStatisticsViewController
+@implementation MemberStatisticsViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -70,12 +69,12 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationItem.title = @"服务统计";
+    self.navigationItem.title = @"会员统计";
     self.dateArray = [[NSMutableArray alloc] initWithCapacity:0];
     userDefaults=[NSUserDefaults standardUserDefaults];
     self.view.backgroundColor = [UIColor whiteColor];
     [self makeUI];
-    [self setupTableView];
+    
     // Do any additional setup after loading the view.
 }
 - (void)makeUI{
@@ -115,61 +114,55 @@
     [self.view addSubview:btnEndTime];
     [btnEndTime addTarget:self action:@selector(selectEndTimeClick) forControlEvents:(UIControlEventTouchUpInside)];
     
-    
-    footView = [[UIView alloc] initWithFrame:CGRectMake(0, 40+10+10, kWidth, 30)];
-    [footView setBackgroundColor:[UIColor colorWithRed:182.0/255.0 green:182.0/255.0 blue:182.0/255.0 alpha:1]];
-    [self.view addSubview:footView];
-    
-    labFoodName = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, kWidth/4-20, 30)];
-    [labFoodName setTextColor:[UIColor colorWithRed:251.0/255.0 green:139.0/255.0 blue:57.0/255.0 alpha:1]];
-    [labFoodName setText:@"姓名"];
-    [labFoodName setFont:[UIFont systemFontOfSize:12]];
-    [footView addSubview:labFoodName];
-    
-    labOrderNumber = [[UILabel alloc] initWithFrame:CGRectMake(kWidth/4, 0, kWidth/4-20, 30)];
-    [labOrderNumber setTextColor:[UIColor colorWithRed:251.0/255.0 green:139.0/255.0 blue:57.0/255.0 alpha:1]];
-    [labOrderNumber setText:@"订单数量"];
-    [labOrderNumber setFont:[UIFont systemFontOfSize:12]];
-    [footView addSubview:labOrderNumber];
+    shopview = [[UIView alloc] initWithFrame:CGRectMake(10, 40+10+10, kWidth-10-10, 120)];
+    [shopview setBackgroundColor:[UIColor colorWithRed:182.0/255.0 green:182.0/255.0 blue:182.0/255.0 alpha:1]];
+    shopview.layer.cornerRadius = 10;
+    [self.view addSubview:shopview];
     
     
-    labStaNum = [[UILabel alloc] initWithFrame:CGRectMake((kWidth/4)*2, 0, kWidth/4, 30)];
-    [labStaNum setTextColor:[UIColor colorWithRed:251.0/255.0 green:139.0/255.0 blue:57.0/255.0 alpha:1]];
-    [labStaNum setText:@"下单次数"];
-    [labStaNum setFont:[UIFont systemFontOfSize:12]];
-    [footView addSubview:labStaNum];
+    img1 = [[UIImageView alloc] initWithFrame:CGRectMake(20, 20+5, 20, 20)];
+    [img1 setImage:[UIImage imageNamed:@"num"]];
+    [shopview addSubview:img1];
+    
+    shopOrderNumTitle = [[UILabel alloc] initWithFrame:CGRectMake(20+20+10, 20, 120, 30)];
+    [shopOrderNumTitle setText:@"会员充值金额:"];
+    [shopOrderNumTitle setFont:[UIFont systemFontOfSize:12]];
+    [shopview addSubview:shopOrderNumTitle];
+    
+    shopOrderNum = [[UILabel alloc] initWithFrame:CGRectMake(10+120, 20, 100, 30)];
+  
+    [shopOrderNum setFont:[UIFont systemFontOfSize:12]];
+    shopOrderNum.textColor = [UIColor colorWithRed:251.0/255.0 green:139.0/255.0 blue:57.0/255.0 alpha:1];
+    [shopview addSubview:shopOrderNum];
+    
+    img2 = [[UIImageView alloc] initWithFrame:CGRectMake(20, 20+30+20+5, 20, 20)];
+    [img2 setImage:[UIImage imageNamed:@"price"]];
+    [shopview addSubview:img2];
+    
+    shopOrderZeTitle = [[UILabel alloc] initWithFrame:CGRectMake(20+20+10, 20+30+20, 120, 30)];
+    [shopOrderZeTitle setText:@"会员新开数量:"];
+    [shopOrderZeTitle setFont:[UIFont systemFontOfSize:12]];
+    [shopview addSubview:shopOrderZeTitle];
+    
+    shopOrderZe = [[UILabel alloc] initWithFrame:CGRectMake(10+120, 20+30+20, 100, 30)];
+    [shopOrderZe setFont:[UIFont systemFontOfSize:12]];
+    shopOrderZe.textColor = [UIColor colorWithRed:251.0/255.0 green:139.0/255.0 blue:57.0/255.0 alpha:1];
+    [shopview addSubview:shopOrderZe];
     
     
-    labTotalPrice = [[UILabel alloc] initWithFrame:CGRectMake(kWidth-(kWidth/4), 0, kWidth/4, 30)];
-    [labTotalPrice setTextColor:[UIColor colorWithRed:251.0/255.0 green:139.0/255.0 blue:57.0/255.0 alpha:1]];
-    [labTotalPrice setText:@"服务次数"];
-    [labTotalPrice setFont:[UIFont systemFontOfSize:12]];
-    [footView addSubview:labTotalPrice];
     
     
-    tabSalesFood = [[UITableView alloc] initWithFrame:CGRectMake(0, 40+10+30+10, kWidth, kHeight-( 40+10+30)) style:UITableViewStylePlain];
+    tabSalesFood = [[UITableView alloc] initWithFrame:CGRectMake(0, 40+10+10+120+10, kWidth, kHeight-( 40+10+10+120+10)) style:UITableViewStylePlain];
     tabSalesFood.delegate = self;
     tabSalesFood.dataSource = self;
     [self.view addSubview:tabSalesFood];
     
-    nodateView = [[UIView alloc] initWithFrame:CGRectMake(0, 40+10+30+10, kWidth, kHeight-( 40+10+30))];
+    nodateView = [[UIView alloc] initWithFrame:CGRectMake(0, 40+10+10+120+10, kWidth, kHeight-(40+10+10+120+10))];
     [nodateView setBackgroundColor:[UIColor whiteColor]];
     UIImageView *imgNodate = [[UIImageView alloc] initWithFrame:CGRectMake(kWidth/2-(196/2), 80, 196, 128)];
     [imgNodate setImage:[UIImage imageNamed:@"common_nodata"]];
     [nodateView addSubview:imgNodate];
     [self.view addSubview:nodateView];
-}
-
--(void)rightBtnButtonClick{
-    if (starttime==nil) {
-        UIAlertView * al=[[UIAlertView alloc]initWithTitle:nil message:@"请选择开始时间" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
-        [al show];
-    }else if (endtime==nil){
-        UIAlertView *alv = [[UIAlertView alloc] initWithTitle:nil message:@"请选择结束时间" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
-        [alv show];
-    }else{
-        [self headerRereshing];
-    }
 }
 
 -(void)selectStartTimeClick{
@@ -193,33 +186,6 @@
     [dataPicker removeFromSuperview];
     dataPicker = nil;
 }
-
-
-//加上刷新控件
--(void)setupTableView
-{
-    //下拉刷新
-    [tabSalesFood addHeaderWithTarget:self action:@selector(headerRereshing)];
-    //上拉加载
-    [tabSalesFood addFooterWithTarget:self action:@selector(footerRereshing)];
-}
-
-
-//下拉
-- (void)headerRereshing
-{
-    [self.dateArray removeAllObjects];
-    [tabSalesFood reloadData];
-    page=1;
-    [self selectgoodstatic];
-}
-//上拉
--(void)footerRereshing
-{
-    page++;
-    [self selectgoodstatic];
-}
-
 - (void)dataChoose{
     dataPicker= [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height-260, self.view.frame.size.width, 216+44)];
     [dataPicker setBackgroundColor:[UIColor whiteColor]];
@@ -255,7 +221,7 @@
     dataPicker = nil;
 }
 
--(void)dateTimeClick{
+-(void)rightBtnButtonClick{
     if (starttime==nil) {
         UIAlertView * al=[[UIAlertView alloc]initWithTitle:nil message:@"请选择开始时间" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
         [al show];
@@ -263,28 +229,20 @@
         UIAlertView *alv = [[UIAlertView alloc] initWithTitle:nil message:@"请选择结束时间" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
         [alv show];
     }else{
-        [self selectgoodstatic];
+        [self selectgoodstatic1];
+        [self selectgoodstatic2];
+        [self selectgoodstatic3];
     }
-    
 }
 
-
-// 查询服务统计信息
-- (void)selectgoodstatic{
-    if (starttime==nil) {
-        UIAlertView * al=[[UIAlertView alloc]initWithTitle:nil message:@"请选择开始时间" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
-        [al show];
-    }else if (endtime==nil){
-        UIAlertView *alv = [[UIAlertView alloc] initWithTitle:nil message:@"请选择结束时间" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
-        [alv show];
-    }
-    NSString *postUrl = [NSString stringWithFormat:@"%@%@",API_URL,GETWIRITESTATIS];
+//  根据日期段查询会员充值金额
+- (void)selectgoodstatic1{
+    NSString *postUrl = [NSString stringWithFormat:@"%@%@",API_URL_MEMBER,SUMBYDATE];
     NSDictionary *parameters;
     
-    parameters = @{@"shop_id":[userDefaults objectForKey:@"shop_id_MX"],
-                   @"start_date":starttime,
-                   @"end_date": endtime,
-                   @"page_no":[NSString stringWithFormat:@"%d",page]
+    parameters = @{@"shopId":[userDefaults objectForKey:@"menmbers_shop_id"],
+                   @"startDate":starttime,
+                   @"endDate": endtime
                    };
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -305,43 +263,118 @@
     
     [manager POST:postUrl parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"结果: %@", responseObject);
-        if ([[responseObject objectForKey:@"CODE"] isEqualToString:@"1000"]) {
-            NSDictionary *myDic = [responseObject objectForKey:@"DATA"];
-            NSArray *dateArray = [myDic objectForKey:@"list"];
+        if ([[responseObject objectForKey:@"code"] isEqualToString:@"0"]) {
+            NSNumber *num = [responseObject objectForKey:@"data"];
+            NSString *money = [num stringValue];
+            [shopOrderNum setText:money];
+        }else
+        {
+            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"" message:[NSString stringWithFormat:@"%@",[responseObject objectForKey:@"MESSAGE"]] delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"好", nil];
+            [alert show];
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        NSLog(@"Error: ==============%@", error);
+    }];
+}
+//根据日期查询会员新开数量
+- (void)selectgoodstatic2{
+    NSString *postUrl = [NSString stringWithFormat:@"%@%@",API_URL_MEMBER,GETUSERCOUNT];
+    NSDictionary *parameters;
+    
+    parameters = @{@"shopId":[userDefaults objectForKey:@"menmbers_shop_id"],
+                   @"startDate":starttime,
+                   @"endDate": endtime
+                   };
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    
+    NSString *key =[userDefaults objectForKey:@"login_key_MX"];
+    NSString *longbusid = [[userDefaults objectForKey:@"business_id_MX"] stringValue];
+    
+    [manager.requestSerializer setValue:key forHTTPHeaderField:@"key"];
+    [manager.requestSerializer setValue:longbusid forHTTPHeaderField:@"id"];
+    
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];//使用这个将得到的是JSON
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/json", @"text/plain", @"text/html", nil];
+    // 设置超时时间
+    [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
+    manager.requestSerializer.timeoutInterval = 10.f;
+    [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
+    
+    [manager POST:postUrl parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"结果: %@", responseObject);
+        if ([[responseObject objectForKey:@"code"] isEqualToString:@"0"]) {
+            NSNumber *num = [responseObject objectForKey:@"data"];
+            NSString *number = [num stringValue];
+            [shopOrderZe setText:number];
+        }else
+        {
+            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"" message:[NSString stringWithFormat:@"%@",[responseObject objectForKey:@"MESSAGE"]] delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"好", nil];
+            [alert show];
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        NSLog(@"Error: ==============%@", error);
+    }];
+}
+
+// 查询会员列表
+- (void)selectgoodstatic3{
+    if (self.dateArray.count>0) {
+        [self.dateArray removeAllObjects];
+        [tabSalesFood reloadData];
+    }
+    NSString *postUrl = [NSString stringWithFormat:@"%@%@",API_URL_MEMBER,GETUSERCHARTS];
+    NSDictionary *parameters;
+    
+    parameters = @{@"shopId":[userDefaults objectForKey:@"menmbers_shop_id"],
+                   @"startDate":starttime,
+                   @"endDate": endtime
+                   };
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    
+    NSString *key =[userDefaults objectForKey:@"login_key_MX"];
+    NSString *longbusid = [[userDefaults objectForKey:@"business_id_MX"] stringValue];
+    
+    [manager.requestSerializer setValue:key forHTTPHeaderField:@"key"];
+    [manager.requestSerializer setValue:longbusid forHTTPHeaderField:@"id"];
+    
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];//使用这个将得到的是JSON
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/json", @"text/plain", @"text/html", nil];
+    // 设置超时时间
+    [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
+    manager.requestSerializer.timeoutInterval = 10.f;
+    [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
+    
+    [manager POST:postUrl parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"结果: %@", responseObject);
+        if ([[responseObject objectForKey:@"code"] isEqualToString:@"0"]) {
+            NSArray *dateArray = [responseObject objectForKey:@"data"];
             
             if (dateArray.count==0) {
                 nodateView.hidden = NO;
-                [tabSalesFood footerEndRefreshing];
-                [tabSalesFood headerEndRefreshing];
-                [tabSalesFood reloadData];
-                UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"无更多数据" message:@"" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"好", nil];
-                [alert show];
+                [self.dateArray removeAllObjects];
                 return ;
             }
             
             for (NSDictionary * dic in dateArray)
             {
-                NSString *NAME = [dic objectForKey:@"NAME"];
-                NSNumber *sacon =[dic objectForKey:@"check_count"];
-                NSString *check_count = [sacon stringValue];
-                NSNumber *order_num = [dic objectForKey:@"order_count"];
-                NSString *order_count = [order_num stringValue];
-                NSNumber *service_count = [dic objectForKey:@"service_count"];
-                NSString *scont =[service_count stringValue];
+
+                NSNumber *sacon =[dic objectForKey:@"user_count"];
+                NSString *user_count = [sacon stringValue];
+                NSString *create_date = [dic objectForKey:@"create_date"];
                 
                 TableInfoModel *model = [[TableInfoModel alloc] init];
-                model.table_name = NAME;
-                model.sales_count =check_count;
-                model.order_count = order_count;
-                model.sales_payment = scont;
+                model.sales_count =user_count;
+                model.order_count = create_date;
                 [self.dateArray addObject:model];
             }
             
             nodateView.hidden = YES;
-            
-            [tabSalesFood headerEndRefreshing];
-            [tabSalesFood footerEndRefreshing];
-            
             [tabSalesFood reloadData];
         }
         
@@ -371,24 +404,23 @@
     return 30.0;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    TableStaticsTableViewCell  *tabcell = [tableView dequeueReusableCellWithIdentifier:@"idc1"];
+    MemberTableViewCell  *tabcell = [tableView dequeueReusableCellWithIdentifier:@"idc1"];
     if (tabcell==nil) {
-        tabcell = [[TableStaticsTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"idc1"];
+        tabcell = [[MemberTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"idc1"];
         tabcell.selectionStyle = UITableViewCellStyleDefault;
     }
     TableInfoModel *model = self.dateArray[indexPath.section];
-    tabcell.labFoodName.text = model.table_name;
-    tabcell.labOrderNumber.text = model.order_count;
-    tabcell.labStaNum.text = model.sales_count;
-    tabcell.labTotalPrice.text = model.sales_payment;
+    NSString *cont = [NSString stringWithFormat:@"会员数量：%@",model.sales_count];
+    tabcell.memberNum.text = cont;
+    tabcell.memberNewNum.text = model.order_count;
     return tabcell;
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 
 /*
 #pragma mark - Navigation
