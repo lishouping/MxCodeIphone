@@ -250,6 +250,7 @@
 		EE3E86052361C64400510477 /* TableStaticsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3E86042361C64400510477 /* TableStaticsTableViewCell.m */; };
 		EE3E86082361D5E800510477 /* MemberStatisticsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3E86072361D5E800510477 /* MemberStatisticsViewController.m */; };
 		EE3E860B2361DC4A00510477 /* MemberTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3E860A2361DC4A00510477 /* MemberTableViewCell.m */; };
+		EE3FC948236325AE002A1CF1 /* paizhao.png in Resources */ = {isa = PBXBuildFile; fileRef = EE3FC947236325AD002A1CF1 /* paizhao.png */; };
 		EE4B8130212AEC620071E606 /* ManagerTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE4B812F212AEC620071E606 /* ManagerTableViewController.m */; };
 		EE4B8133212AECB60071E606 /* ManageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EE4B8132212AECB60071E606 /* ManageTableViewCell.m */; };
 		EE4B8136212AECE50071E606 /* TableModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EE4B8135212AECE50071E606 /* TableModel.m */; };
@@ -721,6 +722,7 @@
 		EE3E86072361D5E800510477 /* MemberStatisticsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MemberStatisticsViewController.m; sourceTree = "<group>"; };
 		EE3E86092361DC4A00510477 /* MemberTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MemberTableViewCell.h; sourceTree = "<group>"; };
 		EE3E860A2361DC4A00510477 /* MemberTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MemberTableViewCell.m; sourceTree = "<group>"; };
+		EE3FC947236325AD002A1CF1 /* paizhao.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = paizhao.png; sourceTree = "<group>"; };
 		EE4B812E212AEC620071E606 /* ManagerTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ManagerTableViewController.h; sourceTree = "<group>"; };
 		EE4B812F212AEC620071E606 /* ManagerTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ManagerTableViewController.m; sourceTree = "<group>"; };
 		EE4B8131212AECB60071E606 /* ManageTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ManageTableViewCell.h; sourceTree = "<group>"; };
@@ -940,6 +942,7 @@
 		47E0A5401FAEA29800959C8A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				EE3FC947236325AD002A1CF1 /* paizhao.png */,
 				EE3A7D70236070A000B1D4CC /* canlo.png */,
 				EEFD672F23588CA60012E697 /* common_nodata.png */,
 				EEFD673723588CA70012E697 /* ic_add.png */,
@@ -1729,6 +1732,7 @@
 				473AE72C1FB704FB0004E146 /* tabbar4@2x.png in Resources */,
 				EEFD673D23588CA70012E697 /* ic_new_17.png in Resources */,
 				473AE7311FB704FB0004E146 /* tabbar2@2x.png in Resources */,
+				EE3FC948236325AE002A1CF1 /* paizhao.png in Resources */,
 				EEFD674323588CA70012E697 /* ic_pay.png in Resources */,
 				EEFD673923588CA70012E697 /* ic_new_6.png in Resources */,
 				473AE7331FB704FB0004E146 /* tabbar5@1x.png in Resources */,

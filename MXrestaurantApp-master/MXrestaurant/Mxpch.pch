@@ -28,7 +28,7 @@
 #define API_URL @"http://47.92.66.33:8080/heygay"
 #define RESOURCE_URL @"http://www.heyguy.cn/images"
 #define API_URL_MEMBER @"http://47.92.208.3:8090"
-#define String UPLOADIMAGE_URL = "http://39.104.125.56:8080/heygay/"
+#define UPLOADIMAGE_URL @"http://39.104.125.56:8080/heygay/"
 
 // 接口详细地址的调用
 // 用户登录
@@ -162,5 +162,6 @@
 #define GETUSERCOUNT @"/statistics/getUserCountByDate"
 // 根据日期查询会员新开数量图表
 #define GETUSERCHARTS @"/statistics/getUserChartsByDate"
-
+// 菜品图片上传
+#define UPLOADCAIPINIMAGE @"/upload/updateImagesReturnUrl"
 #endif /* Mxpch_pch */
