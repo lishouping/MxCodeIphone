@@ -9,5 +9,16 @@
 #import "RootViewController.h"
 
 @interface ManagerPrintAddViewController : RootViewController
-
+@property(nonatomic,strong)NSString *printer_id;
+@property(nonatomic,strong)NSString *printer_no;
+@property(nonatomic,strong)NSString *printer_name;
+@property(nonatomic,strong)NSString *type_print;
+@property(nonatomic,strong)NSString *key;
+@property(nonatomic,strong)NSString *print_num;
+@property(nonatomic,strong)NSString *printer_way;
+@property(nonatomic,strong)NSString *page_size;
+@property(nonatomic,strong)NSString *ip;
+@property(nonatomic,strong)NSString *port;
+@property(nonatomic,strong)NSString *back_good_if_print;
+@property(nonatomic,strong)NSString *print_way;
 @end

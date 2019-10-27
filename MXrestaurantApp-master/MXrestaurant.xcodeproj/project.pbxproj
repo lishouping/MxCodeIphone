@@ -257,6 +257,7 @@
 		EE4B8139212AF5C10071E606 /* ManagerTableAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE4B8138212AF5C10071E606 /* ManagerTableAddViewController.m */; };
 		EE4E8D0020E3BF6F0002138F /* ic_logo1024.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EE4E8CFF20E3BF6F0002138F /* ic_logo1024.jpg */; };
 		EE5EAD9C2122F175005E37A5 /* ManagerShopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE5EAD9B2122F175005E37A5 /* ManagerShopViewController.m */; };
+		EE61B3E02365614400070F17 /* ManagerDishEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE61B3DE2365614300070F17 /* ManagerDishEditViewController.m */; };
 		EE62A8A5235F2330002CBCC5 /* StatisticalAnalysisViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE62A8A4235F2330002CBCC5 /* StatisticalAnalysisViewController.m */; };
 		EE62A8A8235F277F002CBCC5 /* AnalysisTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EE62A8A7235F277F002CBCC5 /* AnalysisTableViewCell.m */; };
 		EEEBE9EE21259A240067E810 /* EmployeeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EEEBE9ED21259A240067E810 /* EmployeeModel.m */; };
@@ -734,6 +735,8 @@
 		EE4E8CFF20E3BF6F0002138F /* ic_logo1024.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ic_logo1024.jpg; sourceTree = "<group>"; };
 		EE5EAD9A2122F175005E37A5 /* ManagerShopViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ManagerShopViewController.h; sourceTree = "<group>"; };
 		EE5EAD9B2122F175005E37A5 /* ManagerShopViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ManagerShopViewController.m; sourceTree = "<group>"; };
+		EE61B3DE2365614300070F17 /* ManagerDishEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ManagerDishEditViewController.m; sourceTree = "<group>"; };
+		EE61B3DF2365614400070F17 /* ManagerDishEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ManagerDishEditViewController.h; sourceTree = "<group>"; };
 		EE62A8A3235F2330002CBCC5 /* StatisticalAnalysisViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StatisticalAnalysisViewController.h; sourceTree = "<group>"; };
 		EE62A8A4235F2330002CBCC5 /* StatisticalAnalysisViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StatisticalAnalysisViewController.m; sourceTree = "<group>"; };
 		EE62A8A6235F277F002CBCC5 /* AnalysisTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AnalysisTableViewCell.h; sourceTree = "<group>"; };
@@ -1423,6 +1426,8 @@
 				EE314D7F212C28DF00E0A44F /* ManagerDishViewController.m */,
 				EE314D81212C28F100E0A44F /* ManagerDishAddViewController.h */,
 				EE314D82212C28F100E0A44F /* ManagerDishAddViewController.m */,
+				EE61B3DF2365614400070F17 /* ManagerDishEditViewController.h */,
+				EE61B3DE2365614300070F17 /* ManagerDishEditViewController.m */,
 				EE62A8A3235F2330002CBCC5 /* StatisticalAnalysisViewController.h */,
 				EE62A8A4235F2330002CBCC5 /* StatisticalAnalysisViewController.m */,
 				EE3A7D72236087F700B1D4CC /* CollectionStatisticsViewController.h */,
@@ -1912,6 +1917,7 @@
 				47E0A6021FAEA39700959C8A /* UIWebView+AFNetworking.m in Sources */,
 				47E0A6041FAEA39700959C8A /* TAAnimatedDotView.m in Sources */,
 				47E0A61D1FAEA39700959C8A /* NSData+ImageContentType.m in Sources */,
+				EE61B3E02365614400070F17 /* ManagerDishEditViewController.m in Sources */,
 				EE30DF6D212ED748005B69D3 /* TZPhotoPreviewCell.m in Sources */,
 				EE30DF6F212ED748005B69D3 /* TZProgressView.m in Sources */,
 				47E0A6271FAEA39700959C8A /* UIImage+MultiFormat.m in Sources */,

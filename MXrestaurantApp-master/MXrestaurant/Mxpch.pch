@@ -141,7 +141,7 @@
 #define PRINTADD @"/printer/addprinter"
 // 打印机删除
 #define PRINTDEL @"/printer/deletePrinter"
-// 打印机删除
+// 打印机修改
 #define PRINTUPDATE @"/printer/updatePrinter"
 
 

@@ -429,7 +429,6 @@
     if (managerType==0) {
          imgLogo.image = selectedPhotos[0];
         logoData = UIImageJPEGRepresentation(imgLogo.image, 0.5);
-        
         PHAsset *ass = assets[0];
         PHImageManager * imageManager = [PHImageManager defaultManager];
         [imageManager requestImageDataForAsset:ass options:nil resultHandler:^(NSData * _Nullable imageData, NSString * _Nullable dataUTI, UIImageOrientation orientation, NSDictionary * _Nullable info) {
@@ -441,7 +440,7 @@
             UIImage * image = [UIImage imageWithData:imageData];
         }];
     }else if (managerType==1){
-         wxLogo.image = selectedPhotos[0];
+        wxLogo.image = selectedPhotos[0];
         wxData = UIImageJPEGRepresentation(wxLogo.image, 0.5);
         PHAsset *ass = assets[0];
         PHImageManager * imageManager = [PHImageManager defaultManager];
@@ -454,7 +453,7 @@
             UIImage * image = [UIImage imageWithData:imageData];
         }];
     }else if (managerType==2){
-         alpayLogo.image = selectedPhotos[0];
+        alpayLogo.image = selectedPhotos[0];
         alData = UIImageJPEGRepresentation(alpayLogo.image, 0.5);
         PHAsset *ass = assets[0];
         PHImageManager * imageManager = [PHImageManager defaultManager];
@@ -512,13 +511,13 @@
             NSString *icon = [NSString stringWithFormat:@"%@/heygay%@",RESOURCE_URL,[dics objectForKey:@"icon"]];
             
             NSURL *icon_img = [[NSURL alloc] initWithString:icon];
-            [imgLogo sd_setImageWithURL:icon_img placeholderImage:[UIImage imageNamed:@"icon"]];
+            [imgLogo sd_setImageWithURL:icon_img];
             
             NSURL *wx_img = [[NSURL alloc] initWithString:wechat_img];
-            [wxLogo sd_setImageWithURL:wx_img placeholderImage:[UIImage imageNamed:@"icon"]];
+            [wxLogo sd_setImageWithURL:wx_img];
             
             NSURL *alp_img = [[NSURL alloc] initWithString:alipay_img];
-            [alpayLogo sd_setImageWithURL:alp_img placeholderImage:[UIImage imageNamed:@"icon"]];
+            [alpayLogo sd_setImageWithURL:alp_img];
             
             NSString *shop_phone = [dics objectForKey:@"shop_phone"];
             
@@ -664,7 +663,7 @@
         
         [manager POST:postUrl parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
             
-           [formData appendPartWithFileData:logoData name:@"file" fileName:fileNameWx mimeType:@"image/jpeg"];
+           [formData appendPartWithFileData:wxData name:@"file" fileName:fileNameWx mimeType:@"image/jpeg"];
             
         } success:^(AFHTTPRequestOperation *operation, id responseObject) {
             
@@ -708,7 +707,7 @@
         
         [manager POST:postUrl parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
             
-          [formData appendPartWithFileData:logoData name:@"file" fileName:fileNameAl mimeType:@"image/jpeg"];
+          [formData appendPartWithFileData:alData name:@"file" fileName:fileNameAl mimeType:@"image/jpeg"];
             
         } success:^(AFHTTPRequestOperation *operation, id responseObject) {
             

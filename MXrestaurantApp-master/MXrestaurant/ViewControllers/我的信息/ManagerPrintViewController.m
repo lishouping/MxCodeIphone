@@ -77,6 +77,7 @@
 }
 - (void)rightBtnButtonClick{
     ManagerPrintAddViewController *mav = [[ManagerPrintAddViewController alloc] init];
+    mav.printer_id = @"-100";
     [self.navigationController pushViewController:mav animated:YES];
 }
 - (void)loadData{
@@ -112,14 +113,23 @@
                 NSString *printer_name = [dic objectForKey:@"printer_name"];
                 NSString *print_num = [dic objectForKey:@"print_num"];
                 NSString *printer_id = [dic objectForKey:@"id"];
-
+                
+                NSString *key = [dic objectForKey:@"key"];
+                NSString *printer_way = [dic objectForKey:@"printer_way"];
+                NSString *page_size = [dic objectForKey:@"page_size"];
+                NSString *back_good_if_print = [dic objectForKey:@"back_good_if_print"];
+                NSString *print_way = [dic objectForKey:@"print_way"];
                 PrintModel *model = [[PrintModel alloc] init];
                 model.type_print = type_print;
                 model.printer_no = printer_no;
                 model.printer_name = printer_name;
                 model.print_num = print_num;
                 model.printer_id = printer_id;
-            
+                model.key = key;
+                model.printer_way = printer_way;
+                model.page_size = page_size;
+                model.back_good_if_print = back_good_if_print;
+                model.print_way = print_way;
                 [self.dataArray addObject:model];
                 
             }
@@ -160,10 +170,14 @@
     tabcell.labName.text = [NSString stringWithFormat:@"打印机名称:%@",model.printer_name];
     tabcell.labNumber.text = [NSString stringWithFormat:@"编号:%@",model.printer_no] ;
     tabcell.labNo.text = [NSString stringWithFormat:@"打印份数:%@",model.print_num] ;
-    if ([model.type_print isEqualToString:@"1"]) {
+    if (![model.type_print isEqual:[NSNull null]]) {
+        if ([model.type_print isEqualToString:@"1"]) {
+            tabcell.labType.text = [NSString stringWithFormat:@"打印类型:%@",@"后厨"];
+        }else {
+            tabcell.labType.text = [NSString stringWithFormat:@"打印类型:%@",@"结账"];
+        }
+    }else{
         tabcell.labType.text = [NSString stringWithFormat:@"打印类型:%@",@"后厨"];
-    }else {
-        tabcell.labType.text = [NSString stringWithFormat:@"打印类型:%@",@"结账"];
     }
     tabcell.labNo.textColor = [UIColor colorWithRed:251.0/255.0 green:139.0/255.0 blue:57.0/255.0 alpha:1];
     return tabcell;
@@ -178,86 +192,17 @@
     
     [alert addAction:[UIAlertAction actionWithTitle:@"修改" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"修改打印机" message:nil preferredStyle:  UIAlertControllerStyleAlert];
-        //在AlertView中添加一个输入框
-        [alert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
-            textField.placeholder = @"请输入打印机名称";
-            textField.text = model.printer_name;
-        }];
-        [alert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
-            textField.placeholder = @"请输入打印份数";
-            textField.text = model.print_num;
-        }];
-        
-        [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            UITextField *tf = alert.textFields.firstObject;
-            UITextField *tf1 = alert.textFields.lastObject;
-            
-            if (tf.text.length == 0) {
-                UIAlertView * al=[[UIAlertView alloc]initWithTitle:nil message:@"请输入打印机名称" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
-                [al show];
-            }else if (tf1.text.length == 0){
-                UIAlertView *alv = [[UIAlertView alloc] initWithTitle:nil message:@"请输入打印份数" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
-                [alv show];
-            }else{
-                hud=[MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
-                hud.labelText=@"修改中...";
-                hud.minSize = CGSizeMake(100.f, 100.f);
-                hud.color=[UIColor blackColor];
-                NSString *postUrl = [NSString stringWithFormat:@"%@%@",API_URL,PRINTUPDATE];
-                NSDictionary *parameters = @{@"printer_id": model.printer_id,
-                                             @"priter_name":tf.text,
-                                             @"printer_num":tf1.text
-                                             };
-                
-                
-                
-                
-                AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-                [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-                
-                NSString *key =[userDefaults objectForKey:@"login_key_MX"];
-                NSString *longbusid = [[userDefaults objectForKey:@"business_id_MX"] stringValue];
-                
-                [manager.requestSerializer setValue:key forHTTPHeaderField:@"key"];
-                [manager.requestSerializer setValue:longbusid forHTTPHeaderField:@"id"];
-                
-                manager.responseSerializer = [AFJSONResponseSerializer serializer];//使用这个将得到的是JSON
-                manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/json", @"text/plain", @"text/html", nil];
-                // 设置超时时间
-                [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
-                manager.requestSerializer.timeoutInterval = 10.f;
-                [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
-                
-                [manager POST:postUrl parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                    NSLog(@"结果: %@", responseObject);
-                    if ([[responseObject objectForKey:@"CODE"] isEqualToString:@"1000"]) {
-                        hud.labelText = @"成功";
-                        [hud hide:YES afterDelay:0.5];
-                        
-                        [self.dataArray removeAllObjects];
-                        [self loadData];
-                    }
-                    
-                    else
-                    {
-                        hud.labelText = @"失败";
-                        [hud hide:YES afterDelay:0.5];
-                    }
-                } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                    
-                    NSLog(@"Error: ==============%@", error);
-                }];
-            }
-            
-            
-            
-            
-        }]];
-        [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        }]];
-        //弹出提示框；
-        [self presentViewController:alert animated:true completion:nil];
+        ManagerPrintAddViewController *mvc = [[ManagerPrintAddViewController alloc] init];
+        mvc.printer_id = [NSString stringWithFormat:@"%@",model.printer_id];
+        mvc.printer_no = model.printer_no;
+        mvc.printer_name = model.printer_name;
+        mvc.type_print = model.type_print;
+        mvc.key = model.key;
+        mvc.print_num = model.print_num;
+        mvc.print_way = [NSString stringWithFormat:@"%@",model.print_way];
+        mvc.page_size = model.page_size;
+        mvc.back_good_if_print = model.back_good_if_print;
+        [self.navigationController pushViewController:mvc animated:YES];
         
     }]];
     [alert addAction:[UIAlertAction actionWithTitle:@"删除" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {

@@ -21,6 +21,7 @@
     UITextField *_tfShopPersonName;
     UITextField *_tfShopPersonPhone;
     UITextField *_tfShopAddress;
+    UITextField *_tfVipPrice;
     UIImageView *imgLogo;
     UIButton *btnSelect;
     
@@ -36,6 +37,18 @@
     UIButton *btnAlLogo;
     
     NSData *mdata ;
+    
+    NSString *fileNameLogo;
+    
+    NSString *logoFile;
+    
+    UIButton *tuiJianBtn;
+    UIButton *btnTcPrint;
+    UIButton *btnPrintType;
+    
+    NSString *tuijian;
+    NSString *goodFlag;
+    NSString *isalert;
 }
 //餐桌分类
 @property(nonatomic,strong)NSMutableArray *dateArray;
@@ -52,6 +65,11 @@
     self.dateArray = [[NSMutableArray alloc] initWithCapacity:0];
     // Do any additional setup after loading the view.
     mcategory_id = @"-1";
+    
+    tuijian = @"0";
+    goodFlag  =@"0";
+    isalert = @"";
+    
     [self makeUI];
 }
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -117,12 +135,29 @@
     _tfShopPersonName.layer.borderColor = [[UIColor colorWithRed:182.0/255.0 green:182.0/255.0 blue:182.0/255.0 alpha:1] CGColor];
     [_scrollView addSubview:_tfShopPersonName];
     
-    UILabel *labShopC = [[UILabel alloc] initWithFrame:CGRectMake(15, 10+40+10+50+50, 80, 40)];
+    UILabel *labShopbb = [[UILabel alloc] initWithFrame:CGRectMake(15, 10+40+10+50+50, 80, 40)];
+    [labShopbb setText:@"会员价格"];
+    labShopbb.font = [UIFont systemFontOfSize:13];
+    [_scrollView addSubview:labShopbb];
+    
+    _tfVipPrice = [[UITextField alloc] initWithFrame:CGRectMake(15+80+10, 10+40+10+50+50, kWidth-15-80-10-15, 40)];
+    _tfVipPrice.placeholder = @"请输入会员价格";
+    _tfVipPrice.delegate = self;
+    [_tfVipPrice setTextColor:[UIColor blackColor]];
+    _tfVipPrice.font = [UIFont systemFontOfSize:13];
+    _tfVipPrice.layer.cornerRadius = 3.0;
+    _tfVipPrice.layer.borderWidth = 0.5;
+    _tfVipPrice.layer.borderColor = [[UIColor colorWithRed:182.0/255.0 green:182.0/255.0 blue:182.0/255.0 alpha:1] CGColor];
+    [_scrollView addSubview:_tfVipPrice];
+    
+    
+    
+    UILabel *labShopC = [[UILabel alloc] initWithFrame:CGRectMake(15, 10+40+10+50+50+50, 80, 40)];
     [labShopC setText:@"菜品折扣"];
     labShopC.font = [UIFont systemFontOfSize:13];
     [_scrollView addSubview:labShopC];
     
-    _tfShopPersonPhone = [[UITextField alloc] initWithFrame:CGRectMake(15+80+10, 10+40+10+50+50, kWidth-15-80-10-15, 40)];
+    _tfShopPersonPhone = [[UITextField alloc] initWithFrame:CGRectMake(15+80+10, 10+40+10+50+50+50, kWidth-15-80-10-15, 40)];
     _tfShopPersonPhone.placeholder = @"请输入菜品折扣";
     _tfShopPersonPhone.delegate = self;
     [_tfShopPersonPhone setTextColor:[UIColor blackColor]];
@@ -132,12 +167,12 @@
     _tfShopPersonPhone.layer.borderColor = [[UIColor colorWithRed:182.0/255.0 green:182.0/255.0 blue:182.0/255.0 alpha:1] CGColor];
     [_scrollView addSubview:_tfShopPersonPhone];
     
-    UILabel *labShopD = [[UILabel alloc] initWithFrame:CGRectMake(15, 10+40+10+50+50+50, 80, 40)];
+    UILabel *labShopD = [[UILabel alloc] initWithFrame:CGRectMake(15, 10+40+10+50+50+50+50, 80, 40)];
     [labShopD setText:@"菜品简介"];
     labShopD.font = [UIFont systemFontOfSize:13];
     [_scrollView addSubview:labShopD];
     
-    _tfShopAddress = [[UITextField alloc] initWithFrame:CGRectMake(15+80+10, 10+40+10+50+50+50, kWidth-15-80-10-15, 40)];
+    _tfShopAddress = [[UITextField alloc] initWithFrame:CGRectMake(15+80+10, 10+40+10+50+50+50+50, kWidth-15-80-10-15, 40)];
     _tfShopAddress.placeholder = @"请输入菜品简介";
     _tfShopAddress.delegate = self;
     [_tfShopAddress setTextColor:[UIColor blackColor]];
@@ -148,17 +183,65 @@
     [_scrollView addSubview:_tfShopAddress];
     
     
-    UILabel *labShopH = [[UILabel alloc] initWithFrame:CGRectMake(15, 10+40+10+50+50+50+50, 80, 60)];
+    
+    UILabel *labShopF1 = [[UILabel alloc] initWithFrame:CGRectMake(15, 10+40+10+50+50+50+50+50, 80, 40)];
+    [labShopF1 setText:@"是否推荐"];
+    labShopF1.font = [UIFont systemFontOfSize:13];
+    [_scrollView addSubview:labShopF1];
+    
+    tuiJianBtn = [[UIButton alloc] initWithFrame:CGRectMake(15+80+10, 10+40+10+50+50+50+50+50, kWidth-15-80-10-15, 40)];
+    [tuiJianBtn addTarget:self action:@selector(selectOnclick3) forControlEvents:(UIControlEventTouchUpInside)];
+    [tuiJianBtn setTitle:@"请选择" forState:UIControlStateNormal];
+    tuiJianBtn.font = [UIFont systemFontOfSize:13];
+    tuiJianBtn.layer.cornerRadius = 3.0;
+    tuiJianBtn.layer.borderWidth = 0.5;
+    tuiJianBtn.layer.borderColor = [[UIColor colorWithRed:182.0/255.0 green:182.0/255.0 blue:182.0/255.0 alpha:1] CGColor];
+    [tuiJianBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [_scrollView addSubview:tuiJianBtn];
+    
+    UILabel *labShopF15 = [[UILabel alloc] initWithFrame:CGRectMake(15, 10+40+10+50+50+50+50+50+50, 80, 40)];
+    [labShopF15 setText:@"规格类型"];
+    labShopF15.font = [UIFont systemFontOfSize:13];
+    [_scrollView addSubview:labShopF15];
+    
+    btnTcPrint = [[UIButton alloc] initWithFrame:CGRectMake(15+80+10, 10+40+10+50+50+50+50+50+50, kWidth-15-80-10-15, 40)];
+    [btnTcPrint addTarget:self action:@selector(selectOnclick1) forControlEvents:(UIControlEventTouchUpInside)];
+    [btnTcPrint setTitle:@"请选择" forState:UIControlStateNormal];
+    btnTcPrint.font = [UIFont systemFontOfSize:13];
+    btnTcPrint.layer.cornerRadius = 3.0;
+    btnTcPrint.layer.borderWidth = 0.5;
+    btnTcPrint.layer.borderColor = [[UIColor colorWithRed:182.0/255.0 green:182.0/255.0 blue:182.0/255.0 alpha:1] CGColor];
+    [btnTcPrint setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [_scrollView addSubview:btnTcPrint];
+    
+    UILabel *labShopF22 = [[UILabel alloc] initWithFrame:CGRectMake(15, 10+40+10+50+50+50+50+50+50+50, 80, 40)];
+    [labShopF22 setText:@"弹窗推荐"];
+    labShopF22.font = [UIFont systemFontOfSize:13];
+    [_scrollView addSubview:labShopF22];
+    
+    btnPrintType = [[UIButton alloc] initWithFrame:CGRectMake(15+80+10, 10+40+10+50+50+50+50+50+50+50, kWidth-15-80-10-15, 40)];
+    [btnPrintType addTarget:self action:@selector(selectOnclick2) forControlEvents:(UIControlEventTouchUpInside)];
+    [btnPrintType setTitle:@"请选择" forState:UIControlStateNormal];
+    btnPrintType.font = [UIFont systemFontOfSize:13];
+    btnPrintType.layer.cornerRadius = 3.0;
+    btnPrintType.layer.borderWidth = 0.5;
+    btnPrintType.layer.borderColor = [[UIColor colorWithRed:182.0/255.0 green:182.0/255.0 blue:182.0/255.0 alpha:1] CGColor];
+    [btnPrintType setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [_scrollView addSubview:btnPrintType];
+    
+
+    
+    UILabel *labShopH = [[UILabel alloc] initWithFrame:CGRectMake(15, 10+40+10+50+50+50+50+50+50+50+50, 80, 60)];
     [labShopH setText:@"菜品图片"];
     labShopH.font = [UIFont systemFontOfSize:13];
     [_scrollView addSubview:labShopH];
     
-    imgLogo = [[UIImageView alloc] initWithFrame:CGRectMake(15+80+10, 10+40+10+50+50+50+50, 60, 60)];
+    imgLogo = [[UIImageView alloc] initWithFrame:CGRectMake(15+80+10, 10+40+10+50+50+50+50+50+50+50+50, 60, 60)];
     [_scrollView addSubview:imgLogo];
     
-    btnAlLogo = [[UIButton alloc] initWithFrame:CGRectMake(15+80+10+60+10, 10+40+10+50+50+50+50, 60, 60)];
+    btnAlLogo = [[UIButton alloc] initWithFrame:CGRectMake(15+80+10+60+10, 10+40+10+50+50+50+50+50+50+50+50, 60, 60)];
     [btnAlLogo addTarget:self action:@selector(selectPic) forControlEvents:UIControlEventTouchUpInside];
-    [btnAlLogo setBackgroundColor:[UIColor grayColor]];
+    [btnAlLogo setImage:[UIImage imageNamed:@"paizhao"] forState:UIControlStateNormal];
     [_scrollView addSubview:btnAlLogo];
     
     
@@ -169,7 +252,7 @@
     [btnSubmit setTitle:@"提交" forState:UIControlStateNormal];
     [btnSubmit setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [btnSubmit setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
-    [btnSubmit addTarget:self action:@selector(sumbitClick) forControlEvents:UIControlEventTouchUpInside];
+    [btnSubmit addTarget:self action:@selector(uploadImage) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:btnSubmit];
     
   
@@ -239,9 +322,77 @@
     
     mdata = UIImageJPEGRepresentation(imgLogo.image, 0.5);
     
-    
+    PHAsset *ass = assets[0];
+    PHImageManager * imageManager = [PHImageManager defaultManager];
+    [imageManager requestImageDataForAsset:ass options:nil resultHandler:^(NSData * _Nullable imageData, NSString * _Nullable dataUTI, UIImageOrientation orientation, NSDictionary * _Nullable info) {
+        NSURL *url = [info valueForKey:@"PHImageFileURLKey"];
+        NSString *str = [url absoluteString];   //url>string
+        NSArray *arr = [str componentsSeparatedByString:@"/"];
+        fileNameLogo = [arr lastObject];  // 图片名字
+        NSInteger length = imageData.length;   // 图片大小，单位B
+        UIImage * image = [UIImage imageWithData:imageData];
+    }];
     
 }
+
+
+-(void)selectOnclick3{
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"是否推荐菜品" message:nil preferredStyle:  UIAlertControllerStyleAlert];
+    
+    [alert addAction:[UIAlertAction actionWithTitle:@"是" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        tuijian = @"1";
+        [tuiJianBtn setTitle:@"是" forState:UIControlStateNormal];
+        
+    }]];
+    [alert addAction:[UIAlertAction actionWithTitle:@"否" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        tuijian = @"0";
+        [tuiJianBtn setTitle:@"否" forState:UIControlStateNormal];
+    }]];
+    [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+    }]] ;
+    //弹出提示框；
+    [self presentViewController:alert animated:true completion:nil];
+}
+
+
+-(void)selectOnclick1{
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"请选择规格类型" message:nil preferredStyle:  UIAlertControllerStyleAlert];
+    
+    [alert addAction:[UIAlertAction actionWithTitle:@"多重规格" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        goodFlag = @"1";
+        [btnTcPrint setTitle:@"多重规格" forState:UIControlStateNormal];
+        
+    }]];
+    [alert addAction:[UIAlertAction actionWithTitle:@"非多重规格" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        goodFlag = @"0";
+        [btnTcPrint setTitle:@"非多重规格" forState:UIControlStateNormal];
+    }]];
+    [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+    }]] ;
+    //弹出提示框；
+    [self presentViewController:alert animated:true completion:nil];
+}
+-(void)selectOnclick2{
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"是否弹窗推荐" message:nil preferredStyle:  UIAlertControllerStyleAlert];
+    
+    [alert addAction:[UIAlertAction actionWithTitle:@"是" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        isalert = @"1";
+        [btnPrintType setTitle:@"是" forState:UIControlStateNormal];
+        
+    }]];
+    [alert addAction:[UIAlertAction actionWithTitle:@"否" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        isalert = @"0";
+        [btnPrintType setTitle:@"否" forState:UIControlStateNormal];
+    }]];
+    [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+    }]] ;
+    //弹出提示框；
+    [self presentViewController:alert animated:true completion:nil];
+}
+
 
 -(void)selectOnclick{
     [tableViewChoose reloadData];
@@ -255,9 +406,8 @@
     [HWPopTool sharedInstance].closeButtonType = ButtonPositionTypeNone    ;
     [[HWPopTool sharedInstance] showWithPresentView:viewTableState animated:YES];
 }
-
--(void)sumbitClick{
-    
+// 店铺LOGO
+-(void)uploadImage{
     if (_tfShopName.text.length == 0) {
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:@"请输入菜品名称" preferredStyle:  UIAlertControllerStyleAlert];
         [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -283,163 +433,106 @@
         //弹出提示框；
         [self presentViewController:alert animated:true completion:nil];
     }else{
-        if ([self.pagetype isEqualToString:@"0"]) {
-            //添加
-            //开始显示HUD
-            hud=[MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
-            hud.minSize = CGSizeMake(100.f, 100.f);
-            hud.color=[UIColor blackColor];
-            NSString *postUrl = [NSString stringWithFormat:@"%@%@",API_URL,ADDGOODS];
-            NSDictionary *parameters = @{
-                                         @"shop_id":[userDefaults objectForKey:@"shop_id_MX"],
-                                         @"category_id": mcategory_id,
-                                         @"goods_name": _tfShopName.text,
-                                         @"pre_price": _tfShopPersonName.text,
-                                         @"discount":_tfShopPersonPhone.text,
-                                         @"introduction":_tfShopAddress.text,
-                                         };
-            
-
-            AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-            manager.responseSerializer = [AFJSONResponseSerializer serializer];//使用这个将得到的是JSON
-            manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/json", @"text/plain", @"text/html", nil];
-            NSString *key =[userDefaults objectForKey:@"login_key_MX"];
-            NSString *longbusid = [[userDefaults objectForKey:@"business_id_MX"] stringValue];
-            
-            [manager.requestSerializer setValue:key forHTTPHeaderField:@"key"];
-            [manager.requestSerializer setValue:longbusid forHTTPHeaderField:@"id"];
-            // 设置超时时间
-            [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
-            manager.requestSerializer.timeoutInterval = 10.f;
-            [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
-            
-            [manager POST:postUrl parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-                
-        
-//                NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
-//                [dictionary setObject:@"multipart/form-data" forKey:@"Content-Type"];
-//                [dictionary setObject:[NSNumber numberWithInteger:mdata.length] forKey:@"Content-Length"];
-                //[dictionary setObject:@"form-data; name=\"f2\"; filename=\"时钟.zip\"" forKey:@"Content-Disposition"];
-                
-                //[formData appendPartWithHeaders:dictionary body:mdata];
-                
-                if(mdata.length>0){
-                    [formData appendPartWithFileData:mdata name:@"file" fileName:@"" mimeType:@"image/jpeg"];
-                }
-                
-            } success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                
-                NSLog(@"结果: %@", responseObject);
-                                if ([[responseObject objectForKey:@"CODE"] isEqualToString:@"1000"]) {
-                                    hud.labelText = @"成功";
-                                    [hud hide:YES afterDelay:0.5];
-                                    //说明不是跟视图
-                                    [self.navigationController popViewControllerAnimated:NO];
-                                }
-                                else
-                                {
-                                    hud.labelText = @"失败";
-                                    [hud hide:YES afterDelay:0.5];
-                
-                                }
-                
-            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                NSLog(@"error = %@", error);
-            }];
-            
-            
-//            [manager POST:postUrl parameters:parameters, success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//                NSLog(@"结果: %@", responseObject);
-//                if ([[responseObject objectForKey:@"CODE"] isEqualToString:@"1000"]) {
-//                    hud.labelText = @"成功";
-//                    [hud hide:YES afterDelay:0.5];
-//                    //说明不是跟视图
-//                    [self.navigationController popViewControllerAnimated:NO];
-//                }
-//                else
-//                {
-//                    hud.labelText = @"失败";
-//                    [hud hide:YES afterDelay:0.5];
-//
-//                }
-//            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//                hud.labelText = @"网络连接异常";
-//                [hud hide:YES afterDelay:0.5];
-//                NSLog(@"Error: ==============%@", error);
-//            }];
-            
-            
-            
-        } else if([self.pagetype isEqualToString:@"2"]) {
-            //修改
-            //开始显示HUD
-            hud=[MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
-            hud.minSize = CGSizeMake(100.f, 100.f);
-            hud.color=[UIColor blackColor];
-            NSString *postUrl = [NSString stringWithFormat:@"%@%@",API_URL,ADDGOODS];
-            NSDictionary *parameters = @{
-                                         @"good_id":self.goods_id,
-                                         @"shop_id":[userDefaults objectForKey:@"shop_id_MX"],
-                                         @"category_id": mcategory_id,
-                                         @"goods_name": _tfShopName.text,
-                                         @"pre_price": _tfShopPersonName.text,
-                                         @"discount":_tfShopPersonPhone.text,
-                                         @"Introduction":_tfShopAddress.text,
-                                         };
-            
-            
-            AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-            manager.responseSerializer = [AFJSONResponseSerializer serializer];//使用这个将得到的是JSON
-            manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/json", @"text/plain", @"text/html", nil];
-            NSString *key =[userDefaults objectForKey:@"login_key_MX"];
-            NSString *longbusid = [[userDefaults objectForKey:@"business_id_MX"] stringValue];
-            
-            [manager.requestSerializer setValue:key forHTTPHeaderField:@"key"];
-            [manager.requestSerializer setValue:longbusid forHTTPHeaderField:@"id"];
-            // 设置超时时间
-            [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
-            manager.requestSerializer.timeoutInterval = 10.f;
-            [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
-            [manager POST:postUrl parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-                
-                
-                //                NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
-                //                [dictionary setObject:@"multipart/form-data" forKey:@"Content-Type"];
-                //                [dictionary setObject:[NSNumber numberWithInteger:mdata.length] forKey:@"Content-Length"];
-                //[dictionary setObject:@"form-data; name=\"f2\"; filename=\"时钟.zip\"" forKey:@"Content-Disposition"];
-                
-                //[formData appendPartWithHeaders:dictionary body:mdata];
-                
-                if(mdata.length>0){
-                    [formData appendPartWithFileData:mdata name:@"file" fileName:@"" mimeType:@"image/jpeg"];
-                }
-                
-            } success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                
-                NSLog(@"结果: %@", responseObject);
-                if ([[responseObject objectForKey:@"CODE"] isEqualToString:@"1000"]) {
-                    hud.labelText = @"成功";
-                    [hud hide:YES afterDelay:0.5];
-                    //说明不是跟视图
-                    [self.navigationController popViewControllerAnimated:NO];
-                }
-                else
-                {
-                    hud.labelText = @"失败";
-                    [hud hide:YES afterDelay:0.5];
-                    
-                }
-                
-            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                NSLog(@"error = %@", error);
-            }];
+        if (mdata.length==0) {
+            [self sumbitClick];
+            return;
         }
+        NSString *postUrl = [NSString stringWithFormat:@"%@%@",UPLOADIMAGE_URL,UPLOADCAIPINIMAGE];
+        NSDictionary *parameters = @{
+                                     @"shop_id":[userDefaults objectForKey:@"shop_id_MX"]
+                                     };
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        manager.responseSerializer = [AFJSONResponseSerializer serializer];//使用这个将得到的是JSON
+        manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/json", @"text/plain", @"text/html", nil];
+        NSString *key =[userDefaults objectForKey:@"login_key_MX"];
+        NSString *longbusid = [[userDefaults objectForKey:@"business_id_MX"] stringValue];
         
+        [manager.requestSerializer setValue:key forHTTPHeaderField:@"key"];
+        [manager.requestSerializer setValue:longbusid forHTTPHeaderField:@"id"];
+        // 设置超时时间
+        [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
+        manager.requestSerializer.timeoutInterval = 10.f;
+        [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
+        
+        [manager POST:postUrl parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+            
+            [formData appendPartWithFileData:mdata name:@"file" fileName:fileNameLogo mimeType:@"image/jpeg"];
+            
+        } success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            
+            NSLog(@"结果: %@", responseObject);
+            if ([[responseObject objectForKey:@"CODE"] isEqualToString:@"1000"]) {
+                NSString *url = [responseObject objectForKey:@"URL"];
+                logoFile = url;
+                [self sumbitClick];
+            }
+            else
+            {
+                [self sumbitClick];
+            }
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"error = %@", error);
+        }];
         
     }
-    
-    
 }
+
+-(void)sumbitClick{
+    //添加
+    //开始显示HUD
+    hud=[MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+    hud.minSize = CGSizeMake(100.f, 100.f);
+    hud.color=[UIColor blackColor];
+    NSString *postUrl = [NSString stringWithFormat:@"%@%@",API_URL,ADDGOODS];
+    NSDictionary *parameters = @{
+                                 @"shop_id":[userDefaults objectForKey:@"shop_id_MX"],
+                                 @"category_id": mcategory_id,
+                                 @"goods_name": _tfShopName.text,
+                                 @"pre_price": _tfShopPersonName.text,
+                                 @"vip_price":_tfVipPrice.text,
+                                 @"discount":_tfShopPersonPhone.text,
+                                 @"introduction":_tfShopAddress.text,
+                                 @"img_url":logoFile,
+                                 @"tuijian":tuijian,
+                                 @"good_exts_flag":goodFlag,
+                                 @"if_alert":isalert
+                                 };
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];//使用这个将得到的是JSON
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/json", @"text/plain", @"text/html", nil];
+    NSString *key =[userDefaults objectForKey:@"login_key_MX"];
+    NSString *longbusid = [[userDefaults objectForKey:@"business_id_MX"] stringValue];
+    
+    [manager.requestSerializer setValue:key forHTTPHeaderField:@"key"];
+    [manager.requestSerializer setValue:longbusid forHTTPHeaderField:@"id"];
+    // 设置超时时间
+    [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
+    manager.requestSerializer.timeoutInterval = 10.f;
+    [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
+    
+    [manager POST:postUrl parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"结果: %@", responseObject);
+        if ([[responseObject objectForKey:@"CODE"] isEqualToString:@"1000"]) {
+            hud.labelText = @"成功";
+            [hud hide:YES afterDelay:0.5];
+            //说明不是跟视图
+            [self.navigationController popViewControllerAnimated:NO];
+        }
+        else
+        {
+            hud.labelText = @"失败";
+            [hud hide:YES afterDelay:0.5];
+            
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        hud.labelText = @"网络连接异常";
+        [hud hide:YES afterDelay:0.5];
+        NSLog(@"Error: ==============%@", error);
+    }];
+}
+
+
 
 - (void)loadData{
     NSString *postUrl = [NSString stringWithFormat:@"%@%@/%@",API_URL,SELECTCATEGORY_URL,[userDefaults objectForKey:@"shop_id_MX"]];
@@ -529,19 +622,51 @@
             mcategory_id = category_id;
             NSString *goods_name = [dic objectForKey:@"goods_name"];
             NSString *pre_price = [[NSNumber numberWithLong:[ [dic objectForKey:@"pre_price"]longValue]] stringValue];
+            NSString *vip_price =[[NSNumber numberWithLong:[ [dic objectForKey:@"vip_price"]longValue]] stringValue];
             NSNumber *dcon = [dic objectForKey:@"discount"];
             NSString *discount = [dcon stringValue];
             NSString *img_url = [dic objectForKey:@"img_url"];
             NSString *introduction = [dic objectForKey:@"introduction"];
             
+            NSString *tuijian  = [dic objectForKey:@"tuijian"];
+            NSString *good_exts_flag = [dic objectForKey:@"good_exts_flag"];
+            NSString *if_alert = [dic objectForKey:@"if_alert"];
+            
+            if ([tuijian isEqual:[NSNull null]]) {
+                [tuiJianBtn setTitle:@"否" forState:UIControlStateNormal];
+            } else {
+                if ([tuijian isEqualToString:@"0"]) {
+                    [tuiJianBtn setTitle:@"否" forState:UIControlStateNormal];
+                } else {
+                    [tuiJianBtn setTitle:@"是" forState:UIControlStateNormal];
+                }
+            }
+            if ([good_exts_flag isEqual:[NSNull null]]) {
+                 [btnTcPrint setTitle:@"非多重规格" forState:UIControlStateNormal];
+            } else {
+                if ([good_exts_flag isEqualToString:@"0"]) {
+                    [btnTcPrint setTitle:@"多重规格" forState:UIControlStateNormal];
+                } else {
+                    [btnTcPrint setTitle:@"非多重规格" forState:UIControlStateNormal];
+                }
+            }
+            
+            if ([if_alert isEqual:[NSNull null]]) {
+                [btnPrintType setTitle:@"否" forState:UIControlStateNormal];
+            } else {
+                if ([if_alert isEqualToString:@"0"]) {
+                    [btnPrintType setTitle:@"否" forState:UIControlStateNormal];
+                } else {
+                    [btnPrintType setTitle:@"是" forState:UIControlStateNormal];
+                }
+            }
+            
             [_tfShopName setText:goods_name];
             [_tfShopPersonName setText:pre_price];
             [_tfShopPersonPhone setText:discount];
             [_tfShopAddress setText:introduction];
+            [_tfVipPrice setText:vip_price];
             [btnSelect setTitle:self.category_name forState:UIControlStateNormal];
-            
-       
-            
             
             NSString *img = [NSString stringWithFormat:@"%@/%@",RESOURCE_URL,img_url];
             NSURL *icon_img = [[NSURL alloc] initWithString:img];
@@ -562,8 +687,6 @@
     }];
     
 }
-
-
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{

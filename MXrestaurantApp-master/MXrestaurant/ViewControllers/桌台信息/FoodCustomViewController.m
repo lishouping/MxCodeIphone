@@ -45,6 +45,7 @@ static int showview = 0;
 @property(nonatomic,strong)NSMutableArray *dateArrayCategory;
 @property(nonatomic,strong)NSMutableArray *dateArrayFoodList;
 @property(nonatomic,strong)NSMutableArray *dateArrayShoppingCar;
+@property(nonatomic,strong)NSMutableArray *dateArrayAllList;
 @end
 
 @implementation FoodCustomViewController
@@ -84,6 +85,7 @@ static int showview = 0;
     self.dateArrayCategory = [[NSMutableArray alloc] initWithCapacity:0];
     self.dateArrayFoodList = [[NSMutableArray alloc] initWithCapacity:0];
     self.dateArrayShoppingCar = [[NSMutableArray alloc] initWithCapacity:0];
+    self.dateArrayAllList = [[NSMutableArray alloc] initWithCapacity:0];
     
     self.navigationItem.title = @"点餐";
     
@@ -244,6 +246,7 @@ static int showview = 0;
 }
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
     NSLog(@"textDidChange---%@",searchBar.text);
+    [self getDisheName:searchBar.text];
      [searchBar resignFirstResponder];
 }
 
@@ -356,6 +359,7 @@ static int showview = 0;
                 [self.dateArrayCategory addObject:model];
             }
             [tableViewClass reloadData];
+            [self getAllDis];
         }
         
         else
@@ -369,6 +373,56 @@ static int showview = 0;
         
         NSLog(@"Error: ==============%@", error);
     }];
+}
+-(void)getAllDis{
+    if (self.dateArrayAllList.count>0) {
+        [self.dateArrayAllList removeAllObjects];
+    }
+    for (int i=0; i<self.dateArrayCategory.count;i++)
+    {
+        CategoryModel *model = self.dateArrayCategory[i];
+        NSArray *dateArray = model.goods_list;
+        for (NSDictionary * dic in dateArray)
+        {
+            NSString *goods_name = [dic objectForKey:@"goods_name"];
+            NSString *pre_price = [dic objectForKey:@"pre_price"];
+            NSString *good_id = [dic objectForKey:@"good_id"];
+            NSString *good_exts_flag = [dic objectForKey:@"good_exts_flag"];
+            
+            
+            FoodModel *model = [[FoodModel alloc] init];
+            model.goods_name = goods_name;
+            model.pre_price = pre_price;
+            model.good_id = good_id;
+            if ([self isBlankString:good_exts_flag]) {
+                model.good_exts_flag = @"0";
+            }else{
+                NSArray *dateArray = [dic objectForKey:@"goods_exts_list"];
+                model.good_exts_flag = good_exts_flag;
+                model.goods_exts_list = dateArray;
+            }
+            [self.dateArrayAllList addObject:model];
+        }
+    }
+    
+
+}
+
+
+-(void)getDisheName:(NSString *)content{
+    if (self.dateArrayAllList.count>0) {
+        for (int i=0; i<self.dateArrayAllList.count; i++) {
+            FoodModel *model = self.dateArrayAllList[i];
+            if ([content containsString:model.goods_name]) {
+                [self.dateArrayFoodList removeAllObjects];
+                [self.dateArrayFoodList addObject:model];
+                
+                [tableViewFood reloadData];
+                return;
+            }
+            
+        }
+    }
 }
 
 //查询菜品

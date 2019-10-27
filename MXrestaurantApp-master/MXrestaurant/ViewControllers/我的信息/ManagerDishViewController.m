@@ -12,6 +12,7 @@
 #import "DishTableViewCell.h"
 #import "DishModel.h"
 #import "HWPopTool.h"
+#import "ManagerDishEditViewController.h"
 @interface ManagerDishViewController ()<UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate>
 {
     UITableView *_tableManage;
@@ -161,7 +162,7 @@
 }
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
      NSLog(@"textDidChange---%@",searchBar.text);
-    
+    [self getDisheName:searchBar.text];
      [searchBar resignFirstResponder];
 }
 
@@ -371,7 +372,7 @@
         }]];
         
         [alert addAction:[UIAlertAction actionWithTitle:@"修改" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            ManagerDishAddViewController *mdav = [[ManagerDishAddViewController alloc] init];
+            ManagerDishEditViewController *mdav = [[ManagerDishEditViewController alloc] init];
             mdav.pagetype = @"2";
             mdav.category_name = model.category_name;
             mdav.goods_id = model.good_id;
@@ -480,6 +481,22 @@
     }
 
     [_tableManage reloadData];
+}
+
+-(void)getDisheName:(NSString *)content{
+    if (self.dataArray.count>0) {
+        for (int i=0; i<self.dataArray.count; i++) {
+             DishModel *model = self.dataArray[i];
+            if ([content containsString:model.goods_name]) {
+                [self.dataArray removeAllObjects];
+                [self.dataArray addObject:model];
+                
+                [_tableManage reloadData];
+                return;
+            }
+           
+        }
+    }
 }
 
 /*
