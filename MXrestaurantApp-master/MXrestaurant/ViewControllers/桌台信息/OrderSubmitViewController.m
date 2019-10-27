@@ -570,8 +570,55 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
      GoodInfoModel *model = self.dateArray[indexPath.section];
+     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"选择操作" message:nil preferredStyle:  UIAlertControllerStyleAlert];
     
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"时价菜品" message:nil preferredStyle:  UIAlertControllerStyleAlert];
+     [alert addAction:[UIAlertAction actionWithTitle:@"赠菜" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        hud=[MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+        hud.labelText=@"";
+        hud.minSize = CGSizeMake(100.f, 100.f);
+        hud.color=[UIColor blackColor];
+        NSString *postUrl = [NSString stringWithFormat:@"%@%@",API_URL,SONGGOODS];
+        NSDictionary *parameters = @{@"goods_id": model.good_id,
+                                     @"num":@"1",
+                                     @"ext_id":@"",
+                                     @"card_id":self.cart_id,
+                                     @"table_id":self.table_id
+                                     };
+        
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+        
+        NSString *key =[userDefaults objectForKey:@"login_key_MX"];
+        NSString *longbusid = [[userDefaults objectForKey:@"business_id_MX"] stringValue];
+        
+        [manager.requestSerializer setValue:key forHTTPHeaderField:@"key"];
+        [manager.requestSerializer setValue:longbusid forHTTPHeaderField:@"id"];
+        
+        manager.responseSerializer = [AFJSONResponseSerializer serializer];//使用这个将得到的是JSON
+        manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/json", @"text/plain", @"text/html", nil];
+        // 设置超时时间
+        [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
+        manager.requestSerializer.timeoutInterval = 10.f;
+        [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
+        
+        [manager POST:postUrl parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSLog(@"结果: %@", responseObject);
+            if ([[responseObject objectForKey:@"CODE"] isEqualToString:@"1000"]) {
+                hud.labelText = @"成功";
+                [hud hide:YES afterDelay:0.5];
+            }
+            
+            else
+            {
+                hud.labelText = [responseObject objectForKey:@"MESSAGE"];
+                [hud hide:YES afterDelay:0.5];
+            }
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            
+            NSLog(@"Error: ==============%@", error);
+            
+        }];
+    }]];
     //在AlertView中添加一个输入框
     [alert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
         textField.placeholder = @"请输入修改的菜品价格";

@@ -52,6 +52,10 @@
     
     NSString *check_way;
     
+    UIButton *btnAgainSubmitOrder;
+    UIButton *btnPrintAgint;
+    
+    
 }
 @property(nonatomic,strong)NSMutableArray *dateArray;
 @end
@@ -234,7 +238,7 @@
     [footV addSubview:footView2];
     footView2.hidden = YES;
     
-    btnAdd = [[UIButton alloc] initWithFrame:CGRectMake(10, 0, kWidth/2-10-10, 30)];
+    btnAdd = [[UIButton alloc] initWithFrame:CGRectMake(10, 0, (kWidth-20)/4-5, 30)];
     [btnAdd setTitle:@"加菜" forState:UIControlStateNormal];
     [btnAdd setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [btnAdd setBackgroundColor:[UIColor colorWithRed:79.0/255.0 green:145.0/255.0 blue:244.0/255.0 alpha:1]];
@@ -243,7 +247,25 @@
     [footView2 addSubview:btnAdd];
     [btnAdd addTarget:self action:@selector(addFoodClick) forControlEvents:UIControlEventTouchUpInside];
     
-    btnSubmit = [[UIButton alloc] initWithFrame:CGRectMake( kWidth/2+10, 0, kWidth/2-10-10, 30)];
+    btnAgainSubmitOrder = [[UIButton alloc] initWithFrame:CGRectMake((kWidth-20)/4+10, 0, (kWidth-20)/4-5, 30)];
+    [btnAgainSubmitOrder setTitle:@"重新下单" forState:UIControlStateNormal];
+    [btnAgainSubmitOrder setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [btnAgainSubmitOrder setBackgroundColor:[UIColor colorWithRed:79.0/255.0 green:145.0/255.0 blue:244.0/255.0 alpha:1]];
+    btnAgainSubmitOrder.layer.cornerRadius = 5.0;
+    [btnAgainSubmitOrder setFont:[UIFont systemFontOfSize:14]];
+    [footView2 addSubview:btnAgainSubmitOrder];
+    [btnAgainSubmitOrder addTarget:self action:@selector(againOrder) forControlEvents:UIControlEventTouchUpInside];
+    
+    btnPrintAgint = [[UIButton alloc] initWithFrame:CGRectMake((kWidth-20)/4+10+(kWidth-20)/4, 0, (kWidth-20)/4-5, 30)];
+    [btnPrintAgint setTitle:@"打印订单" forState:UIControlStateNormal];
+    [btnPrintAgint setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [btnPrintAgint setBackgroundColor:[UIColor colorWithRed:79.0/255.0 green:145.0/255.0 blue:244.0/255.0 alpha:1]];
+    btnPrintAgint.layer.cornerRadius = 5.0;
+    [btnPrintAgint setFont:[UIFont systemFontOfSize:14]];
+    [footView2 addSubview:btnPrintAgint];
+    [btnPrintAgint addTarget:self action:@selector(printOrderAgain) forControlEvents:UIControlEventTouchUpInside];
+    
+    btnSubmit = [[UIButton alloc] initWithFrame:CGRectMake( kWidth-10-((kWidth-20)/4), 0, (kWidth-20)/4-5, 30)];
     [btnSubmit setTitle:@"结账" forState:UIControlStateNormal];
     [btnSubmit setFont:[UIFont systemFontOfSize:14]];
     [btnSubmit setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -939,6 +961,98 @@
     
     
     
+}
+// 重新下单
+-(void)againOrder{
+    hud=[MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+    hud.labelText=@"下单中...";
+    hud.minSize = CGSizeMake(100.f, 100.f);
+    hud.color=[UIColor blackColor];
+    NSString *postUrl = [NSString stringWithFormat:@"%@%@",API_URL,ORDERREPRINT];
+    NSDictionary *parameters;
+    parameters = @{@"shop_id":[userDefaults objectForKey:@"shop_id_MX"],
+                   @"order_id":order_id
+                   };
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    
+    NSString *key =[userDefaults objectForKey:@"login_key_MX"];
+    NSString *longbusid = [[userDefaults objectForKey:@"business_id_MX"] stringValue];
+    
+    [manager.requestSerializer setValue:key forHTTPHeaderField:@"key"];
+    [manager.requestSerializer setValue:longbusid forHTTPHeaderField:@"id"];
+    
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];//使用这个将得到的是JSON
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/json", @"text/plain", @"text/html", nil];
+    // 设置超时时间
+    [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
+    manager.requestSerializer.timeoutInterval = 10.f;
+    [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
+    
+    [manager POST:postUrl parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"结果: %@", responseObject);
+        if ([[responseObject objectForKey:@"CODE"] isEqualToString:@"1000"]) {
+            hud.labelText = @"成功";
+            [hud hide:YES afterDelay:0.5];
+            //说明不是跟视图
+            [self.navigationController popViewControllerAnimated:NO];
+        }
+        
+        else
+        {
+            hud.labelText = @"失败";
+            [hud hide:YES afterDelay:0.5];
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        NSLog(@"Error: ==============%@", error);
+    }];
+}
+// 打印订单
+-(void)printOrderAgain{
+    hud=[MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+    hud.labelText=@"打印中...";
+    hud.minSize = CGSizeMake(100.f, 100.f);
+    hud.color=[UIColor blackColor];
+    NSString *postUrl = [NSString stringWithFormat:@"%@%@",API_URL,ORDERPRINT];
+    NSDictionary *parameters;
+    parameters = @{@"shop_id":[userDefaults objectForKey:@"shop_id_MX"],
+                   @"order_id":order_id
+                   };
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    
+    NSString *key =[userDefaults objectForKey:@"login_key_MX"];
+    NSString *longbusid = [[userDefaults objectForKey:@"business_id_MX"] stringValue];
+    
+    [manager.requestSerializer setValue:key forHTTPHeaderField:@"key"];
+    [manager.requestSerializer setValue:longbusid forHTTPHeaderField:@"id"];
+    
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];//使用这个将得到的是JSON
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/json", @"text/plain", @"text/html", nil];
+    // 设置超时时间
+    [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
+    manager.requestSerializer.timeoutInterval = 10.f;
+    [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
+    
+    [manager POST:postUrl parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"结果: %@", responseObject);
+        if ([[responseObject objectForKey:@"CODE"] isEqualToString:@"1000"]) {
+            hud.labelText = @"成功";
+            [hud hide:YES afterDelay:0.5];
+            //说明不是跟视图
+            [self.navigationController popViewControllerAnimated:NO];
+        }
+        
+        else
+        {
+            hud.labelText = @"失败";
+            [hud hide:YES afterDelay:0.5];
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        NSLog(@"Error: ==============%@", error);
+    }];
 }
 
 

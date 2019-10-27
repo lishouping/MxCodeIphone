@@ -164,4 +164,10 @@
 #define GETUSERCHARTS @"/statistics/getUserChartsByDate"
 // 菜品图片上传
 #define UPLOADCAIPINIMAGE @"/upload/updateImagesReturnUrl"
+// 重新下订单
+#define ORDERREPRINT @"/order/reprint"
+// 重新打印
+#define ORDERPRINT @"/order/print"
+// 赠菜
+#define SONGGOODS @"/cart/songGoods"
 #endif /* Mxpch_pch */
