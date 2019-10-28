@@ -13,6 +13,7 @@
 #import "OrderHavingDinnerTableViewCell.h"
 #import "OrderUpdateViewController.h"
 #import "PayImageViewController.h"
+#import "QRCodeingViewController.h"
 @interface OrderDeatiledViewController ()
 <UITableViewDelegate,UITableViewDataSource,UIActionSheetDelegate>{
     UILabel *labOrderNumber;
@@ -54,6 +55,8 @@
     
     UIButton *btnAgainSubmitOrder;
     UIButton *btnPrintAgint;
+    
+    NSString *myTotalPrice;
     
     
 }
@@ -430,7 +433,7 @@
             
             NSString *total_price = [cardic objectForKey:@"total_price"];
             [labTotalPrice setText:[NSString stringWithFormat:@"%@元",total_price]];
-            
+            myTotalPrice = total_price;
             
             
             NSArray *dateArray = [cardic objectForKey:@"goods_set"];
@@ -488,7 +491,7 @@
                                   delegate:self
                                   cancelButtonTitle:@"取消"
                                   destructiveButtonTitle:nil
-                                  otherButtonTitles:@"现金", @"微信",@"支付宝",nil];
+                                  otherButtonTitles:@"现金", @"微信",@"支付宝",@"微信扫码付",@"支付宝扫码付",nil];
     actionSheet.actionSheetStyle = UIActionSheetStyleBlackOpaque;
     [actionSheet showInView:self.view];
 }
@@ -498,12 +501,27 @@
     if (![[actionSheet buttonTitleAtIndex:buttonIndex ] isEqualToString:@"取消"]) {
         if ([[actionSheet buttonTitleAtIndex:buttonIndex ] isEqualToString:@"现金"]) {
             check_way = @"1";
+             [self check];
         }else if ([[actionSheet buttonTitleAtIndex:buttonIndex ] isEqualToString:@"微信"]){
             check_way = @"2";
+             [self check];
         }else if ([[actionSheet buttonTitleAtIndex:buttonIndex ] isEqualToString:@"支付宝"]){
             check_way = @"3";
+             [self check];
+        }else if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:@"微信扫码付"]){
+            QRCodeingViewController *qc = [[QRCodeingViewController alloc] init];
+            qc.pageType = @"1";
+            qc.order_id = order_id;
+            qc.totalPrice = myTotalPrice;
+            [self.navigationController pushViewController:qc animated:YES];
+        }else if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:@"支付宝扫码付"]){
+            QRCodeingViewController *qc = [[QRCodeingViewController alloc] init];
+            qc.pageType = @"2";
+            qc.order_id = order_id;
+            qc.totalPrice = myTotalPrice;
+            [self.navigationController pushViewController:qc animated:YES];
         }
-        [self check];
+       
     }
 }
 

@@ -170,4 +170,10 @@
 #define ORDERPRINT @"/order/print"
 // 赠菜
 #define SONGGOODS @"/cart/songGoods"
+// WxPay
+#define WXPAY @"/order/wxPayment"
+// AlPay
+#define ALPAY @"/order/alipayPayment"
+// 结账
+#define CHECK_URL @"/order/check"
 #endif /* Mxpch_pch */

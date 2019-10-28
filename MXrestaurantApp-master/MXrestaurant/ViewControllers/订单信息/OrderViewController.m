@@ -27,6 +27,7 @@
     
     NSString *check_way;
     NSString *order_ids;
+    NSString *myTotalPrice;
     
 }
 @property(nonatomic,strong)NSMutableArray *dateArray;
@@ -246,6 +247,7 @@
                     NSString *order_id = [dic objectForKey:@"order_id"];
                     NSString *order_num = [dic objectForKey:@"order_num"];
                     NSString *table_id = [dic objectForKey:@"table_id"];
+                    NSNumber *payment = [dic objectForKey:@"payment"];
                     NSString *order_time;
                     if ([selectBtnFlag isEqualToString:@"-1"]) {
                         order_time = [dic objectForKey:@"create_time"];
@@ -276,6 +278,7 @@
                     model.status = status;
                     model.table_name = table_name;
                     model.people_count = people_count;
+                    model.payment = [payment stringValue];
                     if ([selectBtnFlag isEqualToString:@"-1"]) {
                         model.name = @"";
                     }else{
@@ -441,12 +444,13 @@
 -(void)checkOrderClick:(UIButton *)btn{
      OrderModel *svm = self.dateArray[btn.tag];
     order_ids = svm.order_id;
+    myTotalPrice = svm.payment;
     UIActionSheet *actionSheet = [[UIActionSheet alloc]
                                   initWithTitle:@"请选择付款方式"
                                   delegate:self
                                   cancelButtonTitle:@"取消"
                                   destructiveButtonTitle:nil
-                                  otherButtonTitles:@"现金", @"微信",@"支付宝",nil];
+                                  otherButtonTitles:@"现金", @"微信",@"支付宝",@"微信扫码付",@"支付宝扫码付",nil];
     actionSheet.actionSheetStyle = UIActionSheetStyleBlackOpaque;
     [actionSheet showInView:self.view];
 }
@@ -557,12 +561,27 @@
     if (![[actionSheet buttonTitleAtIndex:buttonIndex ] isEqualToString:@"取消"]) {
         if ([[actionSheet buttonTitleAtIndex:buttonIndex ] isEqualToString:@"现金"]) {
             check_way = @"1";
+            [self check:order_ids];
         }else if ([[actionSheet buttonTitleAtIndex:buttonIndex ] isEqualToString:@"微信"]){
             check_way = @"2";
+            [self check:order_ids];
         }else if ([[actionSheet buttonTitleAtIndex:buttonIndex ] isEqualToString:@"支付宝"]){
             check_way = @"3";
+            [self check:order_ids];
+        }else if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:@"微信扫码付"]){
+            QRCodeingViewController *qc = [[QRCodeingViewController alloc] init];
+            qc.pageType = @"1";
+            qc.order_id = order_ids;
+            qc.totalPrice = myTotalPrice;
+            [self.navigationController pushViewController:qc animated:YES];
+        }else if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:@"支付宝扫码付"]){
+            QRCodeingViewController *qc = [[QRCodeingViewController alloc] init];
+            qc.pageType = @"2";
+            qc.order_id = order_ids;
+            qc.totalPrice = myTotalPrice;
+            [self.navigationController pushViewController:qc animated:YES];
         }
-        [self check:order_ids];
+        
     }
 }
 

@@ -22,6 +22,8 @@
     AVCaptureSession * session;//输入输出的中间桥梁
     QRCodeAreaView *_areaView;//扫描区域视图
     NSString *mcontentid;
+    MBProgressHUD *hud;
+    NSUserDefaults *userDefaults;
 }
 @end
 
@@ -45,7 +47,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"扫码点餐";
-    
+    userDefaults=[NSUserDefaults standardUserDefaults];
     [self makeUI];
 }
 
@@ -121,28 +123,124 @@
         //输出扫描字符串
         //NSLog(@"%@",metadataObject.stringValue);
         NSString *str = metadataObject.stringValue;
-        
-        NSArray *array = [str componentsSeparatedByString:@"&"];
-        
-        NSString *table_id = array[1];
-        NSArray *array2 = [table_id componentsSeparatedByString:@"="];
-        NSString *tableid = array2[1];
-        
-        NSString *table_name = array[2];
-        NSArray *array3 = [table_name componentsSeparatedByString:@"="];
-        NSString *tablename = array3[1];
-        
-        NSLog(@"%@%@",tableid,tablename);
-        
-        FoodCustomViewController *fvc = [[FoodCustomViewController alloc] init];
-        fvc.table_name = tablename;
-        fvc.table_id = tableid;
-        [self.navigationController pushViewController:fvc animated:YES];
-        
-        
+        if ([self.pageType isEqualToString:@"0"]) {
+            NSArray *array = [str componentsSeparatedByString:@"&"];
+            
+            NSString *table_id = array[1];
+            NSArray *array2 = [table_id componentsSeparatedByString:@"="];
+            NSString *tableid = array2[1];
+            
+            NSString *table_name = array[2];
+            NSArray *array3 = [table_name componentsSeparatedByString:@"="];
+            NSString *tablename = array3[1];
+            
+            NSLog(@"%@%@",tableid,tablename);
+            
+            FoodCustomViewController *fvc = [[FoodCustomViewController alloc] init];
+            fvc.table_name = tablename;
+            fvc.table_id = tableid;
+            [self.navigationController pushViewController:fvc animated:YES];
+            
+        }else if([self.pageType isEqualToString:@"1"]){
+            self.client_no = str;
+            self.checkWay = @"2";
+            [self pay:@"1"];
+        }else if([self.pageType isEqualToString:@"2"]){
+            self.client_no = str;
+            self.checkWay = @"3";
+            [self pay:@"2"];
+        }
         
     }
 }
+-(void)pay:(NSString *)type{
+    hud=[MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+    hud.labelText=@"支付中...";
+    hud.minSize = CGSizeMake(100.f, 100.f);
+    hud.color=[UIColor blackColor];
 
+    NSString *postUrl;
+    if([self.pageType isEqualToString:@"1"]){
+        postUrl = [NSString stringWithFormat:@"%@%@",API_URL,WXPAY];
+    }else if([self.pageType isEqualToString:@"2"]){
+        postUrl = [NSString stringWithFormat:@"%@%@",API_URL,ALPAY];
+    }
+    
+    NSDictionary *parameters = @{
+                                 @"shop_id":[userDefaults objectForKey:@"shop_id_MX"],
+                                 @"client_no": self.client_no,
+                                 @"fee": self.totalPrice
+                                 };
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];//使用这个将得到的是JSON
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/json", @"text/plain", @"text/html", nil];
+    NSString *key =[userDefaults objectForKey:@"login_key_MX"];
+    NSString *longbusid = [[userDefaults objectForKey:@"business_id_MX"] stringValue];
+    
+    [manager.requestSerializer setValue:key forHTTPHeaderField:@"key"];
+    [manager.requestSerializer setValue:longbusid forHTTPHeaderField:@"id"];
+    // 设置超时时间
+    [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
+    manager.requestSerializer.timeoutInterval = 10.f;
+    [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
+    
+    [manager POST:postUrl parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"结果: %@", responseObject);
+        if ([[responseObject objectForKey:@"CODE"] isEqualToString:@"1000"]) {
+            [self check];
+        }
+        else
+        {
+            hud.labelText = @"失败";
+            [hud hide:YES afterDelay:0.5];
+            
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        hud.labelText = @"网络连接异常";
+        [hud hide:YES afterDelay:0.5];
+        NSLog(@"Error: ==============%@", error);
+    }];
+}
 
+-(void)check{
+    NSString *postUrl;
+    postUrl = [NSString stringWithFormat:@"%@%@",API_URL,CHECK_URL];
+    
+    NSDictionary *parameters = @{
+                                 @"order_id": self.order_id,
+                                 @"check_way": self.checkWay
+                                 };
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];//使用这个将得到的是JSON
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/json", @"text/plain", @"text/html", nil];
+    NSString *key =[userDefaults objectForKey:@"login_key_MX"];
+    NSString *longbusid = [[userDefaults objectForKey:@"business_id_MX"] stringValue];
+    
+    [manager.requestSerializer setValue:key forHTTPHeaderField:@"key"];
+    [manager.requestSerializer setValue:longbusid forHTTPHeaderField:@"id"];
+    // 设置超时时间
+    [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
+    manager.requestSerializer.timeoutInterval = 10.f;
+    [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
+    
+    [manager POST:postUrl parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"结果: %@", responseObject);
+        if ([[responseObject objectForKey:@"CODE"] isEqualToString:@"1000"]) {
+            hud.labelText = @"支付成功";
+            [hud hide:YES afterDelay:0.5];
+            //说明不是跟视图
+            [self dismissViewControllerAnimated:NO completion:^{}];
+        }
+        else
+        {
+            hud.labelText = @"支付失败";
+            [hud hide:YES afterDelay:0.5];
+            
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        hud.labelText = @"网络连接异常";
+        [hud hide:YES afterDelay:0.5];
+        NSLog(@"Error: ==============%@", error);
+    }];
+}
 @end

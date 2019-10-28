@@ -17,4 +17,5 @@
 @property(nonatomic,strong)NSString *table_name;
 @property(nonatomic,strong)NSString *people_count;
 @property(nonatomic,strong)NSString *name;
+@property(nonatomic,strong)NSString *payment;
 @end
