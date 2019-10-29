@@ -210,13 +210,13 @@
     [btnAdd setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [btnAdd setBackgroundColor:[UIColor colorWithRed:79.0/255.0 green:145.0/255.0 blue:244.0/255.0 alpha:1]];
     btnAdd.layer.cornerRadius = 5.0;
-    [btnAdd setFont:[UIFont systemFontOfSize:14]];
+    [btnAdd setFont:[UIFont systemFontOfSize:12]];
     [footV addSubview:btnAdd];
     [btnAdd addTarget:self action:@selector(addFoodClick) forControlEvents:UIControlEventTouchUpInside];
   
     btnSubmit = [[UIButton alloc] initWithFrame:CGRectMake( kWidth/2+10, 30, kWidth/2-10-10, 30)];
     [btnSubmit setTitle:@"确认下单" forState:UIControlStateNormal];
-    [btnSubmit setFont:[UIFont systemFontOfSize:14]];
+    [btnSubmit setFont:[UIFont systemFontOfSize:12]];
     [btnSubmit setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [btnSubmit setBackgroundColor:[UIColor colorWithRed:251.0/255.0 green:139.0/255.0 blue:57.0/255.0 alpha:1]];
     btnSubmit.layer.cornerRadius = 5.0;

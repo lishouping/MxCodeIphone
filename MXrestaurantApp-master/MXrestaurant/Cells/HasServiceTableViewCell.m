@@ -43,7 +43,7 @@
     
     self.btnServiceHander = [[UIButton alloc] initWithFrame:CGRectMake(kWidth-10-40, 10+5, 40, 30)];
     [self.btnServiceHander setTitle:@"处理" forState:UIControlStateNormal];
-    self.btnServiceHander.font = [UIFont systemFontOfSize:14];
+    self.btnServiceHander.font = [UIFont systemFontOfSize:12];
     [self.btnServiceHander setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.btnServiceHander setBackgroundColor:[UIColor colorWithRed:251.0/255.0 green:139.0/255.0 blue:57.0/255.0 alpha:1]];
     self.btnServiceHander.layer.cornerRadius = 3.0;

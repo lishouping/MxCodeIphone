@@ -64,6 +64,7 @@
     _tfShopName.font = [UIFont systemFontOfSize:13];
     _tfShopName.layer.cornerRadius = 3.0;
     _tfShopName.layer.borderWidth = 0.5;
+    [_tfShopName setAutocapitalizationType:UITextAutocapitalizationTypeNone];
     _tfShopName.layer.borderColor = [[UIColor colorWithRed:182.0/255.0 green:182.0/255.0 blue:182.0/255.0 alpha:1] CGColor];
     [_scrollView addSubview:_tfShopName];
     
@@ -80,6 +81,7 @@
     _tfShopPersonName.font = [UIFont systemFontOfSize:13];
     _tfShopPersonName.layer.cornerRadius = 3.0;
     _tfShopPersonName.layer.borderWidth = 0.5;
+     [_tfShopPersonName setAutocapitalizationType:UITextAutocapitalizationTypeNone];
     _tfShopPersonName.layer.borderColor = [[UIColor colorWithRed:182.0/255.0 green:182.0/255.0 blue:182.0/255.0 alpha:1] CGColor];
     [_scrollView addSubview:_tfShopPersonName];
     
@@ -95,6 +97,7 @@
     _tfShopPersonPhone.font = [UIFont systemFontOfSize:13];
     _tfShopPersonPhone.layer.cornerRadius = 3.0;
     _tfShopPersonPhone.layer.borderWidth = 0.5;
+     [_tfShopPersonPhone setAutocapitalizationType:UITextAutocapitalizationTypeNone];
     _tfShopPersonPhone.layer.borderColor = [[UIColor colorWithRed:182.0/255.0 green:182.0/255.0 blue:182.0/255.0 alpha:1] CGColor];
     [_scrollView addSubview:_tfShopPersonPhone];
     
@@ -118,6 +121,7 @@
     [btnSubmit setBackgroundColor:[UIColor colorWithRed:67.0/255.0 green:136.0/255.0 blue:253.0/255.0 alpha:1]];
     btnSubmit.layer.cornerRadius = 3.0;
     [btnSubmit setTitle:@"提交" forState:UIControlStateNormal];
+    [btnSubmit setFont:[UIFont systemFontOfSize:14]];
     [btnSubmit setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [btnSubmit setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
     [btnSubmit addTarget:self action:@selector(sumbitClick) forControlEvents:UIControlEventTouchUpInside];
@@ -221,6 +225,15 @@
     }
     
     
+}
+#pragma mark UITextFieldDelegate
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [_tfShopName resignFirstResponder];
+    [_tfShopPersonName resignFirstResponder];
+    [_tfShopPersonPhone resignFirstResponder];
+    [_tfShopAddress resignFirstResponder];
+    return YES;
 }
 
 - (void)didReceiveMemoryWarning {

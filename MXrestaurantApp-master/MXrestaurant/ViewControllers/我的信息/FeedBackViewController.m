@@ -44,6 +44,8 @@
     _tfFeedback.layer.borderWidth = 0.5;
     _tfFeedback.layer.borderColor = [[UIColor colorWithRed:182.0/255.0 green:182.0/255.0 blue:182.0/255.0 alpha:1] CGColor];
       _tfFeedback.contentVerticalAlignment = UIControlContentVerticalAlignmentTop;
+    //关闭键盘输入第一个字母大写的问题
+    [_tfFeedback setAutocapitalizationType:UITextAutocapitalizationTypeNone];
     [self.view addSubview:_tfFeedback];
     
     
@@ -53,6 +55,7 @@
     [btnFeedsub setTitle:@"提交" forState:UIControlStateNormal];
     [btnFeedsub setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [btnFeedsub setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
+    [btnFeedsub setFont:[UIFont systemFontOfSize:14]];
     [btnFeedsub addTarget:self action:@selector(feedBackClick) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:btnFeedsub];
 }
@@ -97,6 +100,15 @@
     }];
     
 }
+
+#pragma mark UITextFieldDelegate
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [_tfFeedback resignFirstResponder];
+    return YES;
+}
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

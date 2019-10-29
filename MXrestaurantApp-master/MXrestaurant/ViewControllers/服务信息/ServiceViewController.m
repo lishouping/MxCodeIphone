@@ -21,7 +21,7 @@
     int page;
     int totalnum;
     NSString *selectBtnFlag;
-    
+      UIView *nodateView;
 }
 @property(nonatomic,strong)NSMutableArray *dateArray;
 @end
@@ -83,8 +83,8 @@
     
 }
 - (void)makeUI{
-    LMJTab * tab = [[LMJTab alloc] initWithFrame:CGRectMake(10, 10+44+20, 300, 30) lineWidth:1 lineColor:[UIColor colorWithRed:79.0/255.0 green:145.0/255.0 blue:244/255.0 alpha:1]];
-    [tab setItemsWithTitle:[NSArray arrayWithObjects:@"未处理",@"已处理", nil] normalItemColor:[UIColor whiteColor] selectItemColor:[UIColor colorWithRed:79.0/255.0 green:145.0/255.0 blue:244/255.0 alpha:1] normalTitleColor:[UIColor colorWithRed:79.0/255.0 green:145.0/255.0 blue:244/255.0 alpha:1] selectTitleColor:[UIColor whiteColor] titleTextSize:15 selectItemNumber:0];
+    LMJTab * tab = [[LMJTab alloc] initWithFrame:CGRectMake(10, 10+44+20, kWidth-10-10, 30) lineWidth:1 lineColor:[UIColor colorWithRed:79.0/255.0 green:145.0/255.0 blue:244/255.0 alpha:1]];
+    [tab setItemsWithTitle:[NSArray arrayWithObjects:@"未处理",@"已处理", nil] normalItemColor:[UIColor whiteColor] selectItemColor:[UIColor colorWithRed:79.0/255.0 green:145.0/255.0 blue:244/255.0 alpha:1] normalTitleColor:[UIColor colorWithRed:79.0/255.0 green:145.0/255.0 blue:244/255.0 alpha:1] selectTitleColor:[UIColor whiteColor] titleTextSize:12 selectItemNumber:0];
     tab.delegate = self;
     tab.layer.cornerRadius = 5.0;
     [self.view addSubview:tab];
@@ -95,6 +95,13 @@
     [self.view addSubview:tableService];
     tableService.tableFooterView = [[UIView alloc] init];
     [self createRightBtn];
+    
+    nodateView = [[UIView alloc] initWithFrame:CGRectMake(0,10+44+20+30+10, kWidth, kHeight-44-20-20-10)];
+    [nodateView setBackgroundColor:[UIColor whiteColor]];
+    UIImageView *imgNodate = [[UIImageView alloc] initWithFrame:CGRectMake(kWidth/2-(196/2), 80, 196, 128)];
+    [imgNodate setImage:[UIImage imageNamed:@"common_nodata"]];
+    [nodateView addSubview:imgNodate];
+    [self.view addSubview:nodateView];
 }
 
 - (void)createRightBtn{
@@ -212,6 +219,8 @@
             if (dateArray.count==0) {
                 [tableService footerEndRefreshing];
                 [tableService headerEndRefreshing];
+                nodateView.hidden = NO;
+                tableService.hidden = YES;
                 UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"无更多数据" message:@"" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"好", nil];
                 [alert show];
                 return ;
@@ -252,12 +261,16 @@
                 
                 
             }
+            nodateView.hidden = YES;
+            tableService.hidden = NO;
             [tableService headerEndRefreshing];
             [tableService reloadData];
         }
         
         else
         {
+            nodateView.hidden = NO;
+            tableService.hidden = YES;
             UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"" message:[NSString stringWithFormat:@"%@",[responseObject objectForKey:@"MESSAGE"]] delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"好", nil];
             [alert show];
             

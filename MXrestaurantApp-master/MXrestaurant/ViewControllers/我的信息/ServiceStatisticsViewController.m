@@ -101,12 +101,14 @@
     [btnStartTime setTitleColor:[UIColor colorWithRed:87.0/255.0 green:87.0/255.0 blue:87.0/255.0 alpha:1] forState:UIControlStateNormal];
     btnStartTime.backgroundColor=[UIColor colorWithRed:233.0/255.0 green:236.0/255.0 blue:241.0/255.0 alpha:1];
     btnStartTime.layer.borderWidth = 0.5;
+    [btnStartTime setFont:[UIFont systemFontOfSize:12]];
     btnStartTime.layer.borderColor = [[UIColor colorWithRed:182.0/255.0 green:182.0/255.0 blue:182.0/255.0 alpha:1] CGColor];
     [self.view addSubview:btnStartTime];
     [btnStartTime addTarget:self action:@selector(selectStartTimeClick) forControlEvents:(UIControlEventTouchUpInside)];
     
     btnEndTime = [YLButton buttonWithType:UIButtonTypeCustom];
     [btnEndTime setFont:[UIFont systemFontOfSize:14]];
+    [btnEndTime setFont:[UIFont systemFontOfSize:12]];
     [btnEndTime customButtonWithFrame1:CGRectMake(kWidth-((kWidth-10-10)/2)-10, 10,(kWidth-10-10)/2, 40) title:@"结束日期" rightImage:[UIImage imageNamed:@"canlo"]];
     [btnEndTime setTitleColor:[UIColor colorWithRed:87.0/255.0 green:87.0/255.0 blue:87.0/255.0 alpha:1] forState:UIControlStateNormal];
     btnEndTime.backgroundColor=[UIColor colorWithRed:233.0/255.0 green:236.0/255.0 blue:241.0/255.0 alpha:1];

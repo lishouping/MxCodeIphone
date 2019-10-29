@@ -42,7 +42,7 @@
     
     self.btnSubOrder = [[UIButton alloc] initWithFrame:CGRectMake(kWidth-10-((kWidth-10-10-40)/2), 80, (kWidth-10-10-40)/2, 30)];
     [self.btnSubOrder setTitle:@"一键下单" forState:UIControlStateNormal];
-    [self.btnSubOrder setFont:[UIFont systemFontOfSize:14]];
+    [self.btnSubOrder setFont:[UIFont systemFontOfSize:12]];
     [self.btnSubOrder setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.btnSubOrder setBackgroundColor:[UIColor colorWithRed:251.0/255.0 green:139.0/255.0 blue:57.0/255.0 alpha:1]];
     self.btnSubOrder.layer.cornerRadius = 5.0;

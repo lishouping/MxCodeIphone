@@ -95,6 +95,7 @@
     [btnLogin setBackgroundColor:[UIColor colorWithRed:67.0/255.0 green:136.0/255.0 blue:253.0/255.0 alpha:1]];
     btnLogin.layer.cornerRadius = 3.0;
     [btnLogin setTitle:@"登录" forState:UIControlStateNormal];
+    [btnLogin setFont:[UIFont systemFontOfSize:14]];
     [btnLogin setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [btnLogin setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
     [btnLogin addTarget:self action:@selector(LoginClick) forControlEvents:UIControlEventTouchUpInside];

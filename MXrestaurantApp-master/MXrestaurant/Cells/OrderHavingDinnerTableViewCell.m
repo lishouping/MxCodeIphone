@@ -48,7 +48,7 @@
     self.btnAddFood = [[UIButton alloc] initWithFrame:CGRectMake(10, 80, (kWidth-10-10-40)/2, 30)];
     [self.btnAddFood setTitle:@"加菜" forState:UIControlStateNormal];
     [self.btnAddFood setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [self.btnAddFood setFont:[UIFont systemFontOfSize:14]];
+    [self.btnAddFood setFont:[UIFont systemFontOfSize:12]];
     [self.btnAddFood setBackgroundColor:[UIColor colorWithRed:79.0/255.0 green:145.0/255.0 blue:244.0/255.0 alpha:1]];
     self.btnAddFood.layer.cornerRadius = 5.0;
     [headView addSubview:self.btnAddFood];
@@ -56,7 +56,7 @@
     
     self.btnSubOrder = [[UIButton alloc] initWithFrame:CGRectMake(kWidth-10-((kWidth-10-10-40)/2), 80, (kWidth-10-10-40)/2, 30)];
     [self.btnSubOrder setTitle:@"结账" forState:UIControlStateNormal];
-    [self.btnSubOrder setFont:[UIFont systemFontOfSize:14]];
+    [self.btnSubOrder setFont:[UIFont systemFontOfSize:12]];
     [self.btnSubOrder setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.btnSubOrder setBackgroundColor:[UIColor colorWithRed:251.0/255.0 green:139.0/255.0 blue:57.0/255.0 alpha:1]];
     self.btnSubOrder.layer.cornerRadius = 5.0;

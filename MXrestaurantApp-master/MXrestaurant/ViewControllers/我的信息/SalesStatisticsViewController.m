@@ -77,7 +77,7 @@
 }
 - (void)makeUI{
     LMJTab * tab = [[LMJTab alloc] initWithFrame:CGRectMake(10, 10, 300, 30) lineWidth:1 lineColor:[UIColor colorWithRed:79.0/255.0 green:145.0/255.0 blue:244/255.0 alpha:1]];
-    [tab setItemsWithTitle:[NSArray arrayWithObjects:@"菜品统计",@"订单统计", nil] normalItemColor:[UIColor whiteColor] selectItemColor:[UIColor colorWithRed:79.0/255.0 green:145.0/255.0 blue:244/255.0 alpha:1] normalTitleColor:[UIColor colorWithRed:79.0/255.0 green:145.0/255.0 blue:244/255.0 alpha:1] selectTitleColor:[UIColor whiteColor] titleTextSize:15 selectItemNumber:0];
+    [tab setItemsWithTitle:[NSArray arrayWithObjects:@"菜品统计",@"订单统计", nil] normalItemColor:[UIColor whiteColor] selectItemColor:[UIColor colorWithRed:79.0/255.0 green:145.0/255.0 blue:244/255.0 alpha:1] normalTitleColor:[UIColor colorWithRed:79.0/255.0 green:145.0/255.0 blue:244/255.0 alpha:1] selectTitleColor:[UIColor whiteColor] titleTextSize:12 selectItemNumber:0];
     tab.delegate = self;
     tab.layer.cornerRadius = 5.0;
     [self.view addSubview:tab];
@@ -88,6 +88,7 @@
     [btnStartTime setTitleColor:[UIColor colorWithRed:87.0/255.0 green:87.0/255.0 blue:87.0/255.0 alpha:1] forState:UIControlStateNormal];
     btnStartTime.backgroundColor=[UIColor colorWithRed:233.0/255.0 green:236.0/255.0 blue:241.0/255.0 alpha:1];
     btnStartTime.layer.borderWidth = 0.5;
+    [btnStartTime setFont:[UIFont systemFontOfSize:12]];
     btnStartTime.layer.borderColor = [[UIColor colorWithRed:182.0/255.0 green:182.0/255.0 blue:182.0/255.0 alpha:1] CGColor];
     [self.view addSubview:btnStartTime];
     [btnStartTime addTarget:self action:@selector(selectStartTimeClick) forControlEvents:(UIControlEventTouchUpInside)];
@@ -98,6 +99,7 @@
     [btnEndTime setTitleColor:[UIColor colorWithRed:87.0/255.0 green:87.0/255.0 blue:87.0/255.0 alpha:1] forState:UIControlStateNormal];
     btnEndTime.backgroundColor=[UIColor colorWithRed:233.0/255.0 green:236.0/255.0 blue:241.0/255.0 alpha:1];
     btnEndTime.layer.borderWidth = 0.5;
+     [btnEndTime setFont:[UIFont systemFontOfSize:12]];
     btnEndTime.layer.borderColor = [[UIColor colorWithRed:182.0/255.0 green:182.0/255.0 blue:182.0/255.0 alpha:1] CGColor];
     [self.view addSubview:btnEndTime];
     [btnEndTime addTarget:self action:@selector(selectEndTimeClick) forControlEvents:(UIControlEventTouchUpInside)];

@@ -782,12 +782,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				47F1993C1FC91E6E000201BE /* SystemConfiguration.framework in Frameworks */,
 				47F199461FC91EAF000201BE /* libresolv.tbd in Frameworks */,
 				47F199441FC91EA2000201BE /* UserNotifications.framework in Frameworks */,
 				47F199421FC91E92000201BE /* libz.tbd in Frameworks */,
 				47F199401FC91E89000201BE /* Security.framework in Frameworks */,
 				47F1993E1FC91E77000201BE /* CoreGraphics.framework in Frameworks */,
-				47F1993C1FC91E6E000201BE /* SystemConfiguration.framework in Frameworks */,
 				47F1993A1FC91E65000201BE /* CoreTelephony.framework in Frameworks */,
 				47F199381FC91E5D000201BE /* CoreFoundation.framework in Frameworks */,
 				47F199361FC91E54000201BE /* CFNetwork.framework in Frameworks */,

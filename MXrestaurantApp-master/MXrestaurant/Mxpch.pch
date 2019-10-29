@@ -13,6 +13,7 @@
 #import "UIView+SDAutoLayout.h"
 #define kHeight [[UIScreen mainScreen] bounds].size.height
 #define kWidth  [[UIScreen mainScreen] bounds].size.width
+#define VIEWSAFEAREAINSETS(view) ({UIEdgeInsets i; if(@available(iOS 11.0, *)) {i = view.safeAreaInsets;} else {i = UIEdgeInsetsZero;} i;})
 #define KNOTIFICATION_LOGINCHANGE @"loginStateChange"
 #import "MBProgressHUD.h"
 #import "AppDelegate.h"

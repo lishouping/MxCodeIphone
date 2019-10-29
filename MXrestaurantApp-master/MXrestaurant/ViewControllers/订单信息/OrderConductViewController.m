@@ -169,7 +169,7 @@
     [btnAdd setTitle:@"加菜" forState:UIControlStateNormal];
     [btnAdd setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [btnAdd setBackgroundColor:[UIColor colorWithRed:79.0/255.0 green:145.0/255.0 blue:244.0/255.0 alpha:1]];
-    [btnAdd setFont:[UIFont systemFontOfSize:14]];
+    [btnAdd setFont:[UIFont systemFontOfSize:12]];
     btnAdd.layer.cornerRadius = 5.0;
     [footV addSubview:btnAdd];
     [btnAdd addTarget:self action:@selector(addFoodClick) forControlEvents:UIControlEventTouchUpInside];
@@ -178,7 +178,7 @@
     [btnSubmit setTitle:@"结账" forState:UIControlStateNormal];
     [btnSubmit setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [btnSubmit setBackgroundColor:[UIColor colorWithRed:251.0/255.0 green:139.0/255.0 blue:57.0/255.0 alpha:1]];
-    [btnSubmit setFont:[UIFont systemFontOfSize:14]];
+    [btnSubmit setFont:[UIFont systemFontOfSize:12]];
     btnSubmit.layer.cornerRadius = 5.0;
     [footV addSubview:btnSubmit];
     [btnSubmit addTarget:self action:@selector(submitClick) forControlEvents:UIControlEventTouchUpInside];

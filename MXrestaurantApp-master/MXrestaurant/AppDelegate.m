@@ -159,14 +159,15 @@
 //导航条的颜色以及tabBar的背景色 tabBarItem的title的颜色
 -(void)createAppearance
 {
-    //状态栏的颜色
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    UIFont *font = [UIFont fontWithName:@"Arial-ItalicMT" size:14];
+    //title字体
+    NSDictionary *dic = @{NSFontAttributeName:font,NSForegroundColorAttributeName: [UIColor whiteColor]};
     
     if ([[[UIDevice currentDevice]systemVersion] floatValue]>=7.0)
     {
         [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:17.0/255 green:133.0/255 blue:231.0/255 alpha:1]];
         //导航条标题的颜色
-        [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName]];
+        [[UINavigationBar appearance] setTitleTextAttributes:dic];
         //tabBar的背景色
         [UITabBar appearance].barTintColor=[UIColor colorWithRed:252.0/255 green:252.0/255 blue:252.0/255 alpha:1];
         //tabBarItem的title的颜色
@@ -177,7 +178,7 @@
     {
         [[UINavigationBar appearance] setTintColor:[UIColor colorWithRed:26.0/255 green:31.0/255 blue:44.0/255 alpha:1]];
         //导航条标题的颜色
-        [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName]];
+        [[UINavigationBar appearance] setTitleTextAttributes:dic];
         //tabBar的背景色
         [UITabBar appearance].barTintColor=[UIColor colorWithRed:252.0/255 green:252.0/255 blue:252.0/255 alpha:1];
         //tabBarItem的title的颜色

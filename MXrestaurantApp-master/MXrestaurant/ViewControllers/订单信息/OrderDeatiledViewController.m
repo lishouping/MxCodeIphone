@@ -200,7 +200,7 @@
      footView1.hidden = YES;
     btnAddFood = [[UIButton alloc] initWithFrame:CGRectMake(10, 0, (kWidth-20)/4-5, 30)];
     [btnAddFood setTitle:@"加菜" forState:UIControlStateNormal];
-    [btnAddFood setFont:[UIFont systemFontOfSize:14]];
+    [btnAddFood setFont:[UIFont systemFontOfSize:12]];
     [btnAddFood setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [btnAddFood setBackgroundColor:[UIColor colorWithRed:79.0/255.0 green:145.0/255.0 blue:244.0/255.0 alpha:1]];
     btnAddFood.layer.cornerRadius = 5.0;
@@ -223,7 +223,7 @@
     [btnUpdateOrder setBackgroundColor:[UIColor colorWithRed:79.0/255.0 green:145.0/255.0 blue:244.0/255.0 alpha:1]];
     btnUpdateOrder.layer.cornerRadius = 5.0;
     [footView1 addSubview:btnUpdateOrder];
-    [btnUpdateOrder setFont:[UIFont systemFontOfSize:14]];
+    [btnUpdateOrder setFont:[UIFont systemFontOfSize:12]];
     [btnUpdateOrder addTarget:self action:@selector(updateOrderClick) forControlEvents:UIControlEventTouchUpInside];
     
     btnSubmitOrder = [[UIButton alloc] initWithFrame:CGRectMake(kWidth-10-((kWidth-20)/4), 0, (kWidth-20)/4-5, 30)];
@@ -231,7 +231,7 @@
     [btnSubmitOrder setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [btnSubmitOrder setBackgroundColor:[UIColor colorWithRed:251.0/255.0 green:139.0/255.0 blue:57.0/255.0 alpha:1]];
     btnSubmitOrder.layer.cornerRadius = 5.0;
-    [btnSubmitOrder setFont:[UIFont systemFontOfSize:14]];
+    [btnSubmitOrder setFont:[UIFont systemFontOfSize:12]];
     [footView1 addSubview:btnSubmitOrder];
     [btnSubmitOrder addTarget:self action:@selector(submitOrderClick) forControlEvents:UIControlEventTouchUpInside];
     
@@ -246,7 +246,7 @@
     [btnAdd setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [btnAdd setBackgroundColor:[UIColor colorWithRed:79.0/255.0 green:145.0/255.0 blue:244.0/255.0 alpha:1]];
     btnAdd.layer.cornerRadius = 5.0;
-    [btnAdd setFont:[UIFont systemFontOfSize:14]];
+    [btnAdd setFont:[UIFont systemFontOfSize:12]];
     [footView2 addSubview:btnAdd];
     [btnAdd addTarget:self action:@selector(addFoodClick) forControlEvents:UIControlEventTouchUpInside];
     
@@ -255,7 +255,7 @@
     [btnAgainSubmitOrder setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [btnAgainSubmitOrder setBackgroundColor:[UIColor colorWithRed:79.0/255.0 green:145.0/255.0 blue:244.0/255.0 alpha:1]];
     btnAgainSubmitOrder.layer.cornerRadius = 5.0;
-    [btnAgainSubmitOrder setFont:[UIFont systemFontOfSize:14]];
+    [btnAgainSubmitOrder setFont:[UIFont systemFontOfSize:12]];
     [footView2 addSubview:btnAgainSubmitOrder];
     [btnAgainSubmitOrder addTarget:self action:@selector(againOrder) forControlEvents:UIControlEventTouchUpInside];
     
@@ -264,13 +264,13 @@
     [btnPrintAgint setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [btnPrintAgint setBackgroundColor:[UIColor colorWithRed:79.0/255.0 green:145.0/255.0 blue:244.0/255.0 alpha:1]];
     btnPrintAgint.layer.cornerRadius = 5.0;
-    [btnPrintAgint setFont:[UIFont systemFontOfSize:14]];
+    [btnPrintAgint setFont:[UIFont systemFontOfSize:12]];
     [footView2 addSubview:btnPrintAgint];
     [btnPrintAgint addTarget:self action:@selector(printOrderAgain) forControlEvents:UIControlEventTouchUpInside];
     
     btnSubmit = [[UIButton alloc] initWithFrame:CGRectMake( kWidth-10-((kWidth-20)/4), 0, (kWidth-20)/4-5, 30)];
     [btnSubmit setTitle:@"结账" forState:UIControlStateNormal];
-    [btnSubmit setFont:[UIFont systemFontOfSize:14]];
+    [btnSubmit setFont:[UIFont systemFontOfSize:12]];
     [btnSubmit setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [btnSubmit setBackgroundColor:[UIColor colorWithRed:251.0/255.0 green:139.0/255.0 blue:57.0/255.0 alpha:1]];
     btnSubmit.layer.cornerRadius = 5.0;
@@ -282,7 +282,7 @@
     
     benPrintOrder = [[UIButton alloc] initWithFrame:CGRectMake( kWidth/2+10, 0, kWidth/2-10-10, 30)];
     [benPrintOrder setTitle:@"打印订单" forState:UIControlStateNormal];
-    [benPrintOrder setFont:[UIFont systemFontOfSize:14]];
+    [benPrintOrder setFont:[UIFont systemFontOfSize:12]];
     [benPrintOrder setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [benPrintOrder setBackgroundColor:[UIColor colorWithRed:251.0/255.0 green:139.0/255.0 blue:57.0/255.0 alpha:1]];
     benPrintOrder.layer.cornerRadius = 5.0;

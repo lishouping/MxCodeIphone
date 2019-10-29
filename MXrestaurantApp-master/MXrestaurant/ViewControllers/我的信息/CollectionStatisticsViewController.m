@@ -101,6 +101,7 @@
     btnStartTime.layer.borderWidth = 0.5;
     btnStartTime.layer.borderColor = [[UIColor colorWithRed:182.0/255.0 green:182.0/255.0 blue:182.0/255.0 alpha:1] CGColor];
     [self.view addSubview:btnStartTime];
+     [btnStartTime setFont:[UIFont systemFontOfSize:12]];
     [btnStartTime addTarget:self action:@selector(selectStartTimeClick) forControlEvents:(UIControlEventTouchUpInside)];
     
     btnEndTime = [YLButton buttonWithType:UIButtonTypeCustom];
@@ -109,6 +110,7 @@
     [btnEndTime setTitleColor:[UIColor colorWithRed:87.0/255.0 green:87.0/255.0 blue:87.0/255.0 alpha:1] forState:UIControlStateNormal];
     btnEndTime.backgroundColor=[UIColor colorWithRed:233.0/255.0 green:236.0/255.0 blue:241.0/255.0 alpha:1];
     btnEndTime.layer.borderWidth = 0.5;
+    [btnEndTime setFont:[UIFont systemFontOfSize:12]];
     btnEndTime.layer.borderColor = [[UIColor colorWithRed:182.0/255.0 green:182.0/255.0 blue:182.0/255.0 alpha:1] CGColor];
     [self.view addSubview:btnEndTime];
     [btnEndTime addTarget:self action:@selector(selectEndTimeClick) forControlEvents:(UIControlEventTouchUpInside)];

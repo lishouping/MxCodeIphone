@@ -101,6 +101,7 @@
     _tfShopName.font = [UIFont systemFontOfSize:13];
     _tfShopName.layer.cornerRadius = 3.0;
     _tfShopName.layer.borderWidth = 0.5;
+     [_tfShopName setAutocapitalizationType:UITextAutocapitalizationTypeNone];
     _tfShopName.layer.borderColor = [[UIColor colorWithRed:182.0/255.0 green:182.0/255.0 blue:182.0/255.0 alpha:1] CGColor];
     [_scrollView addSubview:_tfShopName];
     
@@ -132,6 +133,7 @@
     _tfShopPersonName.font = [UIFont systemFontOfSize:13];
     _tfShopPersonName.layer.cornerRadius = 3.0;
     _tfShopPersonName.layer.borderWidth = 0.5;
+     [_tfShopPersonName setAutocapitalizationType:UITextAutocapitalizationTypeNone];
     _tfShopPersonName.layer.borderColor = [[UIColor colorWithRed:182.0/255.0 green:182.0/255.0 blue:182.0/255.0 alpha:1] CGColor];
     [_scrollView addSubview:_tfShopPersonName];
     
@@ -147,6 +149,7 @@
     _tfVipPrice.font = [UIFont systemFontOfSize:13];
     _tfVipPrice.layer.cornerRadius = 3.0;
     _tfVipPrice.layer.borderWidth = 0.5;
+     [_tfVipPrice setAutocapitalizationType:UITextAutocapitalizationTypeNone];
     _tfVipPrice.layer.borderColor = [[UIColor colorWithRed:182.0/255.0 green:182.0/255.0 blue:182.0/255.0 alpha:1] CGColor];
     [_scrollView addSubview:_tfVipPrice];
     
@@ -164,6 +167,7 @@
     _tfShopPersonPhone.font = [UIFont systemFontOfSize:13];
     _tfShopPersonPhone.layer.cornerRadius = 3.0;
     _tfShopPersonPhone.layer.borderWidth = 0.5;
+     [_tfShopPersonPhone setAutocapitalizationType:UITextAutocapitalizationTypeNone];
     _tfShopPersonPhone.layer.borderColor = [[UIColor colorWithRed:182.0/255.0 green:182.0/255.0 blue:182.0/255.0 alpha:1] CGColor];
     [_scrollView addSubview:_tfShopPersonPhone];
     
@@ -179,6 +183,7 @@
     _tfShopAddress.font = [UIFont systemFontOfSize:13];
     _tfShopAddress.layer.cornerRadius = 3.0;
     _tfShopAddress.layer.borderWidth = 0.5;
+     [_tfShopAddress setAutocapitalizationType:UITextAutocapitalizationTypeNone];
     _tfShopAddress.layer.borderColor = [[UIColor colorWithRed:182.0/255.0 green:182.0/255.0 blue:182.0/255.0 alpha:1] CGColor];
     [_scrollView addSubview:_tfShopAddress];
     
@@ -212,6 +217,7 @@
     _tfShopAddress1.font = [UIFont systemFontOfSize:13];
     _tfShopAddress1.layer.cornerRadius = 3.0;
     _tfShopAddress1.layer.borderWidth = 0.5;
+     [_tfShopAddress1 setAutocapitalizationType:UITextAutocapitalizationTypeNone];
     _tfShopAddress1.layer.borderColor = [[UIColor colorWithRed:182.0/255.0 green:182.0/255.0 blue:182.0/255.0 alpha:1] CGColor];
     [_scrollView addSubview:_tfShopAddress1];
     
@@ -641,4 +647,15 @@
 }
 
 
+#pragma mark UITextFieldDelegate
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [_tfShopName resignFirstResponder];
+    [_tfShopPersonName resignFirstResponder];
+    [_tfShopPersonPhone resignFirstResponder];
+    [_tfShopAddress resignFirstResponder];
+    [_tfVipPrice resignFirstResponder];
+    [_tfShopAddress1 resignFirstResponder];
+    return YES;
+}
 @end

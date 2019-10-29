@@ -73,6 +73,7 @@
     _tfShopName.font = [UIFont systemFontOfSize:13];
     _tfShopName.layer.cornerRadius = 3.0;
     _tfShopName.layer.borderWidth = 0.5;
+     [_tfShopName setAutocapitalizationType:UITextAutocapitalizationTypeNone];
     _tfShopName.layer.borderColor = [[UIColor colorWithRed:182.0/255.0 green:182.0/255.0 blue:182.0/255.0 alpha:1] CGColor];
     [_tfShopName setText:self.printer_name];
     [_scrollView addSubview:_tfShopName];
@@ -90,6 +91,7 @@
     _tfShopPersonName.font = [UIFont systemFontOfSize:13];
     _tfShopPersonName.layer.cornerRadius = 3.0;
     _tfShopPersonName.layer.borderWidth = 0.5;
+      [_tfShopPersonName setAutocapitalizationType:UITextAutocapitalizationTypeNone];
     _tfShopPersonName.layer.borderColor = [[UIColor colorWithRed:182.0/255.0 green:182.0/255.0 blue:182.0/255.0 alpha:1] CGColor];
     [_tfShopPersonName setText:self.printer_no];
     [_scrollView addSubview:_tfShopPersonName];
@@ -106,6 +108,7 @@
     _tfShopPersonPhone.font = [UIFont systemFontOfSize:13];
     _tfShopPersonPhone.layer.cornerRadius = 3.0;
     _tfShopPersonPhone.layer.borderWidth = 0.5;
+    [_tfShopPersonPhone setAutocapitalizationType:UITextAutocapitalizationTypeNone];
     _tfShopPersonPhone.layer.borderColor = [[UIColor colorWithRed:182.0/255.0 green:182.0/255.0 blue:182.0/255.0 alpha:1] CGColor];
     if (![self.key isEqual:[NSNull null]]) {
          [_tfShopPersonPhone setText:self.key];
@@ -129,6 +132,7 @@
         _tfShopAddress.font = [UIFont systemFontOfSize:13];
         _tfShopAddress.layer.cornerRadius = 3.0;
         _tfShopAddress.layer.borderWidth = 0.5;
+        [_tfShopAddress setAutocapitalizationType:UITextAutocapitalizationTypeNone];
         _tfShopAddress.layer.borderColor = [[UIColor colorWithRed:182.0/255.0 green:182.0/255.0 blue:182.0/255.0 alpha:1] CGColor];
         [_tfShopAddress setText:self.print_num];
         [_scrollView addSubview:_tfShopAddress];
@@ -210,6 +214,7 @@
         [_tfShopAddress setTextColor:[UIColor blackColor]];
         _tfShopAddress.font = [UIFont systemFontOfSize:13];
         _tfShopAddress.layer.cornerRadius = 3.0;
+        [_tfShopAddress setAutocapitalizationType:UITextAutocapitalizationTypeNone];
         _tfShopAddress.layer.borderWidth = 0.5;
         _tfShopAddress.layer.borderColor = [[UIColor colorWithRed:182.0/255.0 green:182.0/255.0 blue:182.0/255.0 alpha:1] CGColor];
         [_tfShopAddress setText:self.print_num];
@@ -291,6 +296,7 @@
     
     btnSubmit = [[UIButton alloc] initWithFrame:CGRectMake(30,  kHeight-30-44-20-10, kWidth-30-30, 30)];
     [btnSubmit setBackgroundColor:[UIColor colorWithRed:67.0/255.0 green:136.0/255.0 blue:253.0/255.0 alpha:1]];
+    [btnSubmit setFont:[UIFont systemFontOfSize:14]];
     btnSubmit.layer.cornerRadius = 3.0;
     if ([self.printer_id isEqualToString:@"-100"]) {
         [btnSubmit setTitle:@"提交" forState:UIControlStateNormal];
@@ -537,6 +543,15 @@
     }
     
     
+}
+#pragma mark UITextFieldDelegate
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [_tfShopName resignFirstResponder];
+     [_tfShopPersonName resignFirstResponder];
+     [_tfShopPersonPhone resignFirstResponder];
+     [_tfShopAddress resignFirstResponder];
+    return YES;
 }
 
 - (void)didReceiveMemoryWarning {

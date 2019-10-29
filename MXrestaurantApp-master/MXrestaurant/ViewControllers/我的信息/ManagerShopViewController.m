@@ -384,6 +384,7 @@
     [btnSubmit setTitle:@"修改" forState:UIControlStateNormal];
     [btnSubmit setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [btnSubmit setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
+    [btnSubmit setFont:[UIFont systemFontOfSize:14]];
     [btnSubmit addTarget:self action:@selector(sumbitClick) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:btnSubmit];
     
