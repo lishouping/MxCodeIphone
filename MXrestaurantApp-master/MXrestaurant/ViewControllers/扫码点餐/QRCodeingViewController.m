@@ -228,13 +228,14 @@
         if ([[responseObject objectForKey:@"CODE"] isEqualToString:@"1000"]) {
             hud.labelText = @"支付成功";
             [hud hide:YES afterDelay:0.5];
-            //说明不是跟视图
-            [self dismissViewControllerAnimated:NO completion:^{}];
+            //跟视图
+            [self.navigationController popToRootViewControllerAnimated:YES];
         }
         else
         {
             hud.labelText = @"支付失败";
             [hud hide:YES afterDelay:0.5];
+            [self.navigationController popViewControllerAnimated:YES];
             
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

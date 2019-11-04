@@ -143,7 +143,7 @@ static int showview = 0;
     
     
     
-    UIView *footView = [[UIView alloc] initWithFrame:CGRectMake(0, kHeight-50-64, kWidth, 50)];
+    UIView *footView = [[UIView alloc] initWithFrame:CGRectMake(0, kHeight-50-TabBarHeight-TabbarSafeBottomMargin-10, kWidth, 50)];
     [self.view addSubview:footView];
     
     UIView *view = [UIView new];
@@ -190,8 +190,8 @@ static int showview = 0;
     [self.view addSubview:shoppingCarView];
     [shoppingCarView zxp_addConstraints:^(ZXPAutoLayoutMaker *layout) {
         layout.widthValue(kWidth);
-        layout.heightValue(kHeight-20-40-22);
-        layout.bottomSpace(50);
+        layout.heightValue(kHeight-TabBarHeight-50);
+        layout.bottomSpace(TabBarHeight+TabbarSafeBottomMargin+20);
     }];
     shoppingCarView.hidden= YES;
     
@@ -202,7 +202,7 @@ static int showview = 0;
     [mypageView zxp_addConstraints:^(ZXPAutoLayoutMaker *layout) {
         layout.widthValue(kWidth);
         layout.heightValue((kHeight-50-40-22)/2);
-        layout.bottomSpace(22);
+        layout.bottomSpace(0);
     }];
     
 

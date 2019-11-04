@@ -128,7 +128,7 @@
 -(void)makeUI{
     btnTableState = [YLButton buttonWithType:UIButtonTypeCustom];
     [btnTableState setFont:[UIFont systemFontOfSize:12]];
-    [btnTableState customButtonWithFrame:CGRectMake(0, 44+20,kWidth/2, 40) title:@"餐桌状态" rightImage:[UIImage imageNamed:@"nav_icon"]];
+    [btnTableState customButtonWithFrame:CGRectMake(0, NavBarHeight,kWidth/2, 40) title:@"餐桌状态" rightImage:[UIImage imageNamed:@"nav_icon"]];
     [btnTableState setTitleColor:[UIColor colorWithRed:87.0/255.0 green:87.0/255.0 blue:87.0/255.0 alpha:1] forState:UIControlStateNormal];
     btnTableState.backgroundColor=[UIColor colorWithRed:233.0/255.0 green:236.0/255.0 blue:241.0/255.0 alpha:1];
     [self.view addSubview:btnTableState];
@@ -138,7 +138,7 @@
     
     btnTableClass = [YLButton buttonWithType:UIButtonTypeCustom];
     [btnTableClass setFont:[UIFont systemFontOfSize:12]];
-    [btnTableClass customButtonWithFrame:CGRectMake(kWidth/2, 44+20,kWidth/2, 40) title:@"餐桌分类" rightImage:[UIImage imageNamed:@"nav_icon"]];
+    [btnTableClass customButtonWithFrame:CGRectMake(kWidth/2, NavBarHeight,kWidth/2, 40) title:@"餐桌分类" rightImage:[UIImage imageNamed:@"nav_icon"]];
     [btnTableClass setTitleColor:[UIColor colorWithRed:87.0/255.0 green:87.0/255.0 blue:87.0/255.0 alpha:1] forState:UIControlStateNormal];
     btnTableClass.backgroundColor=[UIColor colorWithRed:233.0/255.0 green:236.0/255.0 blue:241.0/255.0 alpha:1];
     [self.view addSubview:btnTableClass];
@@ -279,7 +279,7 @@
 -(void)createCollection{
     UICollectionViewFlowLayout *flowLayout=[[UICollectionViewFlowLayout alloc] init];
     [flowLayout setScrollDirection:UICollectionViewScrollDirectionVertical];
-    self.collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 44+20+50,kWidth, kHeight-50-44-50) collectionViewLayout:flowLayout];
+    self.collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, NavBarHeight+10+40,kWidth, kHeight-NavBarHeight-10-40) collectionViewLayout:flowLayout];
     
     //设置代理
     self.collectionView.delegate = self;

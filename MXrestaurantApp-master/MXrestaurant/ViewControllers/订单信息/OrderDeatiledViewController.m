@@ -167,7 +167,7 @@
     
     tableGoodInfo.tableHeaderView = headView;
     
-    UIView *footV = [[UIView alloc] initWithFrame:CGRectMake(0, kHeight-70-44-20, kWidth, 80)];
+    UIView *footV = [[UIView alloc] initWithFrame:CGRectMake(0, kHeight-TabBarHeight-TabbarSafeBottomMargin-80, kWidth, 80)];
     footV.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:footV];
     

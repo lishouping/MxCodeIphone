@@ -29,7 +29,7 @@
         self.tableInfoView.layer.shadowOpacity = 0.5;
         // 阴影半径，默认3
         self.tableInfoView.layer.shadowRadius = 5;
-        self.imgeIcon = [[UIImageView alloc] initWithFrame:CGRectMake(30, 30, 30, 30)];
+        self.imgeIcon = [[UIImageView alloc] initWithFrame:CGRectMake((kWidth-20-20)/3/2-15, 30, 30, 30)];
         [self.tableInfoView addSubview:self.imgeIcon];
         
         

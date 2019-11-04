@@ -12,6 +12,7 @@
 #import "FoodCustomViewController.h"
 #import "OrderHavingDinnerTableViewCell.h"
 #import "PayImageViewController.h"
+#import "QRCodeingViewController.h"
 @interface OrderConductViewController ()<UITableViewDelegate,UITableViewDataSource,UIActionSheetDelegate>{
     UILabel *labOrderNumber;
     UILabel *labTableNumber;
@@ -34,6 +35,8 @@
     MBProgressHUD *hud;
     
     NSString *check_way;
+    
+    NSString *myTotalPrice;
     
 }
 @property(nonatomic,strong)NSMutableArray *dateArray;
@@ -135,7 +138,7 @@
     
     tableGoodInfo.tableHeaderView = headView;
     
-    UIView *footV = [[UIView alloc] initWithFrame:CGRectMake(0, kHeight-70-44-20, kWidth, 80)];
+    UIView *footV = [[UIView alloc] initWithFrame:CGRectMake(0, kHeight-TabBarHeight-TabbarSafeBottomMargin-80, kWidth, 80)];
     footV.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:footV];
     
@@ -287,7 +290,7 @@
             NSString *total_price = [cardic objectForKey:@"total_price"];
             [labTotalPrice setText:[NSString stringWithFormat:@"%@元",total_price]];
           
-            
+            myTotalPrice = total_price;
             
             NSArray *dateArray = [cardic objectForKey:@"goods_set"];
             for (NSDictionary * dic in dateArray)
@@ -344,7 +347,7 @@
                                   delegate:self
                                   cancelButtonTitle:@"取消"
                                   destructiveButtonTitle:nil
-                                  otherButtonTitles:@"现金", @"微信",@"支付宝",nil];
+                                  otherButtonTitles:@"现金", @"微信",@"支付宝",@"微信扫码付",@"支付宝扫码付",nil];
     actionSheet.actionSheetStyle = UIActionSheetStyleBlackOpaque;
     [actionSheet showInView:self.view];
 }
@@ -354,12 +357,27 @@
     if (![[actionSheet buttonTitleAtIndex:buttonIndex ] isEqualToString:@"取消"]) {
         if ([[actionSheet buttonTitleAtIndex:buttonIndex ] isEqualToString:@"现金"]) {
             check_way = @"1";
+            [self checkOrder];
         }else if ([[actionSheet buttonTitleAtIndex:buttonIndex ] isEqualToString:@"微信"]){
             check_way = @"2";
+            [self checkOrder];
         }else if ([[actionSheet buttonTitleAtIndex:buttonIndex ] isEqualToString:@"支付宝"]){
             check_way = @"3";
+            [self checkOrder];
+        }else if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:@"微信扫码付"]){
+            QRCodeingViewController *qc = [[QRCodeingViewController alloc] init];
+            qc.pageType = @"1";
+            qc.order_id = order_id;
+            qc.totalPrice = myTotalPrice;
+            [self.navigationController pushViewController:qc animated:YES];
+        }else if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:@"支付宝扫码付"]){
+            QRCodeingViewController *qc = [[QRCodeingViewController alloc] init];
+            qc.pageType = @"2";
+            qc.order_id = order_id;
+            qc.totalPrice = myTotalPrice;
+            [self.navigationController pushViewController:qc animated:YES];
         }
-        [self checkOrder];
+        
     }
 }
 // 结账

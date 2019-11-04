@@ -37,7 +37,7 @@
 }
 - (void)makeUI{
     [self.view setBackgroundColor:[UIColor whiteColor]];
-    LMJTab * tab = [[LMJTab alloc] initWithFrame:CGRectMake(10, 10, 300, 30) lineWidth:1 lineColor:[UIColor colorWithRed:79.0/255.0 green:145.0/255.0 blue:244/255.0 alpha:1]];
+    LMJTab * tab = [[LMJTab alloc] initWithFrame:CGRectMake(10, 10, kWidth-10-10, 30) lineWidth:1 lineColor:[UIColor colorWithRed:79.0/255.0 green:145.0/255.0 blue:244/255.0 alpha:1]];
     [tab setItemsWithTitle:[NSArray arrayWithObjects:@"微信",@"支付宝", nil] normalItemColor:[UIColor whiteColor] selectItemColor:[UIColor colorWithRed:79.0/255.0 green:145.0/255.0 blue:244/255.0 alpha:1] normalTitleColor:[UIColor colorWithRed:79.0/255.0 green:145.0/255.0 blue:244/255.0 alpha:1] selectTitleColor:[UIColor whiteColor] titleTextSize:15 selectItemNumber:0];
     tab.delegate = self;
     tab.layer.cornerRadius = 5.0;
@@ -108,8 +108,10 @@
         if ([[responseObject objectForKey:@"CODE"] isEqualToString:@"1000"]) {
             NSDictionary *dics =[responseObject objectForKey:@"DATA"];
             
-            NSString *wechat_img = [NSString stringWithFormat:@"%@/%@",RESOURCE_URL,[dics objectForKey:@"wechat_img"]];
-            NSString *alipay_img = [NSString stringWithFormat:@"%@/%@",RESOURCE_URL,[dics objectForKey:@"alipay_img"]];;
+        
+            NSString *wechat_img = [NSString stringWithFormat:@"%@/heygay%@",RESOURCE_URL,[dics objectForKey:@"wechat_img"]];
+            NSString *alipay_img = [NSString stringWithFormat:@"%@/heygay%@",RESOURCE_URL,[dics objectForKey:@"alipay_img"]];
+            
             
             if ([selectBtnFlag isEqualToString:@"0"]) {
                 //微信

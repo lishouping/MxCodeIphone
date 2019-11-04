@@ -87,20 +87,20 @@
     
 }
 - (void)makeUI{
-    LMJTab * tab = [[LMJTab alloc] initWithFrame:CGRectMake(10, 10+44+20, kWidth-10-10, 30) lineWidth:1 lineColor:[UIColor colorWithRed:79.0/255.0 green:145.0/255.0 blue:244/255.0 alpha:1]];
+    LMJTab * tab = [[LMJTab alloc] initWithFrame:CGRectMake(10, NavBarHeight+10, kWidth-10-10, 30) lineWidth:1 lineColor:[UIColor colorWithRed:79.0/255.0 green:145.0/255.0 blue:244/255.0 alpha:1]];
     [tab setItemsWithTitle:[NSArray arrayWithObjects:@"未处理",@"正在用餐", @"已完成",nil] normalItemColor:[UIColor whiteColor] selectItemColor:[UIColor colorWithRed:79.0/255.0 green:145.0/255.0 blue:244/255.0 alpha:1] normalTitleColor:[UIColor colorWithRed:79.0/255.0 green:145.0/255.0 blue:244/255.0 alpha:1] selectTitleColor:[UIColor whiteColor]  titleTextSize:12 selectItemNumber:0];
     tab.delegate = self;
     tab.layer.cornerRadius = 5.0;
     [self.view addSubview:tab];
     
-    tableService = [[UITableView alloc] initWithFrame:CGRectMake(0, 30+44+40, kWidth, kHeight-44-30-40) style:UITableViewStylePlain];
+    tableService = [[UITableView alloc] initWithFrame:CGRectMake(0, NavBarHeight+10+30+10, kWidth, kHeight-TabBarHeight-30-10-10-10) style:UITableViewStylePlain];
     tableService.delegate = self;
     tableService.dataSource = self;
     [self.view addSubview:tableService];
     tableService.tableFooterView = [[UIView alloc] init];
     [self createRightBtn];
     
-    nodateView = [[UIView alloc] initWithFrame:CGRectMake(0, 30+44+40, kWidth, kHeight-44-30-40)];
+    nodateView = [[UIView alloc] initWithFrame:CGRectMake(0, NavBarHeight+10+30+10, kWidth, kHeight-TabBarHeight-30-10-10-10)];
     [nodateView setBackgroundColor:[UIColor whiteColor]];
     UIImageView *imgNodate = [[UIImageView alloc] initWithFrame:CGRectMake(kWidth/2-(196/2), 80, 196, 128)];
     [imgNodate setImage:[UIImage imageNamed:@"common_nodata"]];
@@ -244,8 +244,16 @@
         if ([[responseObject objectForKey:@"CODE"] isEqualToString:@"1000"]) {
             NSArray *dateArray = [responseObject objectForKey:@"DATA"];
             if (dateArray.count==0) {
-                nodateView.hidden = NO;
-                tableService.hidden = YES;
+                
+                
+                if (page==1) {
+                    nodateView.hidden = NO;
+                    tableService.hidden = YES;
+                }else{
+                    nodateView.hidden = YES;
+                    tableService.hidden = NO;
+                }
+                
                 [tableService footerEndRefreshing];
                 [tableService headerEndRefreshing];
                  [tableService reloadData];
