@@ -98,9 +98,15 @@
     
     nodateView = [[UIView alloc] initWithFrame:CGRectMake(0,NavBarHeight+10+30+10, kWidth, kHeight-TabBarHeight-30-10-10)];
     [nodateView setBackgroundColor:[UIColor whiteColor]];
-    UIImageView *imgNodate = [[UIImageView alloc] initWithFrame:CGRectMake(kWidth/2-(196/2), 80, 196, 128)];
+    UIImageView *imgNodate = [[UIImageView alloc] initWithFrame:CGRectMake(kWidth/2-(196/2/2), 80, 196/2, 128/2)];
     [imgNodate setImage:[UIImage imageNamed:@"common_nodata"]];
     [nodateView addSubview:imgNodate];
+    UILabel *labNodata = [[UILabel alloc] initWithFrame:CGRectMake(0, 80+(128/2)+20, kWidth, 20)];
+    [labNodata setText:@"暂无数据"];
+    labNodata.textAlignment = NSTextAlignmentCenter;
+    [labNodata setFont:[UIFont systemFontOfSize:12]];
+    [nodateView addSubview:labNodata];
+    
     [self.view addSubview:nodateView];
 }
 
@@ -217,10 +223,15 @@
             totalnum = [[responseObject objectForKey:@"totalnum"] intValue];
             NSArray *dateArray = [responseObject objectForKey:@"DATA"];
             if (dateArray.count==0) {
+                if (page==1) {
+                    nodateView.hidden = NO;
+                    tableService.hidden = YES;
+                }else{
+                    nodateView.hidden = YES;
+                    tableService.hidden = NO;
+                }
                 [tableService footerEndRefreshing];
                 [tableService headerEndRefreshing];
-                nodateView.hidden = NO;
-                tableService.hidden = YES;
                 UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"无更多数据" message:@"" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"好", nil];
                 [alert show];
                 return ;

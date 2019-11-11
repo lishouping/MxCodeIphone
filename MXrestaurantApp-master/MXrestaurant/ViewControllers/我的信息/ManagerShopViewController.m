@@ -378,7 +378,7 @@
     [btnAlLogo addTarget:self action:@selector(selectPic:) forControlEvents:UIControlEventTouchUpInside];
     [_scrollView addSubview:btnAlLogo];
     
-    btnSubmit = [[UIButton alloc] initWithFrame:CGRectMake(30,  kHeight-TabBarHeight-TabbarSafeBottomMargin-30, kWidth-30-30, 30)];
+    btnSubmit = [[UIButton alloc] initWithFrame:CGRectMake(30,  kHeight-TabBarHeight-TabbarSafeBottomMargin-30-10-10, kWidth-30-30, 30)];
     [btnSubmit setBackgroundColor:[UIColor colorWithRed:67.0/255.0 green:136.0/255.0 blue:253.0/255.0 alpha:1]];
     btnSubmit.layer.cornerRadius = 3.0;
     [btnSubmit setTitle:@"修改" forState:UIControlStateNormal];

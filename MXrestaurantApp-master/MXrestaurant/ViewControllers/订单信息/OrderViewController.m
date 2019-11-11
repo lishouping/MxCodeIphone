@@ -102,9 +102,16 @@
     
     nodateView = [[UIView alloc] initWithFrame:CGRectMake(0, NavBarHeight+10+30+10, kWidth, kHeight-TabBarHeight-30-10-10-10)];
     [nodateView setBackgroundColor:[UIColor whiteColor]];
-    UIImageView *imgNodate = [[UIImageView alloc] initWithFrame:CGRectMake(kWidth/2-(196/2), 80, 196, 128)];
+    UIImageView *imgNodate = [[UIImageView alloc] initWithFrame:CGRectMake(kWidth/2-(196/2/2), 80, 196/2, 128/2)];
     [imgNodate setImage:[UIImage imageNamed:@"common_nodata"]];
     [nodateView addSubview:imgNodate];
+    
+    UILabel *labNodata = [[UILabel alloc] initWithFrame:CGRectMake(0, 80+(128/2)+20, kWidth, 20)];
+    [labNodata setText:@"暂无数据"];
+    labNodata.textAlignment = NSTextAlignmentCenter;
+    [labNodata setFont:[UIFont systemFontOfSize:12]];
+    [nodateView addSubview:labNodata];
+    
     [self.view addSubview:nodateView];
     
 }
@@ -161,16 +168,16 @@
     if (number==0) {
         selectBtnFlag = @"-1";
         [self.dateArray removeAllObjects];
-        [tableService reloadData];
+        //[tableService reloadData];
         [tableService headerBeginRefreshing];
     }else if (number==1){
         [self.dateArray removeAllObjects];
-        [tableService reloadData];
+        //[tableService reloadData];
         selectBtnFlag = @"0";
         [tableService headerBeginRefreshing];
     }else if (number==2){
         [self.dateArray removeAllObjects];
-        [tableService reloadData];
+        //[tableService reloadData];
         selectBtnFlag = @"1";
         [tableService headerBeginRefreshing];
     }
@@ -467,17 +474,26 @@
 
 //结账
 -(void)checkOrderClick:(UIButton *)btn{
-     OrderModel *svm = self.dateArray[btn.tag];
-    order_ids = svm.order_id;
-    myTotalPrice = svm.payment;
-    UIActionSheet *actionSheet = [[UIActionSheet alloc]
-                                  initWithTitle:@"请选择付款方式"
-                                  delegate:self
-                                  cancelButtonTitle:@"取消"
-                                  destructiveButtonTitle:nil
-                                  otherButtonTitles:@"现金", @"微信",@"支付宝",@"微信扫码付",@"支付宝扫码付",nil];
-    actionSheet.actionSheetStyle = UIActionSheetStyleBlackOpaque;
-    [actionSheet showInView:self.view];
+    NSString *if_check = [[userDefaults objectForKey:@"if_check_MX"] stringValue];
+    if ([if_check isEqualToString:@"1"]) {
+        OrderModel *svm = self.dateArray[btn.tag];
+        order_ids = svm.order_id;
+        myTotalPrice = svm.payment;
+        UIActionSheet *actionSheet = [[UIActionSheet alloc]
+                                      initWithTitle:@"请选择付款方式"
+                                      delegate:self
+                                      cancelButtonTitle:@"取消"
+                                      destructiveButtonTitle:nil
+                                      otherButtonTitles:@"现金", @"微信",@"支付宝",@"微信扫码付",@"支付宝扫码付",nil];
+        actionSheet.actionSheetStyle = UIActionSheetStyleBlackOpaque;
+        [actionSheet showInView:self.view];
+    }else{
+        hud=[MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+        hud.labelText=@"暂不支持此权限";
+        hud.minSize = CGSizeMake(100.f, 100.f);
+        hud.color=[UIColor blackColor];
+        [hud hide:YES afterDelay:1.5];
+    }
 }
 
 // 服务员确认下单

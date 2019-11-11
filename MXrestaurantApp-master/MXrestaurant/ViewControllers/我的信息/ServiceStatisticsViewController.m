@@ -156,9 +156,15 @@
     
     nodateView = [[UIView alloc] initWithFrame:CGRectMake(0, 40+10+30+10, kWidth, kHeight-( 40+10+30))];
     [nodateView setBackgroundColor:[UIColor whiteColor]];
-    UIImageView *imgNodate = [[UIImageView alloc] initWithFrame:CGRectMake(kWidth/2-(196/2), 80, 196, 128)];
+    UIImageView *imgNodate = [[UIImageView alloc] initWithFrame:CGRectMake(kWidth/2-(196/2/2), 80, 196/2, 128/2)];
     [imgNodate setImage:[UIImage imageNamed:@"common_nodata"]];
     [nodateView addSubview:imgNodate];
+    UILabel *labNodata = [[UILabel alloc] initWithFrame:CGRectMake(0, 80+(128/2)+20, kWidth, 20)];
+    [labNodata setText:@"暂无数据"];
+    labNodata.textAlignment = NSTextAlignmentCenter;
+    [labNodata setFont:[UIFont systemFontOfSize:12]];
+    [nodateView addSubview:labNodata];
+    
     [self.view addSubview:nodateView];
 }
 

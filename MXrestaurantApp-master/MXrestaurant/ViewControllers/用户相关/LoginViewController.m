@@ -127,7 +127,8 @@
         NSString *postUrl = [NSString stringWithFormat:@"%@%@",API_URL ,USERLOGIN_URL];
         NSDictionary *parameters = @{@"user_name": tfuserName.text,
                                      @"password": tfpassWord.text,
-                                     @"type":@"2"
+                                     @"type":@"2",
+                                     @"from":@"3"
                                      };
 
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -153,6 +154,7 @@
                 NSString *name = [dic1 objectForKey:@"name"];
                 NSString *business_id = [dic objectForKey:@"business_id"];
                 NSString *role_id = [dic objectForKey:@"role_id"];
+                NSString *if_check = [dic1 objectForKey:@"if_check"];
                 
                 NSUserDefaults * userDefaults=[NSUserDefaults standardUserDefaults];
                 [userDefaults setObject:tfuserName.text forKey:@"userName_MX"];
@@ -163,6 +165,7 @@
                 [userDefaults setObject:name forKey:@"name_MX"];
                 [userDefaults setObject:business_id forKey:@"business_id_MX"];
                 [userDefaults setObject:role_id forKey:@"role_id_MX"];
+                [userDefaults setObject:if_check forKey:@"if_check_MX"];
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"loginState" object:@YES];
                 
                 [self getShopInfo];

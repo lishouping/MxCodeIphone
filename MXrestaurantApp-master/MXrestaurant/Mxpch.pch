@@ -11,7 +11,7 @@
 
 
 #import "UIView+SDAutoLayout.h"
-
+// 屏幕相关项设置
 //屏幕rect
 #define SCREEN_BOUNDS ([UIScreen mainScreen].bounds)
 //屏幕宽度
@@ -31,8 +31,9 @@
 //安全区域高度
 #define TabbarSafeBottomMargin (IS_iPhoneX ? 34.f : 0.f)
 
-
+//屏幕高度
 #define kHeight [[UIScreen mainScreen] bounds].size.height
+//屏幕宽度
 #define kWidth  [[UIScreen mainScreen] bounds].size.width
 #define VIEWSAFEAREAINSETS(view) ({UIEdgeInsets i; if(@available(iOS 11.0, *)) {i = view.safeAreaInsets;} else {i = UIEdgeInsetsZero;} i;})
 #define KNOTIFICATION_LOGINCHANGE @"loginStateChange"
@@ -46,11 +47,16 @@
 #import "ZXPAutoLayout.h"
 #import "LMJTab.h"
 
-
+//----服务器相关设置开始------
+//业务服务器
 #define API_URL @"http://47.92.66.33:8080/heygay"
+//图片预览服务器
 #define RESOURCE_URL @"http://www.heyguy.cn/images"
-#define API_URL_MEMBER @"http://47.92.208.3:8090"
-#define UPLOADIMAGE_URL @"http://39.104.125.56:8080/heygay/"
+//会员系统服务器
+#define API_URL_MEMBER @"http://47.92.66.33:8090"
+//图片上传服务器
+#define UPLOADIMAGE_URL @"http://47.92.66.33:8080/heygay"
+//----服务器相关设置结束------
 
 // 接口详细地址的调用
 // 用户登录

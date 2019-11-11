@@ -342,14 +342,24 @@
 
 //结账
 -(void)submitClick{
-    UIActionSheet *actionSheet = [[UIActionSheet alloc]
-                                  initWithTitle:@"请选择付款方式"
-                                  delegate:self
-                                  cancelButtonTitle:@"取消"
-                                  destructiveButtonTitle:nil
-                                  otherButtonTitles:@"现金", @"微信",@"支付宝",@"微信扫码付",@"支付宝扫码付",nil];
-    actionSheet.actionSheetStyle = UIActionSheetStyleBlackOpaque;
-    [actionSheet showInView:self.view];
+    NSString *if_check = [[userDefaults objectForKey:@"if_check_MX"] stringValue];
+    if ([if_check isEqualToString:@"1"]) {
+        UIActionSheet *actionSheet = [[UIActionSheet alloc]
+                                      initWithTitle:@"请选择付款方式"
+                                      delegate:self
+                                      cancelButtonTitle:@"取消"
+                                      destructiveButtonTitle:nil
+                                      otherButtonTitles:@"现金", @"微信",@"支付宝",@"微信扫码付",@"支付宝扫码付",nil];
+        actionSheet.actionSheetStyle = UIActionSheetStyleBlackOpaque;
+        [actionSheet showInView:self.view];
+    }else{
+        hud=[MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+        hud.labelText=@"暂不支持此权限";
+        hud.minSize = CGSizeMake(100.f, 100.f);
+        hud.color=[UIColor blackColor];
+        [hud hide:YES afterDelay:1.5];
+    }
+    
 }
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
