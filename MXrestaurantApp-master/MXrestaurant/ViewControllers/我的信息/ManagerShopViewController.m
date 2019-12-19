@@ -502,25 +502,46 @@
             NSString *shop_owner_name = [NSString stringWithFormat:@"%@",[dics objectForKey:@"shop_owner_name"]];
             NSString *shop_owner_phone = [NSString stringWithFormat:@"%@",[dics objectForKey:@"shop_owner_phone"]];
             NSString *introduction = [NSString stringWithFormat:@"%@",[dics objectForKey:@"introduction"]];
-            NSString *notice = [NSString stringWithFormat:@"%@",[dics objectForKey:@"notice"]];
+             NSString *notice;
+            if (![[dics objectForKey:@"notice"] isEqual:[NSNull null]]) {
+                 notice = [NSString stringWithFormat:@"%@",[dics objectForKey:@"notice"]];
+            }else{
+                notice = @"";
+            }
+           
             NSString *begin_time = [NSString stringWithFormat:@"%@",[dics objectForKey:@"begin_time"]];
             starttime = begin_time;
             NSString *end_time = [NSString stringWithFormat:@"%@",[dics objectForKey:@"end_time"]];
             endtime = end_time;
-            NSString *wechat_img = [NSString stringWithFormat:@"%@/heygay%@",RESOURCE_URL,[dics objectForKey:@"wechat_img"]];
-            NSString *alipay_img = [NSString stringWithFormat:@"%@/heygay%@",RESOURCE_URL,[dics objectForKey:@"alipay_img"]];
+            
+            
+            NSString *wechat_img;
+            if (![[dics objectForKey:@"alipay_img"] isEqual:[NSNull null]]) {
+                wechat_img = [NSString stringWithFormat:@"%@/heygay%@",RESOURCE_URL,[dics objectForKey:@"wechat_img"]];
+                NSURL *wx_img = [[NSURL alloc] initWithString:wechat_img];
+                [wxLogo sd_setImageWithURL:wx_img];
+            }
+            
+            NSString *alipay_img;
+            if (![[dics objectForKey:@"alipay_img"] isEqual:[NSNull null]]) {
+                alipay_img = [NSString stringWithFormat:@"%@/heygay%@",RESOURCE_URL,[dics objectForKey:@"alipay_img"]];
+                NSURL *alp_img = [[NSURL alloc] initWithString:alipay_img];
+                [alpayLogo sd_setImageWithURL:alp_img];
+            }
+            
             NSString *icon = [NSString stringWithFormat:@"%@/heygay%@",RESOURCE_URL,[dics objectForKey:@"icon"]];
             
             NSURL *icon_img = [[NSURL alloc] initWithString:icon];
             [imgLogo sd_setImageWithURL:icon_img];
             
-            NSURL *wx_img = [[NSURL alloc] initWithString:wechat_img];
-            [wxLogo sd_setImageWithURL:wx_img];
             
-            NSURL *alp_img = [[NSURL alloc] initWithString:alipay_img];
-            [alpayLogo sd_setImageWithURL:alp_img];
+            
+            
             
             NSString *shop_phone = [dics objectForKey:@"shop_phone"];
+            if ([shop_phone isEqual:[NSNull null]]) {
+                shop_phone = @"";
+            }
             
             NSNumber *printWay = [dics objectForKey:@"print_way"];
             if (printWay==1) {
@@ -530,11 +551,22 @@
                 print_way = @"2";
                 [btnSelect setTitle:@"一单一打" forState:UIControlStateNormal];
             }
-          
-            NSString *cooker_off_time = [dics objectForKey:@"cooker_off_time"];
-            csXbTime =cooker_off_time;
-            NSString *last_check_time = [dics objectForKey:@"last_check_time"];
-            jzTime = last_check_time;
+            NSString *cooker_off_time;
+            if (![[dics objectForKey:@"cooker_off_time"] isEqual:[NSNull null]]) {
+                cooker_off_time = [dics objectForKey:@"cooker_off_time"];
+                csXbTime =cooker_off_time;
+            }else{
+                csXbTime = @"";
+            }
+            NSString *last_check_time;
+            if (![[dics objectForKey:@"last_check_time"] isEqual:[NSNull null]]) {
+                last_check_time = [dics objectForKey:@"last_check_time"];
+                jzTime = last_check_time;
+            }else{
+                jzTime = @"";
+            }
+            
+            
             
             [btnCsXb setTitle:cooker_off_time forState:UIControlStateNormal];
             [btnJzTime setTitle:last_check_time forState:UIControlStateNormal];
@@ -542,13 +574,17 @@
             NSString *other = [dics objectForKey:@"other"];
             
             NSString *offer = [dics objectForKey:@"offer"];
-            
-            
-            [_tfServiceTs setText:other];
-            [_tfZhaopin setText:offer];
-            
-            
-            
+            if (![other isEqual:[NSNull null]]) {
+                [_tfServiceTs setText:other];
+            }else{
+                [_tfServiceTs setText:@""];
+            }
+            if (![offer isEqual:[NSNull null]]) {
+                [_tfZhaopin setText:offer];
+            }else{
+                [_tfZhaopin setText:@""];
+            }
+
             [_tfShopName setText:shop_name];
             [_tfShopAddress setText:address];
             [_tfShopPersonName setText:shop_owner_name];
@@ -557,7 +593,12 @@
             [_tfShopPersonPhone setText:shop_owner_phone];
             [_tfShopIntroduction setText:introduction];
             [_tfShopNotice setText:notice];
-            [_tfShopMobilePhone setText:shop_phone];
+            
+            if (![shop_phone isEqual:[NSNull null]]) {
+                [_tfShopMobilePhone setText:shop_phone];
+            }else{
+                [_tfShopMobilePhone setText:@""];
+            }
            
         }
         

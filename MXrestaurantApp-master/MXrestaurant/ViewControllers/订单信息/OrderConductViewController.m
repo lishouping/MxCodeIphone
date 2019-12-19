@@ -285,46 +285,47 @@
             
             [labSubOrderTime setText:[NSString stringWithFormat:@"下单时间:%@",[self timeWithTimeIntervalString:order_time]]];
             
-            NSDictionary *cardic = [dics objectForKey:@"cart"];
-            
-            NSString *total_price = [cardic objectForKey:@"total_price"];
-            [labTotalPrice setText:[NSString stringWithFormat:@"%@元",total_price]];
-          
-            myTotalPrice = total_price;
-            
-            NSArray *dateArray = [cardic objectForKey:@"goods_set"];
-            for (NSDictionary * dic in dateArray)
-            {
+            if (![[dics objectForKey:@"cart"] isEqual:[NSNull null]]) {
+                NSDictionary *cardic = [dics objectForKey:@"cart"];
                 
-                
-                NSString *good_id = [[NSNumber numberWithLong:[ [dic objectForKey:@"good_id"] longValue]] stringValue];
-                NSString *pre_price = [[NSNumber numberWithLong:[ [dic objectForKey:@"pre_price"]longValue]] stringValue];
-                NSString *good_name = [dic objectForKey:@"good_name"];
-                NSString *good_price = [NSString stringWithFormat:@"%.1f",[[dic objectForKey:@"good_price"]doubleValue]];
-                NSString *good_num = [[NSNumber numberWithLong:[[dic objectForKey:@"good_num"]longValue]] stringValue];
-                NSString *good_total_price = [NSString stringWithFormat:@"%.1f",[[dic objectForKey:@"good_total_price"]doubleValue]];
-                
-                NSString *cart_good_id = [[NSNumber numberWithLong:[[dic objectForKey:@"cart_good_id"]longValue]] stringValue];
-                NSString *if_up = [[NSNumber numberWithLong:[[dic objectForKey:@"if_up"]longValue]] stringValue];
-                
-                GoodInfoModel *model = [[GoodInfoModel alloc] init];
-                model.good_id = good_id;
-                model.pre_price = pre_price;
-                model.good_name = good_name;
-                model.good_price = good_price;
-                model.good_num = good_num;
-                model.good_total_price = good_total_price;
-                model.cart_good_id = cart_good_id;
-                model.if_up = if_up;
-                NSString *ext_size_id = [dic objectForKey:@"ext_size_id"];
-                
-                if ([[dic objectForKey:@"ext_size_id"] isEqual:[NSNull null]]) {
-                    ext_size_id = @"-100";
+                 NSString *total_price = [cardic objectForKey:@"total_price"];
+                 myTotalPrice = total_price;
+                 [labTotalPrice setText:[NSString stringWithFormat:@"%@元",total_price]];
+                NSArray *dateArray = [cardic objectForKey:@"goods_set"];
+                for (NSDictionary * dic in dateArray)
+                {
+                    
+                    
+                    NSString *good_id = [[NSNumber numberWithLong:[ [dic objectForKey:@"good_id"] longValue]] stringValue];
+                    NSString *pre_price = [[NSNumber numberWithLong:[ [dic objectForKey:@"pre_price"]longValue]] stringValue];
+                    NSString *good_name = [dic objectForKey:@"good_name"];
+                    NSString *good_price = [NSString stringWithFormat:@"%.1f",[[dic objectForKey:@"good_price"]doubleValue]];
+                    NSString *good_num = [[NSNumber numberWithLong:[[dic objectForKey:@"good_num"]longValue]] stringValue];
+                    NSString *good_total_price = [NSString stringWithFormat:@"%.1f",[[dic objectForKey:@"good_total_price"]doubleValue]];
+                    
+                    NSString *cart_good_id = [[NSNumber numberWithLong:[[dic objectForKey:@"cart_good_id"]longValue]] stringValue];
+                    NSString *if_up = [[NSNumber numberWithLong:[[dic objectForKey:@"if_up"]longValue]] stringValue];
+                    
+                    GoodInfoModel *model = [[GoodInfoModel alloc] init];
+                    model.good_id = good_id;
+                    model.pre_price = pre_price;
+                    model.good_name = good_name;
+                    model.good_price = good_price;
+                    model.good_num = good_num;
+                    model.good_total_price = good_total_price;
+                    model.cart_good_id = cart_good_id;
+                    model.if_up = if_up;
+                    NSString *ext_size_id = [dic objectForKey:@"ext_size_id"];
+                    
+                    if ([[dic objectForKey:@"ext_size_id"] isEqual:[NSNull null]]) {
+                        ext_size_id = @"-100";
+                    }
+                    model.ext_size_id = ext_size_id;
+                    [self.dateArray addObject:model];
                 }
-                model.ext_size_id = ext_size_id;
-                [self.dateArray addObject:model];
+                [tableGoodInfo reloadData];
             }
-            [tableGoodInfo reloadData];
+ 
         }
         
         else
@@ -492,10 +493,10 @@
         [alert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
             textField.placeholder = @"请输入退菜数量";
         }];
-        [alert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
-            textField.placeholder = @"请输入退菜价格";
-        }];
-        
+//        [alert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+//            textField.placeholder = @"请输入退菜价格";
+//        }];
+//
         [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             UITextField *tf = alert.textFields.firstObject;
             UITextField *tf1 = alert.textFields.lastObject;
@@ -509,13 +510,13 @@
             NSString *postUrl = [NSString stringWithFormat:@"%@%@",API_URL,RETURNGOODS];
             if ([model.ext_size_id isEqualToString:@"-100"]) {
                 parameters = @{@"cart_goods_id": model.cart_good_id,
-                               @"num":tf.text,
-                               @"price":tf1.text
+                               @"num":tf.text
+                              // @"price":tf1.text
                                };
             }else{
                 parameters = @{@"cart_goods_id": model.cart_good_id,
                                @"num":tf.text,
-                               @"price":tf1.text,
+                               //@"price":tf1.text,
                                @"ext_id":model.ext_size_id
                                };
             }

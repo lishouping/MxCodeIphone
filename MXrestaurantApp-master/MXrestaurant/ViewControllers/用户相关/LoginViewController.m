@@ -63,10 +63,11 @@
     [userView addSubview:userImg];
     
     tfuserName = [[UITextField alloc] initWithFrame:CGRectMake(60+5, 0, kWidth-(30+60+30), 40)];
+      tfuserName.delegate = self;
     tfuserName.placeholder = @"用户名";
-    tfuserName.delegate = self;
     [tfuserName setTextColor:[UIColor blackColor]];
     tfuserName.font = [UIFont systemFontOfSize:13];
+       tfuserName.clearButtonMode = UITextFieldViewModeWhileEditing;
     [userView addSubview:tfuserName];
     //关闭键盘输入第一个字母大写的问题
     [tfuserName setAutocapitalizationType:UITextAutocapitalizationTypeNone];
@@ -166,19 +167,16 @@
                 [userDefaults setObject:business_id forKey:@"business_id_MX"];
                 [userDefaults setObject:role_id forKey:@"role_id_MX"];
                 [userDefaults setObject:if_check forKey:@"if_check_MX"];
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"loginState" object:@YES];
-                
-                [self getShopInfo];
-                
+               
                 [JPUSHService setAlias:alias callbackSelector:@selector(tagsAliasCallback:tags:alias:) object:self];
+                [self getShopInfo];
+               
             }
 
             else
             {
-                UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"" message:[NSString stringWithFormat:@"%@",[responseObject objectForKey:@"message"]] delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"好", nil];
-                [alert show];
+                hud.labelText = [responseObject objectForKey:@"MESSAGE"];
                 [hud hide:YES afterDelay:0.5];
-
             }
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             hud.labelText = @"网络连接异常";
@@ -230,6 +228,9 @@
             NSString *menmbers_shop_id = [NSString stringWithFormat:@"%@",[dics objectForKey:@"menmbers_shop_id"]];
             [userDefaults setObject:shop_name forKey:@"shop_name"];
             [userDefaults setObject:menmbers_shop_id forKey:@"menmbers_shop_id"];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"loginState" object:@YES];
+            
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

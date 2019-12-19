@@ -11,6 +11,12 @@
 
 
 #import "UIView+SDAutoLayout.h"
+
+#define TEXT_BIGER [UIFont systemFontOfSize:18]
+#define TEXT_BIG [UIFont systemFontOfSize:16]
+#define TEXT_MIDDLE [UIFont systemFontOfSize:14]
+#define TEXT_SMALL [UIFont systemFontOfSize:12]
+
 // 屏幕相关项设置
 //屏幕rect
 #define SCREEN_BOUNDS ([UIScreen mainScreen].bounds)

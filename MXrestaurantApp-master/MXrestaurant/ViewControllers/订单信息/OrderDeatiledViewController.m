@@ -444,9 +444,9 @@
                 NSString *good_id = [[NSNumber numberWithLong:[ [dic objectForKey:@"good_id"] longValue]] stringValue];
                 NSString *pre_price = [[NSNumber numberWithLong:[ [dic objectForKey:@"pre_price"]longValue]] stringValue];
                 NSString *good_name = [dic objectForKey:@"good_name"];
-                NSString *good_price = [NSString stringWithFormat:@"%.1f",[[dic objectForKey:@"good_price"]doubleValue]];
+                NSString *good_price = [NSString stringWithFormat:@"%.2f",[[dic objectForKey:@"good_price"]doubleValue]];
                 NSString *good_num = [[NSNumber numberWithLong:[[dic objectForKey:@"good_num"]longValue]] stringValue];
-                NSString *good_total_price = [NSString stringWithFormat:@"%.1f",[[dic objectForKey:@"good_total_price"]doubleValue]];
+                NSString *good_total_price = [NSString stringWithFormat:@"%.2f",[[dic objectForKey:@"good_total_price"]doubleValue]];
                 
                 NSString *cart_good_id = [[NSNumber numberWithLong:[[dic objectForKey:@"cart_good_id"]longValue]] stringValue];
                 NSString *if_up = [[NSNumber numberWithLong:[[dic objectForKey:@"if_up"]longValue]] stringValue];
@@ -859,9 +859,9 @@
             [alert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
                 textField.placeholder = @"请输入退菜数量";
             }];
-            [alert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
-                textField.placeholder = @"请输入退菜价格";
-            }];
+//            [alert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+//                textField.placeholder = @"请输入退菜价格";
+//            }];
             
             [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                 UITextField *tf = alert.textFields.firstObject;
@@ -876,13 +876,13 @@
                 NSDictionary *parameters;
                 if ([model.ext_size_id isEqualToString:@"-100"]) {
                     parameters = @{@"cart_goods_id": model.cart_good_id,
-                                   @"num":tf.text,
-                                   @"price":tf1.text
+                                   @"num":tf.text
+                                   //@"price":tf1.text
                                    };
                 }else{
                     parameters = @{@"cart_goods_id": model.cart_good_id,
                                    @"num":tf.text,
-                                   @"price":tf1.text,
+                                   //@"price":tf1.text,
                                    @"ext_id":model.ext_size_id
                                    };
                 }

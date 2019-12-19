@@ -309,6 +309,19 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		EE4161D2237C22CB005B8A7C /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		47000DB61FB1D6080016FE4D /* ServiceModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ServiceModel.h; sourceTree = "<group>"; };
 		47000DB71FB1D6080016FE4D /* ServiceModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ServiceModel.m; sourceTree = "<group>"; };
@@ -723,6 +736,9 @@
 		EE3E86092361DC4A00510477 /* MemberTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MemberTableViewCell.h; sourceTree = "<group>"; };
 		EE3E860A2361DC4A00510477 /* MemberTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MemberTableViewCell.m; sourceTree = "<group>"; };
 		EE3FC947236325AD002A1CF1 /* paizhao.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = paizhao.png; sourceTree = "<group>"; };
+		EE4161C8237C22CB005B8A7C /* KeyboardViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KeyboardViewController.h; sourceTree = "<group>"; };
+		EE4161C9237C22CB005B8A7C /* KeyboardViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KeyboardViewController.m; sourceTree = "<group>"; };
+		EE4161CB237C22CB005B8A7C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EE4624522369BE8F00BF91E3 /* canlo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = canlo.png; sourceTree = "<group>"; };
 		EE4B812E212AEC620071E606 /* ManagerTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ManagerTableViewController.h; sourceTree = "<group>"; };
 		EE4B812F212AEC620071E606 /* ManagerTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ManagerTableViewController.m; sourceTree = "<group>"; };
@@ -830,6 +846,7 @@
 				47E0A50A1FAEA1DF00959C8A /* MXrestaurant */,
 				47E0A5231FAEA1DF00959C8A /* MXrestaurantTests */,
 				47E0A52E1FAEA1DF00959C8A /* MXrestaurantUITests */,
+				EE4161C7237C22CB005B8A7C /* CustomKeyboard */,
 				47E0A5091FAEA1DF00959C8A /* Products */,
 				47E0A6391FAEA3A600959C8A /* Frameworks */,
 			);
@@ -1542,6 +1559,16 @@
 			path = TZImagePickerController;
 			sourceTree = "<group>";
 		};
+		EE4161C7237C22CB005B8A7C /* CustomKeyboard */ = {
+			isa = PBXGroup;
+			children = (
+				EE4161C8237C22CB005B8A7C /* KeyboardViewController.h */,
+				EE4161C9237C22CB005B8A7C /* KeyboardViewController.m */,
+				EE4161CB237C22CB005B8A7C /* Info.plist */,
+			);
+			path = CustomKeyboard;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1552,6 +1579,7 @@
 				47E0A5041FAEA1DE00959C8A /* Sources */,
 				47E0A5051FAEA1DE00959C8A /* Frameworks */,
 				47E0A5061FAEA1DE00959C8A /* Resources */,
+				EE4161D2237C22CB005B8A7C /* Embed App Extensions */,
 			);
 			buildRules = (
 			);

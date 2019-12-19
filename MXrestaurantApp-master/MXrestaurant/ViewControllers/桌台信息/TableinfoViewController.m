@@ -65,6 +65,7 @@
 }
 - (void)viewWillAppear:(BOOL)animated
 {
+    
     [self loadUnreadInform];
     if (self.selectType==nil) {
         //下拉刷新
@@ -89,11 +90,7 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    userDefaults=[NSUserDefaults standardUserDefaults];
-    
-    self.navigationItem.title = [userDefaults objectForKey:@"shop_name"];
-    
+
     self.tableDateArray = [[NSMutableArray alloc] initWithCapacity:0];
     self.aierDateArray= [[NSMutableArray alloc] initWithCapacity:0];
     self.dateArray = [[NSMutableArray alloc] initWithCapacity:0];
@@ -111,6 +108,11 @@
                                              selector:@selector(loginStateChange:)
                                                  name:@"pushnew"
                                                object:nil];
+    
+   
+    userDefaults=[NSUserDefaults standardUserDefaults];
+    NSString *title =[userDefaults objectForKey:@"shop_name"];
+    self.navigationItem.title = title;
 }
 - (void)loginStateChange:(NSNotification *)notification
 {
@@ -929,11 +931,9 @@
             [self loadData];
         }
         else
-        {
-            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"" message:[NSString stringWithFormat:@"%@",[responseObject objectForKey:@"MESSAGE"]] delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"好", nil];
-            [alert show];
-            
-            
+        {            
+            hud.labelText = [responseObject objectForKey:@"MESSAGE"];
+            [hud hide:YES afterDelay:0.5];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         

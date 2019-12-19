@@ -41,6 +41,9 @@ static int showview = 0;
     UISearchBar *searchBar;
     
      MBProgressHUD *hud;
+    
+    NSString *select;
+    
 }
 @property(nonatomic,strong)NSMutableArray *dateArrayCategory;
 @property(nonatomic,strong)NSMutableArray *dateArrayFoodList;
@@ -128,13 +131,13 @@ static int showview = 0;
     [titleView addSubview:labPri];
     
     
-    tableViewClass = [[UITableView alloc] initWithFrame:CGRectMake(0, 40+50, kWidth/3, kHeight-40-80-44) style:UITableViewStylePlain];
+    tableViewClass = [[UITableView alloc] initWithFrame:CGRectMake(0, 40+50, kWidth/3, kHeight-40-80-44-TabbarSafeBottomMargin-TabBarHeight) style:UITableViewStylePlain];
     tableViewClass.delegate = self;
     tableViewClass.dataSource = self;
     [self.view addSubview:tableViewClass];
     tableViewClass.tableFooterView = [[UIView alloc] init];
     
-    tableViewFood = [[UITableView alloc] initWithFrame:CGRectMake(kWidth/3, 40+50, kWidth/3*2, kHeight-40-80-44) style:UITableViewStylePlain];
+    tableViewFood = [[UITableView alloc] initWithFrame:CGRectMake(kWidth/3, 40+50, kWidth/3*2, kHeight-40-80-44-TabbarSafeBottomMargin-50-TabBarHeight) style:UITableViewStylePlain];
     tableViewFood.delegate = self;
     tableViewFood.dataSource = self;
     [self.view addSubview:tableViewFood];
@@ -223,7 +226,7 @@ static int showview = 0;
     
     
    
-    tableViewShopCar = [[UITableView alloc] initWithFrame:CGRectMake(0, 30, kWidth, 220) style:UITableViewStylePlain];
+    tableViewShopCar = [[UITableView alloc] initWithFrame:CGRectMake(0, 30, kWidth, (kHeight-50-40-22)/2) style:UITableViewStylePlain];
     tableViewShopCar.backgroundColor =[UIColor colorWithRed:239.0/255.0 green:239.0/255.0 blue:239.0/255.0 alpha:1];
     tableViewShopCar.delegate = self;
     tableViewShopCar.dataSource = self;
@@ -278,8 +281,8 @@ static int showview = 0;
 
 -(void)leftButtonClick
 {
-    [timer invalidate];
-    timer = nil;
+//    [timer invalidate];
+//    timer = nil;
     [self.navigationController popViewControllerAnimated:NO];
 }
 
@@ -358,6 +361,7 @@ static int showview = 0;
                 model.goods_list = goods_list;
                 [self.dateArrayCategory addObject:model];
             }
+            select = @"0000";
             [tableViewClass reloadData];
             [self getAllDis];
         }
@@ -514,11 +518,11 @@ static int showview = 0;
                 
                 
                 NSString *good_id = [[NSNumber numberWithLong:[ [dic objectForKey:@"good_id"] longValue]] stringValue];
-                NSString *pre_price = [[NSNumber numberWithLong:[ [dic objectForKey:@"pre_price"]longValue]] stringValue];
+                NSString *pre_price =[NSString stringWithFormat:@"%.2f",[[dic objectForKey:@"pre_price"]doubleValue]];
                 NSString *good_name = [dic objectForKey:@"good_name"];
                 NSString *good_num = [[NSNumber numberWithLong:[[dic objectForKey:@"good_num"]longValue]] stringValue];
-                NSString *good_price = [NSString stringWithFormat:@"%.1f",[[dic objectForKey:@"good_price"]doubleValue]];
-                NSString *good_total_price = [NSString stringWithFormat:@"%.1f",[[dic objectForKey:@"good_total_price"]doubleValue]];
+                NSString *good_price = [NSString stringWithFormat:@"%.2f",[[dic objectForKey:@"good_price"]doubleValue]];
+                NSString *good_total_price = [NSString stringWithFormat:@"%.2f",[[dic objectForKey:@"good_total_price"]doubleValue]];
                 
                 
                 
@@ -805,21 +809,25 @@ static int showview = 0;
         linView.backgroundColor = [UIColor colorWithRed:251.0/255.0 green:139.0/255.0 blue:57.0/255.0 alpha:1];
         [slectView addSubview:linView];
         tabcell.selectedBackgroundView = slectView;
-        
-        NSIndexPath *ip=[NSIndexPath indexPathForRow:0 inSection:0];
-        [tableView selectRowAtIndexPath:ip animated:YES scrollPosition:UITableViewScrollPositionBottom];
-        
-       
 
         
+
         tabcell.selectedBackgroundView.backgroundColor = [UIColor whiteColor];
         CategoryModel *model = self.dateArrayCategory[indexPath.section];
         tabcell.labClass.text = model.category_name;
         if (indexPath.section==0) {
             [self selectFoodInfo:model post:indexPath.section];
         }
-        
-        
+        if ([select isEqualToString:@"0000"]) {
+            //默认选中第一行，并执行点击事件
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+            [tableViewClass selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:UITableViewScrollPositionTop];
+            if ([tableViewClass.delegate respondsToSelector:@selector(tableView:didSelectRowAtIndexPath:)]) {
+                [tableViewClass.delegate tableView:tableViewClass didSelectRowAtIndexPath:indexPath];
+            }
+            select = @"1111";
+        }
+      
         
         return tabcell;
     }else if ([tableView isEqual:tableViewFood]){
