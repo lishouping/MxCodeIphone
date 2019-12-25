@@ -503,7 +503,8 @@ static int showview = 0;
             NSNumber *longNumber1 = [NSNumber numberWithLong:[[dics objectForKey:@"total_num"] longValue]];
             NSString *total_num = [longNumber1 stringValue];
             
-            NSString *total_price = [NSString stringWithFormat:@"￥%@",[dics objectForKey:@"total_price"]];
+            NSString *total_price = [NSString stringWithFormat:@"￥%.2f",[[dics objectForKey:@"total_price"]doubleValue]];
+            //NSString *total_price = [NSString stringWithFormat:@"￥%@",[dics objectForKey:@"total_price"]];
             
             labFoodNumber.text = total_num;
             if ([total_price isEqualToString:@"￥(null)"]) {

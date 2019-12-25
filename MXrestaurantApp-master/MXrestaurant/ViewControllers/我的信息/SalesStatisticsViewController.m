@@ -494,8 +494,9 @@
                 if ([[dic objectForKey:@"ze"] isEqual:[NSNull null]]) {
                      shopOrderZe.text = @"0";
                 }else{
-                    NSNumber *ze = [dic objectForKey:@"ze"];
-                    NSString *good_ze = [ze stringValue];
+                    NSString *good_ze = [NSString stringWithFormat:@"￥%.2f",[[dic objectForKey:@"ze"]doubleValue]];
+                    //NSNumber *ze = [dic objectForKey:@"ze"];
+                    //NSString *good_ze = [ze stringValue];
                     shopOrderZe.text = good_ze;
                 }
                 

@@ -339,7 +339,7 @@
                 model.table_name = table_name;
                 model.sales_count =sales_count;
                 model.order_count = order_count;
-                model.sales_payment = [NSString stringWithFormat:@"%2f",[[dic objectForKey:@"sales_payment"] doubleValue]];
+                model.sales_payment = [NSString stringWithFormat:@"%.2f",[[dic objectForKey:@"sales_payment"] doubleValue]];
                 [self.dateArray addObject:model];
             }
             

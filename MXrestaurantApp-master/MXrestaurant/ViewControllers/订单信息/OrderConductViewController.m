@@ -288,7 +288,8 @@
             if (![[dics objectForKey:@"cart"] isEqual:[NSNull null]]) {
                 NSDictionary *cardic = [dics objectForKey:@"cart"];
                 
-                 NSString *total_price = [cardic objectForKey:@"total_price"];
+                 //NSString *total_price = [cardic objectForKey:@"total_price"];
+                NSString *total_price = [NSString stringWithFormat:@"￥%.2f",[[cardic objectForKey:@"total_price"]doubleValue]];
                  myTotalPrice = total_price;
                  [labTotalPrice setText:[NSString stringWithFormat:@"%@元",total_price]];
                 NSArray *dateArray = [cardic objectForKey:@"goods_set"];
@@ -299,9 +300,9 @@
                     NSString *good_id = [[NSNumber numberWithLong:[ [dic objectForKey:@"good_id"] longValue]] stringValue];
                     NSString *pre_price = [[NSNumber numberWithLong:[ [dic objectForKey:@"pre_price"]longValue]] stringValue];
                     NSString *good_name = [dic objectForKey:@"good_name"];
-                    NSString *good_price = [NSString stringWithFormat:@"%.1f",[[dic objectForKey:@"good_price"]doubleValue]];
+                    NSString *good_price = [NSString stringWithFormat:@"%.2f",[[dic objectForKey:@"good_price"]doubleValue]];
                     NSString *good_num = [[NSNumber numberWithLong:[[dic objectForKey:@"good_num"]longValue]] stringValue];
-                    NSString *good_total_price = [NSString stringWithFormat:@"%.1f",[[dic objectForKey:@"good_total_price"]doubleValue]];
+                    NSString *good_total_price = [NSString stringWithFormat:@"%.2f",[[dic objectForKey:@"good_total_price"]doubleValue]];
                     
                     NSString *cart_good_id = [[NSNumber numberWithLong:[[dic objectForKey:@"cart_good_id"]longValue]] stringValue];
                     NSString *if_up = [[NSNumber numberWithLong:[[dic objectForKey:@"if_up"]longValue]] stringValue];
@@ -395,6 +396,7 @@
 -(void)checkOrder{
     NSString *postUrl = [NSString stringWithFormat:@"%@%@",API_URL,CHECK_URL];
     NSDictionary *parameters = @{@"order_id": order_id,
+                                 @"waiter_id":[userDefaults objectForKey:@"business_id_MX"],
                                  @"check_way":check_way
                                  };
     
@@ -510,12 +512,14 @@
             NSString *postUrl = [NSString stringWithFormat:@"%@%@",API_URL,RETURNGOODS];
             if ([model.ext_size_id isEqualToString:@"-100"]) {
                 parameters = @{@"cart_goods_id": model.cart_good_id,
+                               @"waiter_id":[userDefaults objectForKey:@"business_id_MX"],
                                @"num":tf.text
                               // @"price":tf1.text
                                };
             }else{
                 parameters = @{@"cart_goods_id": model.cart_good_id,
                                @"num":tf.text,
+                               @"waiter_id":[userDefaults objectForKey:@"business_id_MX"],
                                //@"price":tf1.text,
                                @"ext_id":model.ext_size_id
                                };

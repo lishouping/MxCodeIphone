@@ -322,14 +322,16 @@
             for (NSDictionary * dic in dateArray)
             {
                 NSString *GOOD_NAME = [dic objectForKey:@"CHECK_WAY"];
-                NSNumber *longNumber = [dic objectForKey:@"PAYMENT"];
-                NSString *PAYMENT = [longNumber stringValue];
-                NSString *good_ze = [dic objectForKey:@"ORDER_COUNT"];
+                NSNumber *longNumber = [dic objectForKey:@"ORDER_COUNT"];
+                NSString *ORDER_COUNT = [longNumber stringValue];
+                //NSString *ORDER_COUNT = [dic objectForKey:@"ORDER_COUNT"];
+                
+                NSString *PAYMENT = [NSString stringWithFormat:@"￥%.2f",[[dic objectForKey:@"PAYMENT"]doubleValue]];
                 
                 FoodStatisModel *model = [[FoodStatisModel alloc] init];
                 model.food_name = GOOD_NAME;
-                model.food_num =PAYMENT;
-                model.food_price = good_ze;
+                model.food_num =ORDER_COUNT;
+                model.food_price = PAYMENT;
                 [self.dateArray addObject:model];
             }
             
@@ -378,7 +380,8 @@
     tabcell.labFoodName.text = model.food_name;
     
     tabcell.labStatisNum.text = model.food_num;
-    tabcell.labTotalPrice.text = [NSString stringWithFormat:@"%@",model.food_price];
+    //NSString *food_price = [NSString stringWithFormat:@"￥%.2f",[model.food_price doubleValue]];
+    tabcell.labTotalPrice.text = model.food_price;
     
     return tabcell;
 }

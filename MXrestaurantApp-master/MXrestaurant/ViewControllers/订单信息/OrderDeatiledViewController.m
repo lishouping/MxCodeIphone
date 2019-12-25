@@ -431,7 +431,9 @@
             
             NSDictionary *cardic = [dics objectForKey:@"cart"];
             
-            NSString *total_price = [cardic objectForKey:@"total_price"];
+            NSString *total_price = [NSString stringWithFormat:@"￥%.2f",[[cardic objectForKey:@"total_price"]doubleValue]];
+            
+            //NSString *total_price = [cardic objectForKey:@"total_price"];
             [labTotalPrice setText:[NSString stringWithFormat:@"%@元",total_price]];
             myTotalPrice = total_price;
             
@@ -544,6 +546,7 @@
     hud.color=[UIColor blackColor];
     NSString *postUrl = [NSString stringWithFormat:@"%@%@",API_URL,CHECK_URL];
     NSDictionary *parameters = @{@"order_id": order_id,
+                                 @"waiter_id":[userDefaults objectForKey:@"business_id_MX"],
                                   @"check_way":check_way
                                  };
     
@@ -876,12 +879,14 @@
                 NSDictionary *parameters;
                 if ([model.ext_size_id isEqualToString:@"-100"]) {
                     parameters = @{@"cart_goods_id": model.cart_good_id,
+                                   @"waiter_id":[userDefaults objectForKey:@"business_id_MX"],
                                    @"num":tf.text
                                    //@"price":tf1.text
                                    };
                 }else{
                     parameters = @{@"cart_goods_id": model.cart_good_id,
                                    @"num":tf.text,
+                                   @"waiter_id":[userDefaults objectForKey:@"business_id_MX"],
                                    //@"price":tf1.text,
                                    @"ext_id":model.ext_size_id
                                    };

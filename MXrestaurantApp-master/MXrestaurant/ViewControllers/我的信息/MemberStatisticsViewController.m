@@ -271,8 +271,10 @@
     [manager POST:postUrl parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"结果: %@", responseObject);
         if ([[responseObject objectForKey:@"code"] isEqualToString:@"0"]) {
-            NSNumber *num = [responseObject objectForKey:@"data"];
-            NSString *money = [num stringValue];
+            //NSNumber *num = [responseObject objectForKey:@"data"];
+            //NSString *money = [num stringValue];
+            
+            NSString *money = [NSString stringWithFormat:@"￥%.2f",[[responseObject objectForKey:@"data"]doubleValue]];
             [shopOrderNum setText:money];
         }else
         {

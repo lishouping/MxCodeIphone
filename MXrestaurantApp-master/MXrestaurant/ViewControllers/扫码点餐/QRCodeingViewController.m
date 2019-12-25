@@ -208,6 +208,7 @@
     
     NSDictionary *parameters = @{
                                  @"order_id": self.order_id,
+                                 @"waiter_id":[userDefaults objectForKey:@"business_id_MX"],
                                  @"check_way": self.checkWay
                                  };
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];

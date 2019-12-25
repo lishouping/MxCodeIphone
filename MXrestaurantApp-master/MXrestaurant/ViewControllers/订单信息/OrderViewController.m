@@ -635,6 +635,7 @@
     hud.color=[UIColor blackColor];
     NSString *postUrl = [NSString stringWithFormat:@"%@%@",API_URL,CHECK_URL];
     NSDictionary *parameters = @{@"order_id": order_id,
+                                 @"waiter_id":[userDefaults objectForKey:@"business_id_MX"],
                                   @"check_way":check_way
                                  };
     

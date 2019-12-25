@@ -374,12 +374,13 @@
         }
         if ([[responseObject objectForKey:@"CODE"] isEqualToString:@"1000"]) {
             NSDictionary *dics =[responseObject objectForKey:@"DATA"];
-            NSString *total_price = [NSString stringWithFormat:@"￥%@",[dics objectForKey:@"total_price"]];
+            NSString *total_price = [NSString stringWithFormat:@"￥%.2f",[[dics objectForKey:@"total_price"]doubleValue]];
+            //NSString *total_price = [NSString stringWithFormat:@"￥%@",[dics objectForKey:@"total_price"]];
             double lonNum = [[dics objectForKey:@"total_price"] doubleValue];
             double total;
             if (self.dicdate!=nil) {
                 total = lonNum+longNumber1;
-                labTotalPrice.text = [NSString stringWithFormat:@"￥%.1lf",total];
+                labTotalPrice.text = [NSString stringWithFormat:@"￥%.2f",total];
             }else{
                 labTotalPrice.text = [NSString stringWithFormat:@"%@",total_price];
             }
@@ -587,6 +588,7 @@
                                          @"num":@"1",
                                          @"ext_id":@"",
                                          @"card_id":self.cart_id,
+                                         @"waiter_id":[userDefaults objectForKey:@"business_id_MX"],
                                          @"table_id":self.table_id
                                          };
             

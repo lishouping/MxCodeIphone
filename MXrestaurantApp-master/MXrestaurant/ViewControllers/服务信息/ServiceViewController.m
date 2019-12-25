@@ -407,9 +407,13 @@
             }
             else
             {
-                UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"" message:[NSString stringWithFormat:@"%@",[responseObject objectForKey:@"MESSAGE"]] delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"好", nil];
-                [alert show];
-                
+//                UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"" message:[NSString stringWithFormat:@"%@",[responseObject objectForKey:@"MESSAGE"]] delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"好", nil];
+//                [alert show];
+                [self.dateArray removeAllObjects];
+                [tableService reloadData];
+                [self getDate:selectBtnFlag];
+                hud.labelText = [responseObject objectForKey:@"MESSAGE"];
+                [hud hide:YES afterDelay:0.5];
                 
             }
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
